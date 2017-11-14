@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject FieldPrefab;
+    
+
+    public void Start()
+    {
+       
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
