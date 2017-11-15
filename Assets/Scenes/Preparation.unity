@@ -277,8 +277,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldPrefab: {fileID: 1226726396362864, guid: 00d6e729db8d138458fc541da7f8013d,
     type: 2}
-  warship1: {fileID: 1708067540536380, guid: 17adb3fec3e2dca46891bfa104158b85, type: 2}
-  warship2: {fileID: 1511071789512808, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
+  shotFieldPrefab: {fileID: 1623002079095668, guid: 71044302a8c01024ba0b832c53a5c6c3,
+    type: 2}
+  botPlayer: {fileID: 0}
+  humanPlayer: {fileID: 0}
 --- !u!4 &445727802
 Transform:
   m_ObjectHideFlags: 0
@@ -292,52 +294,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &627718887
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035135029517496, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1511071789512808, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4e8e9cbf2b5d5b84e8a957694dce5394, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &677074991
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,17 +7,16 @@ public class Board {
 
     public int boardSize = 10;
 
-    private GameObject waterPrefab;
+    private static GameObject waterPrefab;
     private List<List<Field>> board;
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
     
-    public Board(GameObject water) {
-        waterPrefab = water;
-        GenerateBoard();
+    public Board() {
+        board = new List<List<Field>>();
     }
 
-    private void GenerateBoard() {
+    public void GenerateBoard() {
         board = new List<List<Field>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin; 
         for (int i = 0; i < boardSize; i++) {
@@ -29,6 +28,10 @@ public class Board {
             }
             board.Add(row);
         }
+    }
+
+    public static void SetWaterPrefab(GameObject water) {
+        waterPrefab = water;
     }
 
     public List<List<Field>> GetBoard() {
@@ -44,9 +47,9 @@ public class Board {
     }
 
     public void PlaceWarship(Warship warship) {
-       /* if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
+        if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
             SetWarshipOnBoard(warship);
-        }*/
+        }
     }
 
     private void SetWarshipOnBoard(Warship warship) {
@@ -62,12 +65,14 @@ public class Board {
             for (int i = x; i < x + warship.GetSize(); i++)
             {
                 board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
+                board[i][warship.GetYPosition()].SetWarship(warship);
             }
         }
         else {
             int y = warship.GetYPosition();
             for (int i = y; i < y + warship.GetSize(); i++){
-                board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE); 
+                board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE);
+                board[warship.GetXPosition()][i].SetWarship(warship);
             }
         }
     }
@@ -86,21 +91,30 @@ public class Board {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
         int warshipSize = warship.GetSize();
-        int threshold;
-        if (x != 0 && y != 0)
-        {
-            threshold = x + warshipSize + 1 < boardSize - 1 ? x + warshipSize + 1 : boardSize - 1;
-            for (int i = x - 1; i < threshold; i++)
+
+        for (int i = x - 1; i < (x + warshipSize + 1); i++) {
+            try
             {
                 board[i][y - 1].SetPlacementResult(PlacementResult.SECURE);
-
             }
-            threshold = y + 1 < boardSize ? y + 1 : boardSize - 1;
-            for (int i = y - 1; i < threshold; i++) {
-                board[x - 1][i].SetPlacementResult(PlacementResult.SECURE);
+            catch (ArgumentOutOfRangeException) { continue; }
+            try
+            {
+                board[i][y + 1].SetPlacementResult(PlacementResult.SECURE);
             }
+            catch (ArgumentOutOfRangeException) { continue; }
         }
+        try
+        {
+            board[x - 1][y].SetPlacementResult(PlacementResult.SECURE);
+        }
+        catch (ArgumentOutOfRangeException) { }
 
+        try
+        {
+            board[x + warshipSize][y].SetPlacementResult(PlacementResult.SECURE);
+        }
+        catch (ArgumentOutOfRangeException) { }
     }
 
     private void SetSecuredFieldForVertical(Warship warship) {

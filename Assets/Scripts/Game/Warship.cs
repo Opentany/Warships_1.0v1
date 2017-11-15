@@ -38,6 +38,10 @@ public class Warship : MonoBehaviour {
         this.y = y;
     }
 
+    public bool GetIsSinked() {
+        return isSinked;
+    }
+
     public void ChangeDurability() {
         durability--;
         if (durability == 0) {

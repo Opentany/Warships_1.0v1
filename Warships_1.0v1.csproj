@@ -223,6 +223,7 @@
     <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
     <Compile Include="Assets\Scripts\Game\Board.cs" />
+    <Compile Include="Assets\Scripts\Game\BotCreator.cs" />
     <Compile Include="Assets\Scripts\Game\BotPlayer.cs" />
     <Compile Include="Assets\Scripts\Game\Field.cs" />
     <Compile Include="Assets\Scripts\Game\HumanPlayer.cs" />

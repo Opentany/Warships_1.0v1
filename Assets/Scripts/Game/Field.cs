@@ -7,10 +7,13 @@ public class Field : MonoBehaviour {
     public Vector2 gridPosition = Vector2.zero;
     private ShotResult shotResult;
     private PlacementResult placementResult;
+    private Warship warship;
+    private Renderer renderer;
 
     void Start(){
         shotResult = ShotResult.UNCHECK;
         placementResult = PlacementResult.AVAILABLE;
+        renderer = GetComponent<Renderer>();
     }
 
 
@@ -20,6 +23,7 @@ public class Field : MonoBehaviour {
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y);
             this.enabled = false;
+            this.renderer.material.color = Color.grey;
         }
         else
         {
@@ -41,8 +45,12 @@ public class Field : MonoBehaviour {
         this.placementResult = placementResult;
     }
 
-    private void CheckShot() {
+    public Warship GetWarship() {
+        return warship;
+    }
 
+    public void SetWarship(Warship warship) {
+        this.warship = warship;
     }
 
 }

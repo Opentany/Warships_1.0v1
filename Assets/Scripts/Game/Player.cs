@@ -4,23 +4,28 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour {
 
-    private Board opponentBoard;
-    private Board playerBoard;
-    private ShotRaport shotRaport;
-    private bool isYourTurn;
+    public Board opponentBoard;
+    public Board playerBoard;
+    public ShotRaport shotRaport;
+    public bool isYourTurn;
+
+    public Player() {
+        shotRaport = new ShotRaport();
+    }
 
     public abstract void ArrangeBoard();
 
-    private bool IsYourTurn() {
+    bool IsYourTurn() {
         return isYourTurn;
     }
 
-    void SetOpponentBoard(Board opponentBoard) {
+    public void SetOpponentBoard(Board opponentBoard) {
         this.opponentBoard = opponentBoard;
     }
 
     void GetOpponentShot(int column, int row) {
-        playerBoard.SetShotResult(column, row, null);
+        ShotResult shotResult = shotRaport.GetShotResult(column, row, playerBoard);
+        playerBoard.SetShotResult(column, row, shotRaport);
     }
 
 

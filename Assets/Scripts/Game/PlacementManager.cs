@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlacementManager{
  
-    public bool CheckIfPlayerCanPutWarshipOnThisPosition(Board board, Warship warship)  {
+    public static bool CheckIfPlayerCanPutWarshipOnThisPosition(Board board, Warship warship)  {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
         if (board.GetBoard()[x][y].GetPlacementResult() == PlacementResult.AVAILABLE){
@@ -18,7 +18,7 @@ public class PlacementManager{
         return false;
     }
 
-    private bool CheckIfCanPutWarshipHorizontal(Board board, Warship warship)
+    private static bool CheckIfCanPutWarshipHorizontal(Board board, Warship warship)
     {
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
@@ -31,7 +31,7 @@ public class PlacementManager{
         return true;
     }
 
-    private bool CheckIfCanPutWarshipVertical(Board board, Warship warship)
+    private static bool CheckIfCanPutWarshipVertical(Board board, Warship warship)
     {
         int y = warship.GetYPosition();
         for (int i = y; i < y + warship.GetSize(); i++)
