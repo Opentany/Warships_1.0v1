@@ -341,8 +341,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -120469969
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f37eb58a10c4ab4884df2fed802bf43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -450,7 +450,7 @@ RectTransform:
   m_GameObject: {fileID: 780731193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.005493065, y: 0.005493065, z: 0.005493065}
+  m_LocalScale: {x: 0.0054916847, y: 0.0054916847, z: 0.0054916847}
   m_Children:
   - {fileID: 1228213200}
   - {fileID: 1912210839}
@@ -685,9 +685,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 647132edbb68d854c8387c1ded83b007, type: 3}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 445727801}
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -960,9 +960,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 647132edbb68d854c8387c1ded83b007, type: 3}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 445727801}
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
