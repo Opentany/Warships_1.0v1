@@ -6,9 +6,11 @@ public class Field : MonoBehaviour {
 
     public Vector2 gridPosition = Vector2.zero;
     private ShotResult shotResult;
+    private PlacementResult placementResult;
 
     void Start(){
         shotResult = ShotResult.UNCHECK;
+        placementResult = PlacementResult.AVAILABLE;
     }
 
 
@@ -29,6 +31,14 @@ public class Field : MonoBehaviour {
 
     public void SetShotResult(ShotResult result) {
         shotResult = result;
+    }
+
+    public PlacementResult GetPlacementResult() {
+        return placementResult;
+    }
+
+    public void SetPlacementResult(PlacementResult placementResult) {
+        this.placementResult = placementResult;
     }
 
     private void CheckShot() {

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Warship : MonoBehaviour {
 
-    enum WarshipSize { ONE, TWO, THREE, FOUR }
-    enum WarshipOrientation { VERTICAL, HORIZONTAL }
-
     private int x;
     private int y;
     private WarshipSize warshipSize;
@@ -14,13 +11,49 @@ public class Warship : MonoBehaviour {
     private bool isSinked;
     private int durability;
 
-
-
-    private void ChangeWarshipOrientation() {
-        warshipOrientation = CheckIfWarshipOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
+    public Warship(WarshipSize warshipSize) {
+        x = 0;
+        y = 0;
+        this.warshipSize = warshipSize;
+        warshipOrientation = WarshipOrientation.HORIZONTAL;
+        isSinked = false;
+        durability = (int)warshipSize;
     }
 
-    private bool CheckIfWarshipOrientationIsHorizontal() {
+
+    public WarshipOrientation GetOrientation() {
+        return warshipOrientation;
+    }
+
+    public int GetXPosition() {
+        return x;
+    }
+
+    public int GetYPosition() {
+        return y;
+    }
+
+    public void SetPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void ChangeDurability() {
+        durability--;
+        if (durability == 0) {
+            isSinked = true;
+        }
+    }
+
+    public int GetSize() {
+        return (int)warshipSize;
+    }
+
+    private void ChangeOrientation() {
+        warshipOrientation = CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
+    }
+
+    private bool CheckIfOrientationIsHorizontal() {
         return warshipOrientation.Equals(WarshipOrientation.HORIZONTAL);
     }
 }

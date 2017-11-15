@@ -11,7 +11,7 @@ public class Board {
     private List<List<Field>> board;
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
-
+    
     public Board(GameObject water) {
         waterPrefab = water;
         GenerateBoard();
@@ -44,8 +44,73 @@ public class Board {
     }
 
     public void PlaceWarship(Warship warship) {
+       /* if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
+            SetWarshipOnBoard(warship);
+        }*/
+    }
+
+    private void SetWarshipOnBoard(Warship warship) {
+        SetWarship(warship);
+        SetSecuredFieldAroundWarship(warship);
+    }
+
+    private void SetWarship(Warship warship) {
+        board[warship.GetXPosition()][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
+        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
+        {
+            int x = warship.GetXPosition();
+            for (int i = x; i < x + warship.GetSize(); i++)
+            {
+                board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
+            }
+        }
+        else {
+            int y = warship.GetYPosition();
+            for (int i = y; i < y + warship.GetSize(); i++){
+                board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE); 
+            }
+        }
+    }
+
+
+    private void SetSecuredFieldAroundWarship(Warship warship) {
+        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL) {
+            SetSecuredFieldForHorizontal(warship);
+        }
+        else {
+            SetSecuredFieldForVertical(warship);
+        }
+    }
+
+    private void SetSecuredFieldForHorizontal(Warship warship) {
+        int x = warship.GetXPosition();
+        int y = warship.GetYPosition();
+        int warshipSize = warship.GetSize();
+        int threshold;
+        if (x != 0 && y != 0)
+        {
+            threshold = x + warshipSize + 1 < boardSize - 1 ? x + warshipSize + 1 : boardSize - 1;
+            for (int i = x - 1; i < threshold; i++)
+            {
+                board[i][y - 1].SetPlacementResult(PlacementResult.SECURE);
+
+            }
+            threshold = y + 1 < boardSize ? y + 1 : boardSize - 1;
+            for (int i = y - 1; i < threshold; i++) {
+                board[x - 1][i].SetPlacementResult(PlacementResult.SECURE);
+            }
+        }
 
     }
 
+    private void SetSecuredFieldForVertical(Warship warship) {
+
+    }
+
+
+
+    private bool CheckIfWarshipIsOnBoardEdge(int x, int y) {
+        return ((x == 0 || x == boardSize - 1) && (y == 0 || y == boardSize - 1));
+    }
 
 }

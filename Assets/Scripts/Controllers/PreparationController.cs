@@ -8,11 +8,13 @@ public class PreparationController : MonoBehaviour {
 
     public Board preparationBoard;
     public GameObject fieldPrefab;
+
+    private WarshipCreator warshipCreator;
     // Use this for initialization
     void Start()
     {
         preparationBoard = new Board(fieldPrefab);
-        CreateWarships();
+        warshipCreator = new WarshipCreator();
     }
 
     private void CreateWarships() {
