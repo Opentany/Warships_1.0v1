@@ -43,7 +43,6 @@ public class Field : MonoBehaviour {
         return placementResult;
     }
 
-    //TODO 
     public void SetPlacementResult(PlacementResult placementResult) {
         this.placementResult = placementResult;
         ChangeSecureCounterIfNeeded(placementResult);
@@ -53,13 +52,9 @@ public class Field : MonoBehaviour {
         if (PlacementResult.SECURE.Equals(placementResult)) {
             secureFieldCounter++;
         }
-        else if (PlacementResult.INACCESSIBLE.Equals(placementResult)) {
+        else {
             secureFieldCounter = 0;
-        }else
-        {
-            secureFieldCounter--;
         }
-
     }
 
     public Warship GetWarship() {
@@ -72,6 +67,14 @@ public class Field : MonoBehaviour {
 
     public bool IsPressed() {
         return this.enabled;
+    }
+
+    public int GetSecureFieldCounter() {
+        return secureFieldCounter;
+    }
+
+    public void DecreaseSecureFieldCounter() {
+        secureFieldCounter--;
     }
 
 }

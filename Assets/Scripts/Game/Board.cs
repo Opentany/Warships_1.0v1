@@ -43,14 +43,14 @@ public class Board {
         return board[column][row];
     }
 
-    public void SetShotResult(int column, int row, ShotRaport shotRaport) {
-
-    }
-
     public void PlaceWarship(Warship warship) {
         if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
             SetWarshipOnBoard(warship);
         }
+    }
+
+    public void SetShotResult(int column, int row, ShotRaport shotRaport) {
+
     }
 
     private void SetWarshipOnBoard(Warship warship) {
@@ -123,6 +123,81 @@ public class Board {
     private bool CheckIfFieldHasWarshipOnCurrentIndexs(int i, int j) {
         return PlacementResult.INACCESSIBLE.Equals(board[i][j].GetPlacementResult());
     }
+
+    public void RemoveWarship(Warship warship) {
+        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
+        {
+            RemoveWarshipHorizontal(warship);
+        }
+        else
+        {
+            RemoveWarshipVertical(warship);
+        }
+        RemoveSecuredFields(warship);
+    }
+
+
+    private void RemoveWarshipHorizontal(Warship warship)
+    {
+        int x = warship.GetXPosition();
+        for (int i = x; i < x + warship.GetSize(); i++)
+        {
+            board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.AVAILABLE);
+            board[i][warship.GetYPosition()].SetWarship(null);
+        }
+    }
+
+    private void RemoveWarshipVertical(Warship warship)
+    {
+        int y = warship.GetYPosition();
+        for (int i = y; i < y + warship.GetSize(); i++)
+        {
+            board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.AVAILABLE);
+            board[warship.GetXPosition()][i].SetWarship(null);
+        }
+    }
+
+    private void RemoveSecuredFields(Warship warship)
+    {
+        int x = warship.GetXPosition();
+        int y = warship.GetYPosition();
+        int warshipSize = warship.GetSize();
+        int startHorizontal, endHorizontal;
+        int startVertical, endVertical;
+        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
+        {
+            startHorizontal = (x != 0) ? x - 1 : x;
+            endHorizontal = (x + warshipSize < boardSize) ? x + warshipSize : boardSize - 1;
+            startVertical = (y != 0) ? y - 1 : y;
+            endVertical = (y + 1 < boardSize) ? y + 1 : boardSize - 1;
+        }
+        else
+        {
+            startHorizontal = (x != 0) ? x - 1 : x;
+            endHorizontal = (x + 1 < boardSize) ? x + 1 : boardSize - 1;
+            startVertical = (y != 0) ? y - 1 : y;
+            endVertical = (y + warshipSize < boardSize) ? y + warshipSize : boardSize - 1;
+        }
+        RemoveSecuredFieldsAroundWarship(startVertical, endVertical, startHorizontal, endHorizontal);
+    }
+
+    private void RemoveSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal)
+    {
+        for (int i = startVertical; i <= endVertical; i++)
+        {
+            for (int j = startHorizontal; j <= endHorizontal; j++)
+            {
+                if (board[i][j].GetSecureFieldCounter() == 1)
+                {
+                    board[i][j].SetPlacementResult(PlacementResult.AVAILABLE);
+                }
+                else {
+                    board[i][j].DecreaseSecureFieldCounter();
+                }
+            }
+        }
+    }
+
 
 
 }
