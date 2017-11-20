@@ -15,7 +15,7 @@ public class ShotRaport  {
 
     public ShotResult GetShotResult(int column, int row, Board board) {
         Field field = board.GetBoard()[column][row];
-        if (!field.enabled)
+        if (!field.IsPressed())
         {
             warship = field.GetWarship();
             if (warship != null)

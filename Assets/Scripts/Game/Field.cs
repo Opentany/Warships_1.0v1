@@ -9,17 +9,19 @@ public class Field : MonoBehaviour {
     private PlacementResult placementResult;
     private Warship warship;
     private Renderer renderer;
+    private int secureFieldCounter;
 
     void Start(){
         shotResult = ShotResult.UNCHECK;
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
+        secureFieldCounter = 0;
     }
 
 
     void OnMouseDown()
     {
-        if (this.enabled)
+        if (IsPressed())
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y);
             this.enabled = false;
@@ -41,8 +43,23 @@ public class Field : MonoBehaviour {
         return placementResult;
     }
 
+    //TODO 
     public void SetPlacementResult(PlacementResult placementResult) {
         this.placementResult = placementResult;
+        ChangeSecureCounterIfNeeded(placementResult);
+    }
+
+    private void ChangeSecureCounterIfNeeded(PlacementResult placementResult) {
+        if (PlacementResult.SECURE.Equals(placementResult)) {
+            secureFieldCounter++;
+        }
+        else if (PlacementResult.INACCESSIBLE.Equals(placementResult)) {
+            secureFieldCounter = 0;
+        }else
+        {
+            secureFieldCounter--;
+        }
+
     }
 
     public Warship GetWarship() {
@@ -51,6 +68,10 @@ public class Field : MonoBehaviour {
 
     public void SetWarship(Warship warship) {
         this.warship = warship;
+    }
+
+    public bool IsPressed() {
+        return this.enabled;
     }
 
 }

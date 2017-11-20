@@ -11,20 +11,20 @@ public class Board {
     private List<List<Field>> board;
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
-    
+
     public Board() {
         board = new List<List<Field>>();
     }
 
     public void GenerateBoard() {
         board = new List<List<Field>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin; 
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<Field> row = new List<Field>();
-            for (int j = 0; j < boardSize; j++)            {
+            for (int j = 0; j < boardSize; j++) {
                 Field field = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
                 field.gameObject.layer = 1;
-                field.gridPosition = new Vector2(i,j);
+                field.gridPosition = new Vector2(i, j);
                 row.Add(field);
             }
             board.Add(row);
@@ -44,7 +44,7 @@ public class Board {
     }
 
     public void SetShotResult(int column, int row, ShotRaport shotRaport) {
-       
+
     }
 
     public void PlaceWarship(Warship warship) {
@@ -55,77 +55,74 @@ public class Board {
 
     private void SetWarshipOnBoard(Warship warship) {
         SetWarship(warship);
-        SetSecuredFieldAroundWarship(warship);
+        SetSecuredFields(warship);
     }
 
     private void SetWarship(Warship warship) {
-        board[warship.GetXPosition()][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
         if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
         {
-            int x = warship.GetXPosition();
-            for (int i = x; i < x + warship.GetSize(); i++)
-            {
-                board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
-                board[i][warship.GetYPosition()].SetWarship(warship);
-            }
-        }
+            SetWarshipHorizontal(warship);        }
         else {
-            int y = warship.GetYPosition();
-            for (int i = y; i < y + warship.GetSize(); i++){
-                board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE);
-                board[warship.GetXPosition()][i].SetWarship(warship);
-            }
+            SetWarshipVertical(warship);
+        }
+    }
+
+    private void SetWarshipHorizontal(Warship warship) {
+        int x = warship.GetXPosition();
+        for (int i = x; i < x + warship.GetSize(); i++)
+        {
+            board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
+            board[i][warship.GetYPosition()].SetWarship(warship);
+        }
+    }
+
+    private void SetWarshipVertical(Warship warship) {
+        int y = warship.GetYPosition();
+        for (int i = y; i < y + warship.GetSize(); i++)
+        {
+            board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE);
+            board[warship.GetXPosition()][i].SetWarship(warship);
         }
     }
 
 
-    private void SetSecuredFieldAroundWarship(Warship warship) {
-        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL) {
-            SetSecuredFieldForHorizontal(warship);
-        }
-        else {
-            SetSecuredFieldForVertical(warship);
-        }
-    }
-
-    private void SetSecuredFieldForHorizontal(Warship warship) {
+    private void SetSecuredFields(Warship warship) {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
         int warshipSize = warship.GetSize();
-
-        for (int i = x - 1; i < (x + warshipSize + 1); i++) {
-            try
-            {
-                board[i][y - 1].SetPlacementResult(PlacementResult.SECURE);
-            }
-            catch (ArgumentOutOfRangeException) { continue; }
-            try
-            {
-                board[i][y + 1].SetPlacementResult(PlacementResult.SECURE);
-            }
-            catch (ArgumentOutOfRangeException) { continue; }
+        int startHorizontal, endHorizontal;
+        int startVertical, endVertical;
+        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL) {
+            startHorizontal = (x != 0) ? x - 1 : x;
+            endHorizontal = (x + warshipSize < boardSize) ? x + warshipSize : boardSize - 1;
+            startVertical = (y != 0) ? y - 1 : y;
+            endVertical = (y + 1 < boardSize) ? y + 1 : boardSize - 1;
         }
-        try
+        else {
+            startHorizontal = (x != 0) ? x - 1 : x;
+            endHorizontal = (x + 1 < boardSize) ? x + 1 : boardSize - 1;
+            startVertical = (y != 0) ? y - 1 : y;
+            endVertical = (y + warshipSize < boardSize) ? y + warshipSize : boardSize - 1;
+        }
+        SetSecuredFieldsAroundWarship(startVertical, endVertical, startHorizontal, endHorizontal);
+    }
+
+    private void SetSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal) {
+        for (int i = startVertical; i <= endVertical; i++)
         {
-            board[x - 1][y].SetPlacementResult(PlacementResult.SECURE);
+            for (int j = startHorizontal; j <= endHorizontal; j++)
+            {
+                if (!CheckIfFieldHasWarshipOnCurrentIndexs(i, j))
+                {
+                    board[i][j].SetPlacementResult(PlacementResult.SECURE);
+                }
+            }
         }
-        catch (ArgumentOutOfRangeException) { }
-
-        try
-        {
-            board[x + warshipSize][y].SetPlacementResult(PlacementResult.SECURE);
-        }
-        catch (ArgumentOutOfRangeException) { }
     }
 
-    private void SetSecuredFieldForVertical(Warship warship) {
-
+    private bool CheckIfFieldHasWarshipOnCurrentIndexs(int i, int j) {
+        return PlacementResult.INACCESSIBLE.Equals(board[i][j].GetPlacementResult());
     }
 
-
-
-    private bool CheckIfWarshipIsOnBoardEdge(int x, int y) {
-        return ((x == 0 || x == boardSize - 1) && (y == 0 || y == boardSize - 1));
-    }
 
 }
