@@ -64,11 +64,11 @@ public class Warship : MonoBehaviour {
     public bool CanRotate(int boardSize) {
         if (warshipOrientation == WarshipOrientation.HORIZONTAL)
         {
-            return (y + GetSize() < boardSize);
+            return (y + GetSize() - 1 < boardSize);
         }
         else
         {
-            return (x + GetSize() < boardSize); 
+            return (x + GetSize() - 1 < boardSize); 
         }
     }
 
