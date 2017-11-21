@@ -151,7 +151,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114910192470929700, guid: a7f9fa4f4d82a8041bdfff685eed922f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a7f9fa4f4d82a8041bdfff685eed922f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &232033695
@@ -193,7 +194,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114364325212833024, guid: bf9a5b9153c5e514c9a0fba06fc34f1c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bf9a5b9153c5e514c9a0fba06fc34f1c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &317292997
@@ -371,7 +373,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114440590075385786, guid: 1dcd20d3c74324442b16cbe34bc9093c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1dcd20d3c74324442b16cbe34bc9093c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &445727800
@@ -429,11 +432,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4410892456687088, guid: f088648add6de7440877f313f8588996, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.36
+      value: -2.305
       objectReference: {fileID: 0}
     - target: {fileID: 4410892456687088, guid: f088648add6de7440877f313f8588996, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.17
+      value: -2.882
       objectReference: {fileID: 0}
     - target: {fileID: 4410892456687088, guid: f088648add6de7440877f313f8588996, type: 2}
       propertyPath: m_LocalPosition.z
@@ -459,7 +462,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114967703788952430, guid: f088648add6de7440877f313f8588996, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f088648add6de7440877f313f8588996, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &677074991
@@ -551,6 +555,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2a8c1970384c4d98e67e95517593f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warshipSize: 4
+--- !u!50 &718596141
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 718596135}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &780731193
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +834,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2a8c1970384c4d98e67e95517593f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warshipSize: 1
+--- !u!50 &1182600342
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182600336}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1228213199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,6 +1146,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2a8c1970384c4d98e67e95517593f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warshipSize: 2
+--- !u!50 &1552061644
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1552061638}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1780699036 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1095776232086832, guid: a7f9fa4f4d82a8041bdfff685eed922f,
@@ -1116,6 +1183,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2a8c1970384c4d98e67e95517593f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warshipSize: 3
+--- !u!50 &1780699042
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1780699036}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1912210838
 GameObject:
   m_ObjectHideFlags: 0
