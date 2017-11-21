@@ -63,6 +63,7 @@ public class Warship : MonoBehaviour {
     private Vector3 offset;
     private Vector3 positionOfField;
     private bool clickedNotDraged;
+    private Vector2 fieldGridPosition;
 
 
     void OnMouseDown()
@@ -87,22 +88,23 @@ public class Warship : MonoBehaviour {
 
     void OnMouseUp()
     {
-        if (GetSize() == 2 || GetSize() == 4)
-        {
-            if (CheckIfOrientationIsHorizontal())
-            {
-                positionOfField.x -= 0.25f;
-            }
-            else
-            {
-                positionOfField.y -= 0.25f;
-            }
-        }
+        //if (GetSize() == 2 || GetSize() == 4)
+        //{
+        //    if (CheckIfOrientationIsHorizontal())
+        //    {
+        //        positionOfField.x -= 0.25f;
+        //    }
+        //    else
+        //    {
+        //        positionOfField.y -= 0.25f;
+        //    }
+        //}
         transform.position = positionOfField;
+        Debug.Log(fieldGridPosition.x +";"+fieldGridPosition.y);
         //Debug.Log(clickedNotDraged);
         if (clickedNotDraged)
         {
-            transform.Rotate(Vector3.forward * +90);
+            transform.Rotate(Vector3.back * -90);
             ChangeOrientation();
         }
     }
@@ -110,7 +112,10 @@ public class Warship : MonoBehaviour {
     {
         if (coll.gameObject.name == "Water(Clone)")
         {
+            Field fieldunder = coll.gameObject.GetComponent<Field>();
             positionOfField = coll.gameObject.transform.position;
+            fieldGridPosition = fieldunder.gridPosition;
+            coll.gameObject.GetComponent(typeof(Field));
         }
     }
 }
