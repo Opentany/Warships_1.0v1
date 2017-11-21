@@ -101,17 +101,17 @@ public class Warship : MonoBehaviour {
 
     void OnMouseUp()
     {
-        //if (GetSize() == 2 || GetSize() == 4)
-        //{
-        //    if (CheckIfOrientationIsHorizontal())
-        //    {
-        //        positionOfField.x -= 0.25f;
-        //    }
-        //    else
-        //    {
-        //        positionOfField.y -= 0.25f;
-        //    }
-        //}
+        if (GetSize() == 2 || GetSize() == 4)
+        {
+            if (CheckIfOrientationIsHorizontal())
+            {
+                positionOfField.x -= 0.25f;
+            }
+            else
+            {
+                positionOfField.y -= 0.25f;
+            }
+        }
         transform.position = positionOfField;
         Debug.Log(fieldGridPosition.x +";"+fieldGridPosition.y);
         //Debug.Log(clickedNotDraged);
