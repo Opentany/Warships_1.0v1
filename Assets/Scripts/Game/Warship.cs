@@ -60,6 +60,19 @@ public class Warship : MonoBehaviour {
     private bool CheckIfOrientationIsHorizontal() {
         return warshipOrientation.Equals(WarshipOrientation.HORIZONTAL);
     }
+
+    public bool CanRotate(int boardSize) {
+        if (warshipOrientation == WarshipOrientation.HORIZONTAL)
+        {
+            return (y + GetSize() < boardSize);
+        }
+        else
+        {
+            return (x + GetSize() < boardSize); 
+        }
+    }
+
+
     private Vector3 offset;
     private Vector3 positionOfField;
     private bool clickedNotDraged;
