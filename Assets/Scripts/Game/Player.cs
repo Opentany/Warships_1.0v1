@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour {
 
-    public Board opponentBoard;
-    public Board playerBoard;
+    protected Board opponentBoard;
+    protected Board playerBoard;
+    protected GameController gameController;
+    protected PreparationController preparationController;
     private bool isYourTurn;
 
     public Player() {
@@ -13,23 +15,46 @@ public abstract class Player : MonoBehaviour {
 
     public abstract void ArrangeBoard();
 
-    bool IsYourTurn() {
+    public bool IsYourTurn() {
         return isYourTurn;
     }
 
-    public void YourTurn()
+    public virtual void YourTurn()
     {
         isYourTurn = true;
     }
 
-    public void SetOpponentBoard(Board opponentBoard) {
+    public virtual void SetPlayerBoard(Board playerBoard)
+    {
+        this.playerBoard = playerBoard;
+    }
+
+    public virtual void SetOpponentBoard(Board opponentBoard) {
         this.opponentBoard = opponentBoard;
     }
 
-    void TakeOpponentShot(ShotRaport shotRaport) {
+    public virtual void TakeOpponentShot(ShotRaport shotRaport) {
         playerBoard.ApplyShot(shotRaport);
     }
 
+    public virtual void SetPlayerShotResult(ShotRaport shotRaport)
+    {
+        opponentBoard.ApplyShot(shotRaport);
+    }
 
+    public Board GetPlayerBoard()
+    {
+        return playerBoard;
+    }
+
+    public void SetGameController(GameController gameController)
+    {
+        this.gameController = gameController;
+    }
+
+    public void SetPreparationController(PreparationController preparationController)
+    {
+        this.preparationController = preparationController;
+    }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Board {
 
-    public int boardSize = 10;
+    public static readonly int boardSize = 10;
 
     private static GameObject waterPrefab;
     private List<List<Field>> board;
