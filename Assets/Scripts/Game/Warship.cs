@@ -53,6 +53,10 @@ public class Warship : MonoBehaviour {
         return (int)warshipSize;
     }
 
+    public void SetWarshipOrientation(WarshipOrientation orientation)
+    {
+        warshipOrientation = orientation;
+    }
     private void ChangeOrientation() {
         warshipOrientation = CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
     }
