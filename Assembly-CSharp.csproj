@@ -58,16 +58,18 @@
      <Compile Include="Assets\Scripts\Game\Board.cs" />
      <Compile Include="Assets\Scripts\Game\BotCreator.cs" />
      <Compile Include="Assets\Scripts\Game\BotPlayer.cs" />
+     <Compile Include="Assets\Scripts\Game\DmgDone.cs" />
      <Compile Include="Assets\Scripts\Game\Field.cs" />
      <Compile Include="Assets\Scripts\Game\HumanPlayer.cs" />
+     <Compile Include="Assets\Scripts\Game\IllegalShotException.cs" />
      <Compile Include="Assets\Scripts\Game\PlacementManager.cs" />
      <Compile Include="Assets\Scripts\Game\PlacementResult.cs" />
      <Compile Include="Assets\Scripts\Game\Player.cs" />
      <Compile Include="Assets\Scripts\Game\ShotRaport.cs" />
-     <Compile Include="Assets\Scripts\Game\ShotResult.cs" />
      <Compile Include="Assets\Scripts\Game\Warship.cs" />
      <Compile Include="Assets\Scripts\Game\WarshipCreator.cs" />
      <Compile Include="Assets\Scripts\Game\WarshipOrientation.cs" />
+     <Compile Include="Assets\Scripts\Game\WarshipsContainer.cs" />
      <Compile Include="Assets\Scripts\Game\WarshipSize.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

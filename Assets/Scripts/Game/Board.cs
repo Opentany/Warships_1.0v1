@@ -200,6 +200,19 @@ public class Board {
         }
     }
 
+    public void DisplayBoard()
+    {
+        string row="";
+        for (int i = 0; i < boardSize; i++)
+        {
+            for (int j = 0; j < boardSize; j++)
+            {
+                row += board[i][j].secureFieldCounter;
+            }
+            Debug.Log(row);
+            row = "";
+        }
+    }
 
 
 }

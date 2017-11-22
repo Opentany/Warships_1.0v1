@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfeb53d2268428f48a1a0e94d9dce921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameController: {fileID: 1368896931520992, guid: d3107a87cbc347644ba44d5778f38c18,
+    type: 2}
   gridPosition: {x: 0, y: 0}
 --- !u!212 &212885610541068166
 SpriteRenderer:
