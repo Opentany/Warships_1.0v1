@@ -21,7 +21,7 @@ public class PreparationController : MonoBehaviour {
     private List<Warship> warships2;
     private List<Warship> warships1;
 
-    public WarshipSize chosenWarshipSize=WarshipSize.FOUR;
+    public int chosenWarshipSize;
     // Use this for initialization
     void Start()
     {
@@ -36,9 +36,12 @@ public class PreparationController : MonoBehaviour {
         warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
         warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
         warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
-        chosenWarshipSize = WarshipSize.FOUR;
     }
 
+    void Update()
+    {
+        Debug.Log("chosenWorshipSize to " + chosenWarshipSize);
+    }
     public void ChooseField(Field field)
     {
         chosenField = field;
@@ -46,8 +49,12 @@ public class PreparationController : MonoBehaviour {
         {
             Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship();
-           Debug.Log("Stworzono statek "+statek.warshipSize);
-            preparationBoard.PlaceWarship(statek);
+            if (statek!=null)
+            {
+                preparationBoard.PlaceWarship(statek);
+            }
+            Debug.Log("pusto");
+            
         }
         else
         {
@@ -61,7 +68,7 @@ public class PreparationController : MonoBehaviour {
         Debug.Log("chosenWorshipSize to "+chosenWarshipSize);
         switch (chosenWarshipSize)
         {
-            case WarshipSize.FOUR:
+            case 4:
             {
                 statek = warships4[1];
                 warships4.Remove(statek);
@@ -69,7 +76,7 @@ public class PreparationController : MonoBehaviour {
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
-            case WarshipSize.THREE:
+            case 3:
             {
                 statek = warships3[1];
                 warships3.Remove(statek);
@@ -77,7 +84,7 @@ public class PreparationController : MonoBehaviour {
                     statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
-            case WarshipSize.TWO:
+            case 2:
             {
                 statek = warships2[1];
                 warships2.Remove(statek);
@@ -85,7 +92,7 @@ public class PreparationController : MonoBehaviour {
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
-            case WarshipSize.ONE:
+            case 1:
             {
                 statek = warships1[1];
                 warships1.Remove(statek);
@@ -97,27 +104,28 @@ public class PreparationController : MonoBehaviour {
                     statek = null;
                     break;
         }
+        
         return statek;
     }
 
     public void ChooseWarship4()
     {
-        chosenWarshipSize = WarshipSize.FOUR;
+        chosenWarshipSize = (int)WarshipSize.FOUR;
         Debug.Log("Chosen Warship is "+chosenWarshipSize);
     }
     public void ChooseWarship3()
     {
-        chosenWarshipSize = WarshipSize.THREE;
+        chosenWarshipSize = (int)WarshipSize.THREE;
         Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship2()
     {
-        chosenWarshipSize = WarshipSize.TWO;
+        chosenWarshipSize = (int)WarshipSize.TWO;
         Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship1()
     {
-        chosenWarshipSize = WarshipSize.ONE;
+        chosenWarshipSize = (int)WarshipSize.ONE;
         Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
 
