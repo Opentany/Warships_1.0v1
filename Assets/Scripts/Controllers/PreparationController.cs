@@ -12,6 +12,8 @@ public class PreparationController : MonoBehaviour {
     public GameObject shotFieldPrefab;
     public static Player botPlayer;
     public static Player humanPlayer;
+    private static Board humanPlayerBoard;
+    private static Board botPlayerBoard;
 
     private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
@@ -36,6 +38,8 @@ public class PreparationController : MonoBehaviour {
         warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
         warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
         warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
+        botPlayer.ArrangeBoard();
+        botPlayerBoard = botPlayer.GetPlayerBoard();
     }
 
     public void ChooseField(Field field)

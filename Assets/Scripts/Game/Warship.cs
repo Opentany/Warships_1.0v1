@@ -135,4 +135,9 @@ public class Warship : MonoBehaviour {
             coll.gameObject.GetComponent(typeof(Field));
         }
     }
+
+    public string toStringShort()
+    {
+        return "Size: " + warshipSize + " x: " + x + " y: " + y + " " + warshipOrientation; 
+    }
 }
