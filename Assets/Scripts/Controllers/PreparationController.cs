@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class PreparationController : MonoBehaviour {
 
-    public Board preparationBoard;
+    public static Board preparationBoard;
     public GameObject fieldPrefab;
     public GameObject shotFieldPrefab;
-    public Player botPlayer;
-    public Player humanPlayer;
+    public static Player botPlayer;
+    public static Player humanPlayer;
 
-    private WarshipCreator warshipCreator;
+    private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
-    private Field chosenField;
+    private static Field chosenField;
     private static List<Warship> warships4;
     private static List<Warship> warships3;
     private static List<Warship> warships2;
@@ -45,8 +45,9 @@ public class PreparationController : MonoBehaviour {
         {
             Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
+            Debug.Log(statek.warshipSize);
                 preparationBoard.PlaceWarship(statek);
-
+            preparationBoard.DisplayBoard();
         }
         else
         {
@@ -62,7 +63,7 @@ public class PreparationController : MonoBehaviour {
         {
             case 4:
             {
-                statek = warships4[0];
+                statek = warships4[0];                    
                 warships4.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
@@ -73,7 +74,7 @@ public class PreparationController : MonoBehaviour {
                 statek = warships3[0];
                 warships3.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
-                    statek.SetWarshipOrientation(chosenWarshipOrientation);
+                statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
             case 2:
@@ -92,11 +93,13 @@ public class PreparationController : MonoBehaviour {
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
-                default:
-                    statek = null;
-                    break;
-        }
-        
+            default:
+            {
+                statek = null;
+                    Debug.Log("Co ja tutaj robię ????");
+                break;
+            }
+        }      
         return statek;
     }
 

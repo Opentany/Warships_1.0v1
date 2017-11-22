@@ -9,9 +9,9 @@ public class Field : MonoBehaviour
     public Vector2 gridPosition = Vector2.zero;
     private DmgDone dmgDone;
     private PlacementResult placementResult;
-    private Warship warship;
+    public Warship warship;
     private Renderer renderer;
-    private int secureFieldCounter;
+    public int secureFieldCounter;
     private PreparationController thsPreparationController;
 
     void Start(){
