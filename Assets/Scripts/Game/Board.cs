@@ -207,7 +207,14 @@ public class Board {
         {
             for (int j = 0; j < boardSize; j++)
             {
-                row += board[i][j].secureFieldCounter;
+                if (board[i][j].warship==null)
+                {
+                    row += "0 ";
+                }
+                else
+                {
+                    row += "1 ";
+                }
             }
             Debug.Log(row);
             row = "";

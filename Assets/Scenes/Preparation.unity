@@ -699,6 +699,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349443868}
+--- !u!1 &371472245 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1095776232086832, guid: a7f9fa4f4d82a8041bdfff685eed922f,
+    type: 2}
+  m_PrefabInternal: {fileID: 209592535}
 --- !u!1001 &377756815
 Prefab:
   m_ObjectHideFlags: 0
@@ -770,6 +775,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1521486119}
   m_Script: {fileID: -1184210157, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &479479141 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1673244189136590, guid: f088648add6de7440877f313f8588996,
+    type: 2}
+  m_PrefabInternal: {fileID: 480856568}
 --- !u!1001 &480856568
 Prefab:
   m_ObjectHideFlags: 0
@@ -933,6 +943,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 559602573}
+--- !u!1 &583239298 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1953567775366564, guid: 1dcd20d3c74324442b16cbe34bc9093c,
+    type: 2}
+  m_PrefabInternal: {fileID: 377756815}
 --- !u!1 &625989204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1159,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 744959725}
+--- !u!1 &780636257 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1102090974433500, guid: bf9a5b9153c5e514c9a0fba06fc34f1c,
+    type: 2}
+  m_PrefabInternal: {fileID: 232033695}
 --- !u!1 &780731193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1247,7 @@ RectTransform:
   m_GameObject: {fileID: 780731193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0054916847, y: 0.0054916847, z: 0.0054916847}
+  m_LocalScale: {x: 0.005490066, y: 0.005490066, z: 0.005490066}
   m_Children:
   - {fileID: 1228213200}
   - {fileID: 1912210839}
@@ -2247,6 +2267,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114695062946097684, guid: d3107a87cbc347644ba44d5778f38c18,
+        type: 2}
+      propertyPath: warship4Prefab
+      value: 
+      objectReference: {fileID: 479479141}
+    - target: {fileID: 114695062946097684, guid: d3107a87cbc347644ba44d5778f38c18,
+        type: 2}
+      propertyPath: warship3Prefab
+      value: 
+      objectReference: {fileID: 371472245}
+    - target: {fileID: 114695062946097684, guid: d3107a87cbc347644ba44d5778f38c18,
+        type: 2}
+      propertyPath: warship2Prefab
+      value: 
+      objectReference: {fileID: 583239298}
+    - target: {fileID: 114695062946097684, guid: d3107a87cbc347644ba44d5778f38c18,
+        type: 2}
+      propertyPath: warship1Prefab
+      value: 
+      objectReference: {fileID: 780636257}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3107a87cbc347644ba44d5778f38c18, type: 2}
   m_IsPrefabParent: 0

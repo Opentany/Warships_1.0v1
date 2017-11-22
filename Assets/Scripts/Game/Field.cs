@@ -7,6 +7,8 @@ public class Field : MonoBehaviour
 
     public GameObject GameController;
     public Vector2 gridPosition = Vector2.zero;
+    public Vector3 realPosition;
+    public Quaternion realRotation;
     private DmgDone dmgDone;
     private PlacementResult placementResult;
     public Warship warship;
@@ -20,18 +22,21 @@ public class Field : MonoBehaviour
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
         thsPreparationController = GameController.GetComponent<PreparationController>();
+        realPosition = transform.position;
+        realRotation = transform.rotation;
     }
 
 
     void OnMouseDown()
     {
-        thsPreparationController.ChooseField(this);
+        
         if (IsPressed())
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y);
             this.enabled = false;
             this.renderer.material.color = Color.grey;
-            
+            thsPreparationController.ChooseField(this);
+
         }
         else
         {
