@@ -18,6 +18,22 @@ public class Board {
 
     public void GenerateBoard() {
         board = new List<List<Field>>();
+        for (int i = 0; i < boardSize; i++)
+        {
+            List<Field> row = new List<Field>();
+            for (int j = 0; j < boardSize; j++)
+            {
+                Field field = new Field();
+                field.gridPosition = new Vector2(i, j);
+                row.Add(field);
+            }
+            board.Add(row);
+        }
+    }
+
+
+    public void GenerateBoardOnScreen() {
+        board = new List<List<Field>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<Field> row = new List<Field>();

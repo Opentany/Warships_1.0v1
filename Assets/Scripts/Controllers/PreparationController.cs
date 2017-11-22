@@ -31,7 +31,7 @@ public class PreparationController : MonoBehaviour {
     {
         preparationBoard = new Board();
         Board.SetWaterPrefab(fieldPrefab);
-        preparationBoard.GenerateBoard();
+        preparationBoard.GenerateBoardOnScreen();
         warshipCreator = new WarshipCreator();
         botPlayer = BotCreator.CreateBotPlayer();
         humanPlayer = new HumanPlayer();

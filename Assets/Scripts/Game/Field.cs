@@ -16,6 +16,13 @@ public class Field : MonoBehaviour
     public int secureFieldCounter;
     private PreparationController thsPreparationController;
 
+    public Field() {
+        warship = null;
+        placementResult = PlacementResult.AVAILABLE;
+        secureFieldCounter = 0;
+    }
+
+
     void Start(){
         warship = null;
         placementResult = PlacementResult.AVAILABLE;
