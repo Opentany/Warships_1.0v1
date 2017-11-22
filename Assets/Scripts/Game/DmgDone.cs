@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ShotResult {
-    UNCHECK,
-    ILLEGAL,
+public enum DmgDone {
+    MISS,
     HIT,
-    SINKED,
-    MISS
+    SINKED
 }
 

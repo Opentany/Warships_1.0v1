@@ -5,14 +5,14 @@ using UnityEngine;
 public class Field : MonoBehaviour {
 
     public Vector2 gridPosition = Vector2.zero;
-    private ShotResult shotResult;
+    private DmgDone dmgDone;
     private PlacementResult placementResult;
     private Warship warship;
     private Renderer renderer;
     private int secureFieldCounter;
 
     void Start(){
-        shotResult = ShotResult.UNCHECK;
+        warship = null;
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
@@ -35,8 +35,8 @@ public class Field : MonoBehaviour {
 
     }
 
-    public void SetShotResult(ShotResult result) {
-        shotResult = result;
+    public void SetShotResult(DmgDone result) {
+        dmgDone = result;
     }
 
     public PlacementResult GetPlacementResult() {
@@ -49,7 +49,8 @@ public class Field : MonoBehaviour {
     }
 
     private void ChangeSecureCounterIfNeeded(PlacementResult placementResult) {
-        if (PlacementResult.SECURE.Equals(placementResult)) {
+        if (placementResult.Equals(PlacementResult.SECURE))
+        {
             secureFieldCounter++;
         }
         else {

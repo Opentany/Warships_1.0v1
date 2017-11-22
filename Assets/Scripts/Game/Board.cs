@@ -49,8 +49,10 @@ public class Board {
         }
     }
 
-    public void SetShotResult(int column, int row, ShotRaport shotRaport) {
-
+    public void ApplyShot(ShotRaport shotRaport) {
+        int x = shotRaport.GetX();
+        int y = shotRaport.GetY();
+        board[x][y].SetShotResult(shotRaport.GetShotResult());
     }
 
     private void SetWarshipOnBoard(Warship warship) {

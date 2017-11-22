@@ -7,33 +7,44 @@ public class ShotRaport  {
     private int x;
     private int y;
     private Warship warship;
-    private ShotResult shotResult;
+    private DmgDone shotResult;
 
-    public ShotRaport() {
-        shotResult = ShotResult.UNCHECK;
+
+    public int GetX()
+    {
+        return x;
     }
 
-    public ShotResult GetShotResult(int column, int row, Board board) {
-        Field field = board.GetBoard()[column][row];
-        if (!field.IsPressed())
-        {
-            warship = field.GetWarship();
-            if (warship != null)
-            {
-                warship.ChangeDurability();
-                if (warship.GetIsSinked())
-                {
-                    return ShotResult.SINKED;
-                }
-                else
-                {
-                    return ShotResult.HIT;
-                }
+    public int GetY()
+    {
+        return y;
+    }
 
+    public DmgDone GetShotResult()
+    {
+        return shotResult;
+    }
+
+    public ShotRaport (int x, int y, Board board) {
+        this.x = x;
+        this.y = y;
+        Field field = board.GetBoard()[x][y];
+        warship = field.GetWarship();
+        if (warship != null)
+        {
+            warship.ChangeDurability();
+            if (warship.GetIsSinked())
+            {
+                shotResult =  DmgDone.SINKED;
             }
-            return ShotResult.MISS;
+            else
+            {
+                shotResult = DmgDone.HIT;
+            }
+
         }
-        return ShotResult.ILLEGAL;
+        shotResult = DmgDone.MISS;
+        throw new IllegalShotException(x, y);
     }
 
 }

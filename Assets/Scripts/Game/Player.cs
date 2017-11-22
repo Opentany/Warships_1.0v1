@@ -6,11 +6,9 @@ public abstract class Player : MonoBehaviour {
 
     public Board opponentBoard;
     public Board playerBoard;
-    public ShotRaport shotRaport;
-    public bool isYourTurn;
+    private bool isYourTurn;
 
     public Player() {
-        shotRaport = new ShotRaport();
     }
 
     public abstract void ArrangeBoard();
@@ -19,13 +17,17 @@ public abstract class Player : MonoBehaviour {
         return isYourTurn;
     }
 
+    public void YourTurn()
+    {
+        isYourTurn = true;
+    }
+
     public void SetOpponentBoard(Board opponentBoard) {
         this.opponentBoard = opponentBoard;
     }
 
-    void GetOpponentShot(int column, int row) {
-        ShotResult shotResult = shotRaport.GetShotResult(column, row, playerBoard);
-        playerBoard.SetShotResult(column, row, shotRaport);
+    void TakeOpponentShot(ShotRaport shotRaport) {
+        playerBoard.ApplyShot(shotRaport);
     }
 
 
