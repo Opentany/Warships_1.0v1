@@ -81,6 +81,9 @@ MonoBehaviour:
   GameController: {fileID: 1368896931520992, guid: d3107a87cbc347644ba44d5778f38c18,
     type: 2}
   gridPosition: {x: 0, y: 0}
+  realPosition: {x: 0, y: 0, z: 0}
+  realRotation: {x: 0, y: 0, z: 0, w: 0}
+  secureFieldCounter: 0
 --- !u!212 &212885610541068166
 SpriteRenderer:
   m_ObjectHideFlags: 1

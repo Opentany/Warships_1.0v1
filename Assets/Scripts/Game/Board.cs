@@ -8,14 +8,18 @@ public class Board {
     public static readonly int boardSize = 10;
 
     private static GameObject waterPrefab;
+    private static GameObject miniWaterPrefab;
     private List<List<Field>> board;
+    private List<List<Field>> miniBoard;
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
+    private float screenVerticalOffset = -3f;
     private int fieldsOccupiedByWarships;
     private List<Warship> warshipList;
 
     public Board() {
         board = new List<List<Field>>();
+        miniBoard = new List<List<Field>>();
         warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
     }
@@ -52,12 +56,43 @@ public class Board {
         }
     }
 
+
+    public void GenerateMiniBoardOnScreen()
+    {
+        miniBoard = new List<List<Field>>();
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + fieldMargin / 2;
+        for (int i = 0; i < boardSize; i++)
+        {
+            List<Field> row = new List<Field>();
+            for (int j = 0; j < boardSize; j++)
+            {
+                Field field = GameObject.Instantiate(miniWaterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+                field.gameObject.layer = 1;
+                field.gridPosition = new Vector2(i, j);
+                row.Add(field);
+            }
+            miniBoard.Add(row);
+        }
+        miniWaterPrefab.SetActive(false);
+
+    }
+
     public static void SetWaterPrefab(GameObject water) {
         waterPrefab = water;
+        CreateMiniWaterPrefab(water);
+    }
+
+    private static void CreateMiniWaterPrefab(GameObject water) {
+        miniWaterPrefab = GameObject.Instantiate(water) as GameObject;
+        miniWaterPrefab.transform.localScale = miniWaterPrefab.transform.localScale / 2;
     }
 
     public List<List<Field>> GetBoard() {
         return board;
+    }
+
+    public List<List<Field>> GetMiniBoard() {
+        return miniBoard;
     }
 
     public Field GetField(int column, int row) {
