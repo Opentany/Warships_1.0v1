@@ -298,6 +298,32 @@ public class Board {
         return new WarshipsContainer(warshipList);
     }
 
+    public void SetWarshipOnMiniBoard(List<Warship> warships) {
+        foreach (Warship warship in warships) {
+            if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+            {
+                AddColorHorizontal(warship);
+            }
+            else {
+                AddColorVertical(warship);
+            }
+        }
+    }
 
+    private void AddColorHorizontal(Warship warship) {
+        int x = warship.GetXPosition();
+        for (int i = x; i < x + warship.GetSize(); i++)
+        {
+            board[i][warship.GetYPosition()].SetWarshipColor();
+        }
+    }
+
+    private void AddColorVertical(Warship warship){
+        int y = warship.GetYPosition();
+        for (int i = y; i < y + warship.GetSize(); i++)
+        {
+            board[warship.GetXPosition()][i].SetWarshipColor();
+        }
+    }
 
 }
