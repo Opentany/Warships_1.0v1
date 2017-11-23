@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementManager{
- 
+    private static int fieldsOccupiedByWarships = 20;
+
+
     public static bool CheckIfPlayerCanPutWarshipOnThisPosition(Board board, Warship warship)  {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
@@ -48,5 +50,9 @@ public class PlacementManager{
         return true;
     }
 
+
+    public static bool CanGameStart(int warshipsField) {
+        return warshipsField == fieldsOccupiedByWarships;
+    }
  
 }

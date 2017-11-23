@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Controllers\DragDrop.cs" />
-     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
      <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
      <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
      <Compile Include="Assets\Scripts\Game\Board.cs" />

@@ -11,9 +11,11 @@ public class Board {
     private List<List<Field>> board;
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
+    private int fieldsOccupiedByWarships;
 
     public Board() {
         board = new List<List<Field>>();
+        fieldsOccupiedByWarships = 0;
     }
 
     public void GenerateBoard() {
@@ -70,6 +72,13 @@ public class Board {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         board[x][y].SetShotResult(shotRaport.GetShotResult());
+        if (CheckIfFieldWasShot(shotRaport)) {
+            fieldsOccupiedByWarships--;
+        }
+    }
+
+    private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
+        return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
     }
 
     private void SetWarshipOnBoard(Warship warship) {
@@ -93,6 +102,7 @@ public class Board {
             board[i][warship.GetYPosition()].SetPlacementResult(PlacementResult.INACCESSIBLE);
             board[i][warship.GetYPosition()].SetWarship(warship);
         }
+        fieldsOccupiedByWarships += warship.GetSize();
     }
 
     private void SetWarshipVertical(Warship warship) {
@@ -102,6 +112,7 @@ public class Board {
             board[warship.GetXPosition()][i].SetPlacementResult(PlacementResult.INACCESSIBLE);
             board[warship.GetXPosition()][i].SetWarship(warship);
         }
+        fieldsOccupiedByWarships += warship.GetSize();
     }
 
 
@@ -224,19 +235,23 @@ public class Board {
         {
             for (int j = 0; j < boardSize; j++)
             {
-                if (board[i][j].warship==null)
-                {
-                    row += "0 ";
-                }
-                else
-                {
-                    row += "1 ";
-                }
+                row += " " + board[i][j].secureFieldCounter;
             }
             Debug.Log(row);
             row = "";
         }
     }
+
+    public int GetFieldsOccupiedByWarships() {
+        return fieldsOccupiedByWarships;
+    }
+
+    public void SetFieldsOccupiedByWarships(int fields)
+    {
+        fieldsOccupiedByWarships = fields;
+    }
+
+
 
 
 }

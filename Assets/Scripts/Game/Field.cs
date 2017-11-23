@@ -28,6 +28,7 @@ public class Field : MonoBehaviour
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
+        GameController = GameObject.FindGameObjectWithTag("GameController");
         thsPreparationController = GameController.GetComponent<PreparationController>();
         realPosition = transform.position;
         realRotation = transform.rotation;
@@ -47,7 +48,7 @@ public class Field : MonoBehaviour
         }
         else
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString());
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
             
 
         }

@@ -1,10 +1,9 @@
 ﻿
 public abstract class Player{
 
-    protected Board opponentBoard;
-    protected Board playerBoard;
-    protected GameController gameController;
-    protected PreparationController preparationController;
+
+    public Board opponentBoard;
+    public Board playerBoard;
     private bool isYourTurn;
 
     public Player() {
@@ -42,16 +41,11 @@ public abstract class Player{
     public Board GetPlayerBoard()
     {
         return playerBoard;
+
     }
 
-    public void SetGameController(GameController gameController)
-    {
-        this.gameController = gameController;
-    }
-
-    public void SetPreparationController(PreparationController preparationController)
-    {
-        this.preparationController = preparationController;
+    public bool CheckIfYouWin() {
+        return opponentBoard.GetFieldsOccupiedByWarships() == 0;
     }
 
 }

@@ -54,8 +54,6 @@ public class BotPlayer : Player
                 licznik++;
             }
         }
-        Debug.Log("ile statków");
-        Debug.Log(licznik);
         return ships;
     }
 
@@ -65,11 +63,9 @@ public class BotPlayer : Player
         int x = rnd.Next(Board.boardSize);
         int y = rnd.Next(10);
         ship.SetPosition(x, y);
-        Debug.Log("Tutaj");
-        Debug.Log(ship.GetXPosition());
         WarshipOrientation wo = (WarshipOrientation)rnd.Next(2);
         ship.SetWarshipOrientation(wo);
-        Debug.Log(ship.toStringShort());
+
     }
 
 }
