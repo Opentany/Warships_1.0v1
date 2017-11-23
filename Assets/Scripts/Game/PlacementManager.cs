@@ -71,6 +71,8 @@ public class PlacementManager{
     private static bool CheckIfCanPutWarshipHorizontal(BoardModel board, Warship warship)
     {
         int x = warship.GetXPosition();
+        if (y + warship.GetSize() > Board.boardSize)
+            return false;
         for (int i = x; i < x + warship.GetSize(); i++)
         {
             if (board.GetBoard()[i][warship.GetYPosition()].GetPlacementResult() != PlacementResult.AVAILABLE)
@@ -84,6 +86,8 @@ public class PlacementManager{
     private static bool CheckIfCanPutWarshipVertical(BoardModel board, Warship warship)
     {
         int y = warship.GetYPosition();
+        if (x + warship.GetSize() > Board.boardSize)
+            return false;
         for (int i = y; i < y + warship.GetSize(); i++)
         {
             if (board.GetBoard()[warship.GetXPosition()][i].GetPlacementResult() != PlacementResult.AVAILABLE)
