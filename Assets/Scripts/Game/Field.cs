@@ -50,7 +50,10 @@ public class Field : MonoBehaviour
 
     }
 
- 
+    public void SetWarshipColor() {
+        this.renderer.material.color = Color.green;
+    }
+
     void OnMouseDown()
     {
         if (isMini)
