@@ -1,101 +1,88 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Board {
+public class BoardModel {
 
-    public static readonly int boardSize = 10;
-
-    private static GameObject waterPrefab;
-    private List<List<Field>> board;
-    private float screenHorizontalOffset = -2f;
-    private float fieldMargin = 0.05f;
+    public int boardSize = 10;
+    private List<List<FieldModel>> board;
     private int fieldsOccupiedByWarships;
 
-    public Board() {
-        board = new List<List<Field>>();
+    public BoardModel()
+    {
+        board = new List<List<FieldModel>>();
         fieldsOccupiedByWarships = 0;
     }
 
-    public void GenerateBoard() {
-        board = new List<List<Field>>();
+    public void GenerateBoardModel()
+    {
+        board = new List<List<FieldModel>>();
         for (int i = 0; i < boardSize; i++)
         {
-            List<Field> row = new List<Field>();
+            List<FieldModel> row = new List<FieldModel>();
             for (int j = 0; j < boardSize; j++)
             {
-                Field field = GameObject.Instantiate(waterPrefab, new Vector2(), Quaternion.Euler(new Vector2())).GetComponent<Field>();
-                field.enabled = false;
-                field.gridPosition = new Vector2(i, j);
+                FieldModel field = new FieldModel(i, j);
                 row.Add(field);
             }
             board.Add(row);
         }
     }
 
-
-    public void GenerateBoardOnScreen() {
-        board = new List<List<Field>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
-        for (int i = 0; i < boardSize; i++) {
-            List<Field> row = new List<Field>();
-            for (int j = 0; j < boardSize; j++) {
-                Field field = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
-                field.gameObject.layer = 1;
-                field.gridPosition = new Vector2(i, j);
-                row.Add(field);
-            }
-            board.Add(row);
-        }
-    }
-
-    public static void SetWaterPrefab(GameObject water) {
-        waterPrefab = water;
-    }
-
-    public List<List<Field>> GetBoard() {
+    public List<List<FieldModel>> GetBoard()
+    {
         return board;
     }
 
-    public Field GetField(int column, int row) {
+    public FieldModel GetField(int column, int row)
+    {
         return board[column][row];
     }
 
-    public void PlaceWarship(Warship warship) {
-        if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
+    public void PlaceWarship(Warship warship)
+    {
+        if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship))
+        {
             SetWarshipOnBoard(warship);
         }
     }
 
-    public void ApplyShot(ShotRaport shotRaport) {
+    public void ApplyShot(ShotRaport shotRaport)
+    {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         board[x][y].SetShotResult(shotRaport.GetShotResult());
-        if (CheckIfFieldWasShot(shotRaport)) {
+        if (CheckIfFieldWasShot(shotRaport))
+        {
             fieldsOccupiedByWarships--;
         }
     }
 
-    private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
+    private bool CheckIfFieldWasShot(ShotRaport shotRaport)
+    {
         return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
     }
 
-    private void SetWarshipOnBoard(Warship warship) {
+    private void SetWarshipOnBoard(Warship warship)
+    {
         SetWarship(warship);
         SetSecuredFields(warship);
     }
 
-    private void SetWarship(Warship warship) {
+    private void SetWarship(Warship warship)
+    {
         if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
         {
-            SetWarshipHorizontal(warship);        }
-        else {
+            SetWarshipHorizontal(warship);
+        }
+        else
+        {
             SetWarshipVertical(warship);
         }
     }
 
-    private void SetWarshipHorizontal(Warship warship) {
+    private void SetWarshipHorizontal(Warship warship)
+    {
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
@@ -105,7 +92,8 @@ public class Board {
         fieldsOccupiedByWarships += warship.GetSize();
     }
 
-    private void SetWarshipVertical(Warship warship) {
+    private void SetWarshipVertical(Warship warship)
+    {
         int y = warship.GetYPosition();
         for (int i = y; i < y + warship.GetSize(); i++)
         {
@@ -116,19 +104,22 @@ public class Board {
     }
 
 
-    private void SetSecuredFields(Warship warship) {
+    private void SetSecuredFields(Warship warship)
+    {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
         int warshipSize = warship.GetSize();
         int startHorizontal, endHorizontal;
         int startVertical, endVertical;
-        if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL)) {
+        if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+        {
             startHorizontal = (x != 0) ? x - 1 : x;
             endHorizontal = (x + warshipSize < boardSize) ? x + warshipSize : boardSize - 1;
             startVertical = (y != 0) ? y - 1 : y;
             endVertical = (y + 1 < boardSize) ? y + 1 : boardSize - 1;
         }
-        else {
+        else
+        {
             startHorizontal = (x != 0) ? x - 1 : x;
             endHorizontal = (x + 1 < boardSize) ? x + 1 : boardSize - 1;
             startVertical = (y != 0) ? y - 1 : y;
@@ -137,7 +128,8 @@ public class Board {
         SetSecuredFieldsAroundWarship(startVertical, endVertical, startHorizontal, endHorizontal);
     }
 
-    private void SetSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal) {
+    private void SetSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal)
+    {
         for (int i = startHorizontal; i <= endHorizontal; i++)
         {
             for (int j = startVertical; j <= endVertical; j++)
@@ -150,11 +142,13 @@ public class Board {
         }
     }
 
-    private bool CheckIfFieldHasWarshipOnCurrentIndexs(int i, int j) {
+    private bool CheckIfFieldHasWarshipOnCurrentIndexs(int i, int j)
+    {
         return PlacementResult.INACCESSIBLE.Equals(board[i][j].GetPlacementResult());
     }
 
-    public void RemoveWarship(Warship warship) {
+    public void RemoveWarship(Warship warship)
+    {
         if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
         {
             RemoveWarshipHorizontal(warship);
@@ -223,28 +217,16 @@ public class Board {
                 {
                     board[i][j].SetPlacementResult(PlacementResult.AVAILABLE);
                 }
-                else {
+                else
+                {
                     board[i][j].DecreaseSecureFieldCounter();
                 }
             }
         }
     }
 
-    public void DisplayBoard()
+    public int GetFieldsOccupiedByWarships()
     {
-        string row="";
-        for (int i = 0; i < boardSize; i++)
-        {
-            for (int j = 0; j < boardSize; j++)
-            {
-                row += " " + board[i][j].secureFieldCounter;
-            }
-            Debug.Log(row);
-            row = "";
-        }
-    }
-
-    public int GetFieldsOccupiedByWarships() {
         return fieldsOccupiedByWarships;
     }
 
@@ -252,8 +234,4 @@ public class Board {
     {
         fieldsOccupiedByWarships = fields;
     }
-
-
-
-
 }
