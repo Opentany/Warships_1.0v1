@@ -158,6 +158,7 @@ public class Board {
     }
 
     public void RemoveWarship(Warship warship) {
+        warshipList.Remove(warship);
         if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
         {
             RemoveWarshipHorizontal(warship);
