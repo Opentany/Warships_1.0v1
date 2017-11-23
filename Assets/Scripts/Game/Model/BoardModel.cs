@@ -7,10 +7,13 @@ public class BoardModel {
     public static int boardSize = 10;
     private List<List<FieldModel>> board;
     private int fieldsOccupiedByWarships;
+    private List<Warship> warshipList;
+
 
     public BoardModel()
     {
         board = new List<List<FieldModel>>();
+        warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
     }
 
@@ -43,6 +46,7 @@ public class BoardModel {
     {
         if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship))
         {
+            warshipList.Add(warship);
             SetWarshipOnBoard(warship);
         }
     }
@@ -149,6 +153,7 @@ public class BoardModel {
 
     public void RemoveWarship(Warship warship)
     {
+        warshipList.Remove(warship);
         if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
         {
             RemoveWarshipHorizontal(warship);
@@ -233,6 +238,11 @@ public class BoardModel {
     public void SetFieldsOccupiedByWarships(int fields)
     {
         fieldsOccupiedByWarships = fields;
+    }
+
+    public WarshipsContainer GetWarshipList()
+    {
+        return new WarshipsContainer(warshipList);
     }
 
 }
