@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour {
+public abstract class Player {
 
     public Board opponentBoard;
     public Board playerBoard;
@@ -30,6 +30,9 @@ public abstract class Player : MonoBehaviour {
         playerBoard.ApplyShot(shotRaport);
     }
 
+    public bool CheckIfYouWin() {
+        return opponentBoard.GetFieldsOccupiedByWarships() == 0;
+    }
 
 
 }
