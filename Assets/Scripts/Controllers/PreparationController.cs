@@ -47,7 +47,7 @@ public class PreparationController : MonoBehaviour {
         ChooseWarship4();
     }
 
-    public void ChooseField(Field field)
+    public bool ChooseField(Field field)
     {
         chosenField = field;
         if (chosenField!=null)
@@ -56,24 +56,28 @@ public class PreparationController : MonoBehaviour {
             var statek = CreateWarship(chosenWarshipSize);
             if (statek==null)
             {
-                return;
+                
+                return false;
             }
             Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(preparationBoard, statek))
             {
                 preparationBoard.PlaceWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
+                preparationBoard.DisplayBoard();
+                return true;
             }
             else
             {
                 Debug.Log("wybierz inne miejsce");
                 PutBackWarship(statek);
+                return false;
             }
-            preparationBoard.DisplayBoard();
         }
         else
         {
             Debug.Log("nie wybrano pola");
+            return false;
         }
     }
 

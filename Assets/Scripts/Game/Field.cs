@@ -41,9 +41,13 @@ public class Field : MonoBehaviour
         if (IsPressed())
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
-            this.enabled = false;
-            this.renderer.material.color = Color.grey;
-            thsPreparationController.ChooseField(this);
+            if (thsPreparationController.ChooseField(this))
+            {
+                this.enabled = false;
+                this.renderer.material.color = Color.grey;
+            }
+            
+            
 
         }
         else
