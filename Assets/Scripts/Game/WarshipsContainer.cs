@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class WarshipsContainer : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class WarshipsContainer{
+
+    private List<Warship> warships;
+
+    public WarshipsContainer(List<Warship> ships)
+    {
+        this.warships = ships;
+    }
+
+    public List<Warship> GetWarships()
+    {
+        return warships;
+    }
+
+
 }

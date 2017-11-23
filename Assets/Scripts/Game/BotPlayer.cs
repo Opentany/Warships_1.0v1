@@ -9,13 +9,13 @@ public class BotPlayer : Player
 
     public override void ArrangeBoard()
     {
-        Board board = new Board();
+        BoardModel board = new BoardModel();
         System.Random rnd = new System.Random();
         List<Warship> ships = getAllShips();
         bool lastShipOk = false;
         while (!lastShipOk)
         {
-            board.GenerateBoard();
+            board.GenerateBoardModel();
             for(int i = 0; i < 10; i++)
             {
                 Warship ship = ships[i];
@@ -34,7 +34,7 @@ public class BotPlayer : Player
                     break;
             }
         }
-        this.SetPlayerBoard(board);
+        this.shipsContainer = new WarshipsContainer(ships);
         for (int i = 0; i < 10; i++)
         {
             Warship ship = ships[i];
@@ -68,4 +68,12 @@ public class BotPlayer : Player
 
     }
 
+    public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
+    {
+        Board board = new Board();
+        this.shipsContainer = warshipsContainer;
+        foreach (Warship ship in shipsContainer.GetWarships()){
+            board.PlaceWarship(ship);
+        }
+    }
 }

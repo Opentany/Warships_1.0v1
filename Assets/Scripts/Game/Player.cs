@@ -2,8 +2,9 @@
 public abstract class Player{
 
 
-    public Board opponentBoard;
-    public Board playerBoard;
+    public BoardModel opponentBoard;
+    public BoardModel playerBoard;
+    public WarshipsContainer shipsContainer;
     private bool isYourTurn;
 
     public Player() {
@@ -20,14 +21,7 @@ public abstract class Player{
         isYourTurn = true;
     }
 
-    public virtual void SetPlayerBoard(Board playerBoard)
-    {
-        this.playerBoard = playerBoard;
-    }
-
-    public virtual void SetOpponentBoard(Board opponentBoard) {
-        this.opponentBoard = opponentBoard;
-    }
+    public abstract void SetPlayerBoard(WarshipsContainer playerBoard);
 
     public virtual void TakeOpponentShot(ShotRaport shotRaport) {
         playerBoard.ApplyShot(shotRaport);
@@ -38,10 +32,14 @@ public abstract class Player{
         opponentBoard.ApplyShot(shotRaport);
     }
 
-    public Board GetPlayerBoard()
+    public BoardModel GetPlayerBoard()
     {
         return playerBoard;
+    }
 
+    public WarshipsContainer GetPlayerShips()
+    {
+        return shipsContainer;
     }
 
     public bool CheckIfYouWin() {

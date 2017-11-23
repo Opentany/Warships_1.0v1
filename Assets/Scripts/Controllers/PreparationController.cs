@@ -15,7 +15,6 @@ public class PreparationController : MonoBehaviour {
     public GameObject warship1Prefab;
     public GameObject shotFieldPrefab;
     public static Player botPlayer;
-    public static Player humanPlayer;
     private static Board humanPlayerBoard;
     private static Board botPlayerBoard;
 
@@ -26,6 +25,7 @@ public class PreparationController : MonoBehaviour {
     private static List<Warship> warships3;
     private static List<Warship> warships2;
     private static List<Warship> warships1;
+    private WarshipsContainer botPlayerShips;
 
     public static int chosenWarshipSize;
     // Use this for initialization
@@ -36,14 +36,13 @@ public class PreparationController : MonoBehaviour {
         preparationBoard.GenerateBoardOnScreen();
         warshipCreator = new WarshipCreator();
         botPlayer = BotCreator.CreateBotPlayer();
-        humanPlayer = new HumanPlayer();
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
         warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
         warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
         warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
         warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
         botPlayer.ArrangeBoard();
-        botPlayerBoard = botPlayer.GetPlayerBoard();
+        botPlayerShips = botPlayer.GetPlayerShips();
         ChooseWarship4();
     }
 
