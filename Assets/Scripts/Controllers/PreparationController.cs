@@ -225,6 +225,14 @@ public class PreparationController : MonoBehaviour {
         return chosenWarshipOrientation.Equals(WarshipOrientation.HORIZONTAL);
     }
 
+
+    public void StartGame(string sceneName) {
+        if (PlacementManager.CanGameStart(preparationBoard.GetFieldsOccupiedByWarships())) {
+            LoadScene(sceneName);
+        }
+    }
+
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
