@@ -44,6 +44,7 @@ public class PreparationController : MonoBehaviour {
         warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
         botPlayer.ArrangeBoard();
         botPlayerBoard = botPlayer.GetPlayerBoard();
+        ChooseWarship4();
     }
 
     public void ChooseField(Field field)
@@ -53,6 +54,10 @@ public class PreparationController : MonoBehaviour {
         {
             Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
+            if (statek==null)
+            {
+                return;
+            }
             Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(preparationBoard, statek))
             {
@@ -191,12 +196,17 @@ public class PreparationController : MonoBehaviour {
     }
     private Warship CreateWarship(int size)
     {
-        Warship statek;
+        Warship statek = null;
         Debug.Log("chosenWorshipSize to "+size);
         switch (size)
         {
             case 4:
             {
+                if (warships4.Count==0)
+                {
+                    Debug.Log("Skończyły się statki rozmiaru "+size);
+                    break;
+                }
                 statek = warships4[0];                    
                 warships4.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
@@ -205,7 +215,12 @@ public class PreparationController : MonoBehaviour {
             }
             case 3:
             {
-                statek = warships3[0];
+                if (warships3.Count == 0)
+                {
+                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    break;
+                }
+                    statek = warships3[0];
                 warships3.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
@@ -213,7 +228,12 @@ public class PreparationController : MonoBehaviour {
             }
             case 2:
             {
-                statek = warships2[0];
+                if (warships2.Count == 0)
+                {
+                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    break;
+                }
+                    statek = warships2[0];
                 warships2.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
@@ -221,7 +241,12 @@ public class PreparationController : MonoBehaviour {
             }
             case 1:
             {
-                statek = warships1[0];
+                if (warships1.Count == 0)
+                {
+                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    break;
+                }
+                    statek = warships1[0];
                 warships1.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
@@ -229,7 +254,6 @@ public class PreparationController : MonoBehaviour {
             }
             default:
             {
-                statek = null;
                     Debug.Log("Co ja tutaj robię ????");
                 break;
             }
