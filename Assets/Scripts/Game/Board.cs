@@ -12,9 +12,11 @@ public class Board {
     private float screenHorizontalOffset = -2f;
     private float fieldMargin = 0.05f;
     private int fieldsOccupiedByWarships;
+    private List<Warship> warshipList;
 
     public Board() {
         board = new List<List<Field>>();
+        warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
     }
 
@@ -64,6 +66,7 @@ public class Board {
 
     public void PlaceWarship(Warship warship) {
         if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship)) {
+            warshipList.Add(warship);
             SetWarshipOnBoard(warship);
         }
     }
@@ -253,6 +256,10 @@ public class Board {
         fieldsOccupiedByWarships = fields;
     }
 
+
+    public WarshipsContainer GetWarshipList() {
+        return new WarshipsContainer(warshipList);
+    }
 
 
 
