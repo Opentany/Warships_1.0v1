@@ -7,6 +7,8 @@ public class Field : MonoBehaviour
 
     public GameObject GameController;
     public Vector2 gridPosition = Vector2.zero;
+    public Vector3 realPosition;
+    public Quaternion realRotation;
     private DmgDone dmgDone;
     private PlacementResult placementResult;
     public Warship warship;
@@ -14,28 +16,39 @@ public class Field : MonoBehaviour
     public int secureFieldCounter;
     private PreparationController thsPreparationController;
 
+    public Field() {
+        warship = null;
+        placementResult = PlacementResult.AVAILABLE;
+        secureFieldCounter = 0;
+    }
+
+
     void Start(){
         warship = null;
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
         thsPreparationController = GameController.GetComponent<PreparationController>();
+        realPosition = transform.position;
+        realRotation = transform.rotation;
     }
 
 
     void OnMouseDown()
     {
-        thsPreparationController.ChooseField(this);
+        
         if (IsPressed())
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y);
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
             this.enabled = false;
             this.renderer.material.color = Color.grey;
-            
+            thsPreparationController.ChooseField(this);
+
         }
         else
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available");
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString());
+            
 
         }
 

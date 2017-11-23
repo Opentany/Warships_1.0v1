@@ -18,6 +18,22 @@ public class Board {
 
     public void GenerateBoard() {
         board = new List<List<Field>>();
+        for (int i = 0; i < boardSize; i++)
+        {
+            List<Field> row = new List<Field>();
+            for (int j = 0; j < boardSize; j++)
+            {
+                Field field = new Field();
+                field.gridPosition = new Vector2(i, j);
+                row.Add(field);
+            }
+            board.Add(row);
+        }
+    }
+
+
+    public void GenerateBoardOnScreen() {
+        board = new List<List<Field>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<Field> row = new List<Field>();
@@ -61,7 +77,7 @@ public class Board {
     }
 
     private void SetWarship(Warship warship) {
-        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
+        if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
         {
             SetWarshipHorizontal(warship);        }
         else {
@@ -94,7 +110,7 @@ public class Board {
         int warshipSize = warship.GetSize();
         int startHorizontal, endHorizontal;
         int startVertical, endVertical;
-        if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL) {
+        if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL)) {
             startHorizontal = (x != 0) ? x - 1 : x;
             endHorizontal = (x + warshipSize < boardSize) ? x + warshipSize : boardSize - 1;
             startVertical = (y != 0) ? y - 1 : y;
@@ -110,9 +126,9 @@ public class Board {
     }
 
     private void SetSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal) {
-        for (int i = startVertical; i <= endVertical; i++)
+        for (int i = startHorizontal; i <= endHorizontal; i++)
         {
-            for (int j = startHorizontal; j <= endHorizontal; j++)
+            for (int j = startVertical; j <= endVertical; j++)
             {
                 if (!CheckIfFieldHasWarshipOnCurrentIndexs(i, j))
                 {
@@ -207,7 +223,14 @@ public class Board {
         {
             for (int j = 0; j < boardSize; j++)
             {
-                row += board[i][j].secureFieldCounter;
+                if (board[i][j].warship==null)
+                {
+                    row += "0 ";
+                }
+                else
+                {
+                    row += "1 ";
+                }
             }
             Debug.Log(row);
             row = "";

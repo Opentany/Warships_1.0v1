@@ -66,4 +66,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldPrefab: {fileID: 1226726396362864, guid: 00d6e729db8d138458fc541da7f8013d,
     type: 2}
+  warship4Prefab: {fileID: 1673244189136590, guid: f088648add6de7440877f313f8588996,
+    type: 2}
+  warship3Prefab: {fileID: 1095776232086832, guid: a7f9fa4f4d82a8041bdfff685eed922f,
+    type: 2}
+  warship2Prefab: {fileID: 1953567775366564, guid: 1dcd20d3c74324442b16cbe34bc9093c,
+    type: 2}
+  warship1Prefab: {fileID: 1102090974433500, guid: bf9a5b9153c5e514c9a0fba06fc34f1c,
+    type: 2}
   shotFieldPrefab: {fileID: 0}
