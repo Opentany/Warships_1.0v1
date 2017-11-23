@@ -50,8 +50,16 @@ public class PreparationController : MonoBehaviour {
             Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
             Debug.Log(statek.warshipSize);
-            preparationBoard.PlaceWarship(statek);
-            WarshipPlacer((int)statek.warshipSize,chosenField);
+            if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(preparationBoard, statek))
+            {
+                preparationBoard.PlaceWarship(statek);
+                WarshipPlacer((int)statek.warshipSize, chosenField);
+            }
+            else
+            {
+                Debug.Log("wybierz inne miejsce");
+                PutBackWarship(statek);
+            }
             preparationBoard.DisplayBoard();
         }
         else
@@ -141,6 +149,38 @@ public class PreparationController : MonoBehaviour {
             default:
             {
                 Debug.Log("Co ja tutaj robię ????");
+                break;
+            }
+        }
+    }
+
+    private void PutBackWarship(Warship warship)
+    {
+        switch ((int)warship.warshipSize)
+        {
+            case 4:
+            {
+                warships4.Add(warship);
+                break;
+            }
+            case 3:
+            {
+                warships3.Add(warship);
+                    break;
+            }
+            case 2:
+            {
+                warships2.Add(warship);
+                    break;
+            }
+            case 1:
+            {
+                warships1.Add(warship);
+                    break;
+            }
+            default:
+            {
+                Debug.Log("That can't be DONE !!!");
                 break;
             }
         }
