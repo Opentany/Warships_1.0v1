@@ -11,28 +11,23 @@ public class BotPlayer : Player
     {
         Board board = new Board();
         System.Random rnd = new System.Random();
-        WarshipCreator wc = new WarshipCreator();
-        List<Warship> ships = wc.GetWarshipList();
-        Debug.Log(ships.Count);
+        List<Warship> ships = getAllShips();
         bool lastShipOk = false;
-        while (lastShipOk)
+        while (!lastShipOk)
         {
             board.GenerateBoard();
-            foreach (Warship ship in ships)
+            for(int i = 0; i < 10; i++)
             {
-
+                Warship ship = ships[i];
                 int x;
                 int y;
                 int tries = 10;
                 do
                 {
-                    x = rnd.Next(Board.boardSize);
-                    y = rnd.Next(Board.boardSize);
-                    ship.SetPosition(x, y);
-                    WarshipOrientation wo = (WarshipOrientation)rnd.Next(2);
-                    ship.SetWarshipOrientation(wo);
+                    getRandomWarship(ship);
                     lastShipOk = PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(board, ship);
                 } while (!lastShipOk && tries > 0);
+
                 if (lastShipOk)
                     board.PlaceWarship(ship);
                 else
@@ -40,11 +35,41 @@ public class BotPlayer : Player
             }
         }
         this.SetPlayerBoard(board);
-        Debug.Log("Done");
-        foreach (Warship ship in ships)
+        for (int i = 0; i < 10; i++)
         {
+            Warship ship = ships[i];
             Debug.Log(ship.toStringShort());
         }
-        board.DisplayBoard();
     }
+
+    private List<Warship> getAllShips()
+    {
+        int licznik=0;
+        List<Warship> ships = new List<Warship>();
+        for(int i = 4; i> 0; i--)
+        {
+            for(int j = 5-i; j > 0; j--)
+            {
+                ships.Add(new Warship((WarshipSize)i));
+                licznik++;
+            }
+        }
+        Debug.Log("ile statków");
+        Debug.Log(licznik);
+        return ships;
+    }
+
+    public static void getRandomWarship(Warship ship)
+    {
+        System.Random rnd = new System.Random();
+        int x = rnd.Next(Board.boardSize);
+        int y = rnd.Next(10);
+        ship.SetPosition(x, y);
+        Debug.Log("Tutaj");
+        Debug.Log(ship.GetXPosition());
+        WarshipOrientation wo = (WarshipOrientation)rnd.Next(2);
+        ship.SetWarshipOrientation(wo);
+        Debug.Log(ship.toStringShort());
+    }
+
 }

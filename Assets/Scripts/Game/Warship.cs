@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
-public class Warship : MonoBehaviour {
+public class Warship{
 
     private int x;
     private int y;
@@ -19,7 +18,6 @@ public class Warship : MonoBehaviour {
         isSinked = false;
         durability = (int)warshipSize;
     }
-
 
     public WarshipOrientation GetOrientation() {
         return warshipOrientation;
@@ -47,6 +45,11 @@ public class Warship : MonoBehaviour {
         if (durability == 0) {
             isSinked = true;
         }
+    }
+
+    public int GetDurability()
+    {
+        return durability;
     }
 
     public int GetSize() {
@@ -81,60 +84,7 @@ public class Warship : MonoBehaviour {
     private Vector3 positionOfField;
     private bool clickedNotDraged;
     private Vector2 fieldGridPosition;
-
-
-    void OnMouseDown()
-    {
-
-        offset = gameObject.transform.position -
-                 Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-        clickedNotDraged = true;
-    }
-
-    void OnMouseDrag()
-    {
-        Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
-        var nextPosition = Camera.main.ScreenToWorldPoint(newPosition) + offset;
-        if (nextPosition != transform.position)
-        {
-            clickedNotDraged = false;
-        }
-        transform.position = nextPosition;
-
-    }
-
-    void OnMouseUp()
-    {
-        if (GetSize() == 2 || GetSize() == 4)
-        {
-            if (CheckIfOrientationIsHorizontal())
-            {
-                positionOfField.x -= 0.25f;
-            }
-            else
-            {
-                positionOfField.y -= 0.25f;
-            }
-        }
-        transform.position = positionOfField;
-        Debug.Log(fieldGridPosition.x +";"+fieldGridPosition.y);
-        //Debug.Log(clickedNotDraged);
-        if (clickedNotDraged)
-        {
-            transform.Rotate(Vector3.back * -90);
-            ChangeOrientation();
-        }
-    }
-    void OnCollisionStay2D(Collision2D coll)
-    {
-        if (coll.gameObject.name == "Water(Clone)")
-        {
-            Field fieldunder = coll.gameObject.GetComponent<Field>();
-            positionOfField = coll.gameObject.transform.position;
-            fieldGridPosition = fieldunder.gridPosition;
-            coll.gameObject.GetComponent(typeof(Field));
-        }
-    }
+    private int i;
 
     public string toStringShort()
     {

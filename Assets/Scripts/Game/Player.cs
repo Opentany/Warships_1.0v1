@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class Player : MonoBehaviour {
+﻿
+public abstract class Player{
 
     protected Board opponentBoard;
     protected Board playerBoard;

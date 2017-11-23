@@ -23,7 +23,8 @@ public class Board {
             List<Field> row = new List<Field>();
             for (int j = 0; j < boardSize; j++)
             {
-                Field field = new Field();
+                Field field = GameObject.Instantiate(waterPrefab, new Vector2(), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+                field.enabled = false;
                 field.gridPosition = new Vector2(i, j);
                 row.Add(field);
             }
