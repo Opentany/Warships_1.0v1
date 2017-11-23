@@ -17,6 +17,7 @@ public class Field : MonoBehaviour
     public int secureFieldCounter;
     private PreparationController thsPreparationController;
     private GameplayController gameplayController;
+    public bool isMini = false;
 
     public Field() {
         warship = null;
@@ -52,6 +53,10 @@ public class Field : MonoBehaviour
  
     void OnMouseDown()
     {
+        if (isMini)
+        {
+            return;
+        }
         if (gameplayController != null)
         {
             OnClickInGameplay();

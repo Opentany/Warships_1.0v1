@@ -69,6 +69,7 @@ public class Board {
                 Field field = GameObject.Instantiate(miniWaterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
                 field.gameObject.layer = 1;
                 field.gridPosition = new Vector2(i, j);
+                field.isMini = true;
                 row.Add(field);
             }
             miniBoard.Add(row);
