@@ -50,7 +50,7 @@ public class PreparationController : MonoBehaviour {
             Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
             Debug.Log(statek.warshipSize);
-                preparationBoard.PlaceWarship(statek);
+            preparationBoard.PlaceWarship(statek);
             WarshipPlacer((int)statek.warshipSize,chosenField);
             preparationBoard.DisplayBoard();
         }
@@ -78,8 +78,8 @@ public class PreparationController : MonoBehaviour {
                 else
                 {
                     pozycja.y = pozycja.y + 0.69f;
-                    Warship obrazekWarship = GameObject.Instantiate(warship4Prefab, pozycja, rotacja).GetComponent<Warship>();
-                    
+                    GameObject.Instantiate(warship4Prefab, pozycja, rotacja);
+
                 }
                 break;
             }
@@ -97,7 +97,7 @@ public class PreparationController : MonoBehaviour {
                 else
                 {
                     pozycja.y = pozycja.y + 0.46f;
-                    Warship obrazekWarship = GameObject.Instantiate(warship3Prefab, pozycja, rotacja).GetComponent<Warship>();
+                    GameObject.Instantiate(warship3Prefab, pozycja, rotacja);
 
                 }
                 break;
@@ -116,7 +116,7 @@ public class PreparationController : MonoBehaviour {
                 else
                 {
                     pozycja.y = pozycja.y + 0.24f;
-                    Warship obrazekWarship = GameObject.Instantiate(warship2Prefab, pozycja, rotacja).GetComponent<Warship>();
+                    GameObject.Instantiate(warship2Prefab, pozycja, rotacja);
 
                 }
                 break;
@@ -133,7 +133,7 @@ public class PreparationController : MonoBehaviour {
                     }
                     else
                     {
-                        Warship obrazekWarship = GameObject.Instantiate(warship1Prefab, pozycja, rotacja).GetComponent<Warship>();
+                        GameObject.Instantiate(warship1Prefab, pozycja, rotacja);
 
                     }
                     break;

@@ -28,6 +28,7 @@ public class Field : MonoBehaviour
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
+        GameController = GameObject.FindGameObjectWithTag("GameController");
         thsPreparationController = GameController.GetComponent<PreparationController>();
         realPosition = transform.position;
         realRotation = transform.rotation;
