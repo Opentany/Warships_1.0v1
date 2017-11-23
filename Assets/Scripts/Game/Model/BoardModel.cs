@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardModel {
 
-    public int boardSize = 10;
+    public static int boardSize = 10;
     private List<List<FieldModel>> board;
     private int fieldsOccupiedByWarships;
 
@@ -234,4 +234,5 @@ public class BoardModel {
     {
         fieldsOccupiedByWarships = fields;
     }
+
 }
