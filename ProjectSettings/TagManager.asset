@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water
   - Warship
+  - GameplayController
   layers:
   - Default
   - TransparentFX

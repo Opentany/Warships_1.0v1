@@ -6,6 +6,7 @@ public class Field : MonoBehaviour
 {
 
     public GameObject GameController;
+    public GameObject GameplayController;
     public Vector2 gridPosition = Vector2.zero;
     public Vector3 realPosition;
     public Quaternion realRotation;
@@ -15,6 +16,7 @@ public class Field : MonoBehaviour
     private Renderer renderer;
     public int secureFieldCounter;
     private PreparationController thsPreparationController;
+    private GameplayController gameplayController;
 
     public Field() {
         warship = null;
@@ -28,16 +30,42 @@ public class Field : MonoBehaviour
         placementResult = PlacementResult.AVAILABLE;
         renderer = GetComponent<Renderer>();
         secureFieldCounter = 0;
-        GameController = GameObject.FindGameObjectWithTag("GameController");
-        thsPreparationController = GameController.GetComponent<PreparationController>();
+        FindViews();
         realPosition = transform.position;
         realRotation = transform.rotation;
     }
 
+    private void FindViews() {
+        GameController = GameObject.FindGameObjectWithTag("GameController");
+        GameplayController = GameObject.FindGameObjectWithTag("GameplayController");
+        if (GameController != null)
+        {
+            thsPreparationController = GameController.GetComponent<PreparationController>();
+        }
+        if (GameplayController != null)
+        {
+           gameplayController = GameplayController.GetComponent<GameplayController>();
+        }
 
+    }
+
+ 
     void OnMouseDown()
     {
-        
+        if (gameplayController != null)
+        {
+            OnClickInGameplay();
+        }
+        else if (thsPreparationController != null) {
+            OnClickInPreparation();
+        }
+
+       
+
+    }
+
+    private void OnClickInPreparation()
+    {
         if (IsPressed())
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
@@ -46,17 +74,25 @@ public class Field : MonoBehaviour
                 this.enabled = false;
                 this.renderer.material.color = Color.grey;
             }
-            
-            
-
         }
         else
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
-            
+
 
         }
+    }
 
+    private void OnClickInGameplay()
+    {
+        if (IsPressed())
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
+        }
+        else
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
+        }
     }
 
     public void SetShotResult(DmgDone result) {
