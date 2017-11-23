@@ -46,6 +46,50 @@ public class PlacementManager{
         return true;
     }
 
+    public static bool CheckIfPlayerCanPutWarshipOnThisPosition(BoardModel board, Warship warship)
+    {
+        int x = warship.GetXPosition();
+        int y = warship.GetYPosition();
+        if (board.GetBoard()[x][y].GetPlacementResult() == PlacementResult.AVAILABLE)
+        {
+            if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
+            {
+                return CheckIfCanPutWarshipHorizontal(board, warship);
+            }
+            else
+            {
+                return CheckIfCanPutWarshipVertical(board, warship);
+            }
+        }
+        return false;
+    }
+
+    private static bool CheckIfCanPutWarshipHorizontal(BoardModel board, Warship warship)
+    {
+        int x = warship.GetXPosition();
+        for (int i = x; i < x + warship.GetSize(); i++)
+        {
+            if (board.GetBoard()[i][warship.GetYPosition()].GetPlacementResult() != PlacementResult.AVAILABLE)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static bool CheckIfCanPutWarshipVertical(BoardModel board, Warship warship)
+    {
+        int y = warship.GetYPosition();
+        for (int i = y; i < y + warship.GetSize(); i++)
+        {
+            if (board.GetBoard()[warship.GetXPosition()][i].GetPlacementResult() != PlacementResult.AVAILABLE)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public static bool CanGameStart(int warshipsField) {
         return warshipsField == fieldsOccupiedByWarships;

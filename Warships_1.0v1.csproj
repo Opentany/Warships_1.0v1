@@ -230,6 +230,8 @@
     <Compile Include="Assets\Scripts\Game\Field.cs" />
     <Compile Include="Assets\Scripts\Game\HumanPlayer.cs" />
     <Compile Include="Assets\Scripts\Game\IllegalShotException.cs" />
+    <Compile Include="Assets\Scripts\Game\Model\BoardModel.cs" />
+    <Compile Include="Assets\Scripts\Game\Model\FieldModel.cs" />
     <Compile Include="Assets\Scripts\Game\PlacementManager.cs" />
     <Compile Include="Assets\Scripts\Game\PlacementResult.cs" />
     <Compile Include="Assets\Scripts\Game\Player.cs" />
