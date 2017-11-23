@@ -10,11 +10,11 @@ public class GameplayController : MonoBehaviour {
 
     private enum PlayerType {HUMAN, BOT };
 
-
+    public Board board;
 
 	// Use this for initialization
 	void Start () {
-        Board board = new Board();
+        board = new Board();
         Board.SetWaterPrefab(waterPrefab);
         board.GenerateBoardOnScreen();
         board.GenerateMiniBoardOnScreen();
@@ -48,10 +48,9 @@ public class GameplayController : MonoBehaviour {
 
     }
 
-    //Funkcja do malowania statków na małej planszy
-    public void SetMyShips(List<Warship> ship)
+    public void SetMyShips(List<Warship> ships)
     {
-
+        board.SetWarshipOnMiniBoard(ships);
     }
 
 }
