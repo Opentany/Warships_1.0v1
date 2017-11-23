@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
+public abstract class Player{
 
-public abstract class Player {
 
     public Board opponentBoard;
     public Board playerBoard;
@@ -13,26 +11,41 @@ public abstract class Player {
 
     public abstract void ArrangeBoard();
 
-    bool IsYourTurn() {
+    public bool IsYourTurn() {
         return isYourTurn;
     }
 
-    public void YourTurn()
+    public virtual void YourTurn()
     {
         isYourTurn = true;
     }
 
-    public void SetOpponentBoard(Board opponentBoard) {
+    public virtual void SetPlayerBoard(Board playerBoard)
+    {
+        this.playerBoard = playerBoard;
+    }
+
+    public virtual void SetOpponentBoard(Board opponentBoard) {
         this.opponentBoard = opponentBoard;
     }
 
-    void TakeOpponentShot(ShotRaport shotRaport) {
+    public virtual void TakeOpponentShot(ShotRaport shotRaport) {
         playerBoard.ApplyShot(shotRaport);
+    }
+
+    public virtual void SetPlayerShotResult(ShotRaport shotRaport)
+    {
+        opponentBoard.ApplyShot(shotRaport);
+    }
+
+    public Board GetPlayerBoard()
+    {
+        return playerBoard;
+
     }
 
     public bool CheckIfYouWin() {
         return opponentBoard.GetFieldsOccupiedByWarships() == 0;
     }
-
 
 }

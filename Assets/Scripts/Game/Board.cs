@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Board {
 
-    public int boardSize = 10;
+    public static readonly int boardSize = 10;
 
     private static GameObject waterPrefab;
     private List<List<Field>> board;
@@ -25,7 +25,8 @@ public class Board {
             List<Field> row = new List<Field>();
             for (int j = 0; j < boardSize; j++)
             {
-                Field field = new Field();
+                Field field = GameObject.Instantiate(waterPrefab, new Vector2(), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+                field.enabled = false;
                 field.gridPosition = new Vector2(i, j);
                 row.Add(field);
             }
