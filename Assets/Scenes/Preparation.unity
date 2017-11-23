@@ -1251,7 +1251,7 @@ RectTransform:
   m_GameObject: {fileID: 780731193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.005490066, y: 0.005490066, z: 0.005490066}
+  m_LocalScale: {x: 0.0054854755, y: 0.0054854755, z: 0.0054854755}
   m_Children:
   - {fileID: 1228213200}
   - {fileID: 1912210839}
@@ -2478,7 +2478,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445727801}
-        m_MethodName: LoadScene
+        m_MethodName: StartGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
