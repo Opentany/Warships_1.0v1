@@ -146,4 +146,35 @@ public class Field : MonoBehaviour
         secureFieldCounter--;
     }
 
+    public void SetColorOnField(DmgDone shotResult)
+    {
+        if (shotResult.Equals(DmgDone.HIT))
+        {
+            this.renderer.material.color = Color.red;
+        }
+        else if (shotResult.Equals(DmgDone.SINKED))
+        {
+            this.renderer.material.color = Color.black;
+        }
+        else if (shotResult.Equals(DmgDone.MISS)) {
+            this.renderer.material.color = Color.grey;
+        }
+    }
+
+    //TODO
+    public void SetEffectOnField(DmgDone shotResult) {
+        if (shotResult.Equals(DmgDone.HIT))
+        {
+            this.renderer.material.color = Color.red;
+        }
+        else if (shotResult.Equals(DmgDone.SINKED))
+        {
+            this.renderer.material.color = Color.black;
+        }
+        else if (shotResult.Equals(DmgDone.MISS))
+        {
+            this.renderer.material.color = Color.grey;
+        }
+    }
+
 }

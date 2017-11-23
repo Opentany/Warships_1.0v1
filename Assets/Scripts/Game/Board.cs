@@ -116,6 +116,21 @@ public class Board {
         }
     }
 
+    public void ApplyMyShot(ShotRaport shotRaport) {
+        int x = shotRaport.GetX();
+        int y = shotRaport.GetY();
+        board[x][y].SetShotResult(shotRaport.GetShotResult());
+        board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+    }
+
+
+    public void ApplyOpponentShot(ShotRaport shotRaport) {
+        int x = shotRaport.GetX();
+        int y = shotRaport.GetY();
+        miniBoard[x][y].SetShotResult(shotRaport.GetShotResult());
+        miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
+    }
+
     private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
         return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
     }
@@ -314,7 +329,7 @@ public class Board {
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-            board[i][warship.GetYPosition()].SetWarshipColor();
+            miniBoard[i][warship.GetYPosition()].SetWarshipColor();
         }
     }
 
@@ -322,8 +337,10 @@ public class Board {
         int y = warship.GetYPosition();
         for (int i = y; i < y + warship.GetSize(); i++)
         {
-            board[warship.GetXPosition()][i].SetWarshipColor();
+            miniBoard[warship.GetXPosition()][i].SetWarshipColor();
         }
     }
+
+
 
 }
