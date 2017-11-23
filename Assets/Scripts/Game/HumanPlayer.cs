@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class HumanPlayer : Player
 {
-    
+
     public override void ArrangeBoard()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void SetPlayerBoard(WarshipsContainer playerBoard)
+    public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        throw new System.NotImplementedException();
+        controller.SetMyShips(warshipsContainer.GetWarships());
     }
+
 }

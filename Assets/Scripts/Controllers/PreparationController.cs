@@ -15,8 +15,7 @@ public class PreparationController : MonoBehaviour {
     public GameObject warship1Prefab;
     public GameObject shotFieldPrefab;
     public static Player botPlayer;
-    private static Board humanPlayerBoard;
-    private static Board botPlayerBoard;
+    public static Player humanPlayer;
 
     private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
@@ -36,6 +35,7 @@ public class PreparationController : MonoBehaviour {
         preparationBoard.GenerateBoardOnScreen();
         warshipCreator = new WarshipCreator();
         botPlayer = BotCreator.CreateBotPlayer();
+        humanPlayer = new HumanPlayer();
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
         warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
         warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
@@ -300,6 +300,8 @@ public class PreparationController : MonoBehaviour {
     public void StartGame(string sceneName) {
         if (PlacementManager.CanGameStart(preparationBoard.GetFieldsOccupiedByWarships())) {
             LoadScene(sceneName);
+            humanPlayer.SetPlayerBoard(preparationBoard.GetWarshipList());
+            GameplayController.setPlayers(humanPlayer, botPlayer);
         }
     }
 

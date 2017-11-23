@@ -6,8 +6,10 @@ public abstract class Player{
     public BoardModel playerBoard;
     public WarshipsContainer shipsContainer;
     private bool isYourTurn;
+    public GameplayController controller;
 
     public Player() {
+        isYourTurn = false;
     }
 
     public abstract void ArrangeBoard();
@@ -32,11 +34,6 @@ public abstract class Player{
         opponentBoard.ApplyShot(shotRaport);
     }
 
-    public BoardModel GetPlayerBoard()
-    {
-        return playerBoard;
-    }
-
     public WarshipsContainer GetPlayerShips()
     {
         return shipsContainer;
@@ -44,6 +41,11 @@ public abstract class Player{
 
     public bool CheckIfYouWin() {
         return opponentBoard.GetFieldsOccupiedByWarships() == 0;
+    }
+
+    public void SetGameController(GameplayController controller)
+    {
+        this.controller = controller;
     }
 
 }
