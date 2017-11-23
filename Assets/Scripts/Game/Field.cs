@@ -39,7 +39,7 @@ public class Field : MonoBehaviour
         
         if (IsPressed())
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y);
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
             this.enabled = false;
             this.renderer.material.color = Color.grey;
             thsPreparationController.ChooseField(this);
@@ -47,7 +47,8 @@ public class Field : MonoBehaviour
         }
         else
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available");
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString());
+            
 
         }
 
