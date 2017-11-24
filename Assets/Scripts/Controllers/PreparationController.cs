@@ -30,6 +30,7 @@ public class PreparationController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Debug.Log(GameObject.Find("/GameplayController"));
         preparationBoard = new Board();
         Board.SetWaterPrefab(fieldPrefab);
         preparationBoard.GenerateBoardOnScreen();

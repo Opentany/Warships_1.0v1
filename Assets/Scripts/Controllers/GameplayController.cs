@@ -18,9 +18,11 @@ public class GameplayController : MonoBehaviour {
         Board.SetWaterPrefab(waterPrefab);
         board.GenerateBoardOnScreen();
         board.GenerateMiniBoardOnScreen();
+        SetMyShips(players[0].GetPlayerShips().GetWarships());
         System.Random rnd = new System.Random();
         PlayerType startingPlayer = (PlayerType)rnd.Next(2);
         players[(int)startingPlayer].YourTurn();
+
     }
 	
 	// Update is called once per frame

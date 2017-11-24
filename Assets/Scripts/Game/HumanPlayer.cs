@@ -12,7 +12,8 @@ public class HumanPlayer : Player
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        controller.SetMyShips(warshipsContainer.GetWarships());
+        shipsContainer = warshipsContainer;
+        //controller.SetMyShips(warshipsContainer.GetWarships());
     }
 
 }

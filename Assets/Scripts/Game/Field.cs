@@ -51,7 +51,8 @@ public class Field : MonoBehaviour
     }
 
     public void SetWarshipColor() {
-        this.renderer.material.color = Color.green;
+        renderer = this.GetComponent<Renderer>();
+        renderer.material.color = Color.green;
     }
 
     void OnMouseDown()
@@ -148,6 +149,7 @@ public class Field : MonoBehaviour
 
     public void SetColorOnField(DmgDone shotResult)
     {
+        renderer = this.GetComponent<Renderer>();
         if (shotResult.Equals(DmgDone.HIT))
         {
             this.renderer.material.color = Color.red;
@@ -163,6 +165,7 @@ public class Field : MonoBehaviour
 
     //TODO
     public void SetEffectOnField(DmgDone shotResult) {
+        renderer = this.GetComponent<Renderer>();
         if (shotResult.Equals(DmgDone.HIT))
         {
             this.renderer.material.color = Color.red;
