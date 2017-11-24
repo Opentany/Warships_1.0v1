@@ -74,6 +74,7 @@ public class BotPlayer : Player
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.PlaceWarship(ship);
         }
+        playerBoard.SetFieldsOccupiedByWarships(20);
     }
 
     public override void YourTurn()

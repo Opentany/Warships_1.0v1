@@ -37,8 +37,8 @@ public abstract class Player{
         return shipsContainer;
     }
 
-    public bool CheckIfYouWin() {
-        return opponentBoard.GetFieldsOccupiedByWarships() == 0;
+    public bool CheckIfYouLose() {
+        return playerBoard.GetFieldsOccupiedByWarships() == 0;
     }
 
     public void SetGameController(GameplayController controller)

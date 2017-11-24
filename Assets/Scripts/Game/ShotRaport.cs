@@ -70,7 +70,9 @@ public class ShotRaport  {
             }
 
         }
-        shotResult = DmgDone.MISS;
+        else{
+            shotResult = DmgDone.MISS;
+        }
     }
 
 

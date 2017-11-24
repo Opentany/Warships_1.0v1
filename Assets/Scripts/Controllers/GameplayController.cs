@@ -38,6 +38,14 @@ public class GameplayController : MonoBehaviour {
         ready = true;
     }
 
+    public void GameLoop(){
+
+    	while (!players[0].CheckIfYouLose() || !players[1].CheckIfYouLose()){
+
+    	}
+    }
+
+
     public static void setPlayers(Player human, Player bot)
     {
         Debug.Log("Setting players");
@@ -77,7 +85,7 @@ public class GameplayController : MonoBehaviour {
                 board.ApplyMyShot(raport);
             else
                 board.ApplyOpponentShot(raport);
-            if (players[(int)activePlayer].CheckIfYouWin())
+            if (players[(int)activePlayer].CheckIfYouLose())
                 PlayerWon(players[(int)activePlayer]);
             if (raport.GetShotResult().Equals(DmgDone.MISS))
             {

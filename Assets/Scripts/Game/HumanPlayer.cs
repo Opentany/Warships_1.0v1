@@ -12,8 +12,13 @@ public class HumanPlayer : Player
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        shipsContainer = warshipsContainer;
-        //controller.SetMyShips(warshipsContainer.GetWarships());
+        playerBoard = new BoardModel();
+        opponentBoard = new BoardModel();
+        opponentBoard.SetFieldsOccupiedByWarships(20);
+        this.shipsContainer = warshipsContainer;
+        foreach (Warship ship in shipsContainer.GetWarships()){
+            playerBoard.PlaceWarship(ship);
+        }
     }
 
     public override void YourTurn()

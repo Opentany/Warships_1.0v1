@@ -150,34 +150,38 @@ public class Field : MonoBehaviour
 
     public void SetColorOnField(DmgDone shotResult)
     {
+        Debug.Log(gridPosition.x + " "+gridPosition.y + " " +shotResult);
         renderer = this.GetComponent<Renderer>();
         if (shotResult.Equals(DmgDone.HIT))
         {
-            this.renderer.material.color = Color.red;
+            renderer.material.color = Color.red;
         }
         else if (shotResult.Equals(DmgDone.SINKED))
         {
-            this.renderer.material.color = Color.black;
+            renderer.material.color = Color.black;
         }
         else if (shotResult.Equals(DmgDone.MISS)) {
-            this.renderer.material.color = Color.grey;
+            renderer.material.color = Color.grey;
         }
     }
 
     //TODO
     public void SetEffectOnField(DmgDone shotResult) {
+                         Debug.Log(gridPosition.x + " "+gridPosition.y + " " +shotResult);
+
+
         renderer = this.GetComponent<Renderer>();
         if (shotResult.Equals(DmgDone.HIT))
         {
-            this.renderer.material.color = Color.red;
+            renderer.material.color = Color.red;
         }
         else if (shotResult.Equals(DmgDone.SINKED))
         {
-            this.renderer.material.color = Color.black;
+            renderer.material.color = Color.black;
         }
         else if (shotResult.Equals(DmgDone.MISS))
         {
-            this.renderer.material.color = Color.grey;
+            renderer.material.color = Color.grey;
         }
     }
 

@@ -127,6 +127,7 @@ public class Board {
     public void ApplyOpponentShot(ShotRaport shotRaport) {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
+        Debug.Log("Bot " + x + " "+ y+ " "+ shotRaport.GetShotResult());
         miniBoard[x][y].SetShotResult(shotRaport.GetShotResult());
         miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
     }
