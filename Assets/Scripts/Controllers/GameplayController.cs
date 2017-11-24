@@ -86,7 +86,7 @@ public class GameplayController : MonoBehaviour {
             else
                 board.ApplyOpponentShot(raport);
             if (players[(int)activePlayer].CheckIfYouLose())
-                PlayerWon(players[(int)activePlayer]);
+                PlayerWon(players[(int)opponent]);
             if (raport.GetShotResult().Equals(DmgDone.MISS))
             {
                 activePlayer = NextPlayer(activePlayer);
