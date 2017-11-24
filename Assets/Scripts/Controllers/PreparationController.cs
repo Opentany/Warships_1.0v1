@@ -25,6 +25,7 @@ public class PreparationController : MonoBehaviour {
     private static List<Warship> warships2;
     private static List<Warship> warships1;
     private WarshipsContainer botPlayerShips;
+    private WarshipsContainer humanPlayerShips;
 
     public static int chosenWarshipSize;
     // Use this for initialization
@@ -36,14 +37,22 @@ public class PreparationController : MonoBehaviour {
         preparationBoard.GenerateBoardOnScreen();
         warshipCreator = new WarshipCreator();
         botPlayer = BotCreator.CreateBotPlayer();
+
+        //humanPlayer = BotCreator.CreateBotPlayer();
         humanPlayer = new HumanPlayer();
+
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
         warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
         warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
         warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
         warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
+
         botPlayer.ArrangeBoard();
+        //humanPlayer.ArrangeBoard();
+
         botPlayerShips = botPlayer.GetPlayerShips();
+        //humanPlayerShips = humanPlayer.GetPlayerShips();
+
         ChooseWarship4();
     }
 
@@ -299,11 +308,19 @@ public class PreparationController : MonoBehaviour {
 
 
     public void StartGame(string sceneName) {
+            Debug.Log("I wanna start");
+
+        //if (true) {
         if (PlacementManager.CanGameStart(preparationBoard.GetFieldsOccupiedByWarships())) {
-            LoadScene(sceneName);
-            humanPlayer.SetPlayerBoard(preparationBoard.GetWarshipList());
             GameplayController.setPlayers(humanPlayer, botPlayer);
-        }
+            Debug.Log("Set");
+            //humanPlayer.SetPlayerBoard(humanPlayerShips);
+            humanPlayer.SetPlayerBoard(preparationBoard.GetWarshipList());
+            Debug.Log("1st Player");
+            botPlayer.SetPlayerBoard(botPlayerShips);
+            Debug.Log("2nd Player");
+            LoadScene(sceneName);    
+        }        
     }
 
 

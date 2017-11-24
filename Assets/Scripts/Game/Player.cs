@@ -10,6 +10,7 @@ public abstract class Player{
 
     public Player() {
         isYourTurn = false;
+        opponentBoard = new BoardModel();
     }
 
     public abstract void ArrangeBoard();
@@ -18,10 +19,7 @@ public abstract class Player{
         return isYourTurn;
     }
 
-    public virtual void YourTurn()
-    {
-        isYourTurn = true;
-    }
+    public abstract void YourTurn();
 
     public abstract void SetPlayerBoard(WarshipsContainer playerBoard);
 

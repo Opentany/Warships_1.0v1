@@ -54,6 +54,7 @@ public class PlacementManager{
     {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
+        Debug.Log(x + " " + y);
         if (board.GetBoard()[x][y].GetPlacementResult() == PlacementResult.AVAILABLE)
         {
             if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)

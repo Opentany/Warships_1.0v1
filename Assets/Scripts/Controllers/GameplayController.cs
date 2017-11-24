@@ -10,28 +10,37 @@ public class GameplayController : MonoBehaviour {
 
     private enum PlayerType {HUMAN, BOT };
 
+    private static PlayerType activePlayer;
+
     public Board board;
 
-	// Use this for initialization
-	void Start () {
+    public bool activeHuman;
+
+    public static bool ready = false;
+
+    // Use this for initialization
+    void Start() {
+        Debug.Log("Prepare Game");
+        foreach (Player player in players)
+        {
+            player.SetGameController(this);
+        }
+        Debug.Log("Controllers Set");
         board = new Board();
         Board.SetWaterPrefab(waterPrefab);
         board.GenerateBoardOnScreen();
         board.GenerateMiniBoardOnScreen();
         SetMyShips(players[0].GetPlayerShips().GetWarships());
         System.Random rnd = new System.Random();
-        PlayerType startingPlayer = (PlayerType)rnd.Next(2);
-        players[(int)startingPlayer].YourTurn();
-
+        activePlayer = (PlayerType)0;
+        activeHuman = (activePlayer.Equals(PlayerType.HUMAN));
+        Debug.Log("Start Game");
+        ready = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public static void setPlayers(Player human, Player bot)
     {
+        Debug.Log("Setting players");
         players = new List<Player>
         {
             human,
@@ -41,18 +50,67 @@ public class GameplayController : MonoBehaviour {
 
     private PlayerType NextPlayer(PlayerType player)
     {
-        return (PlayerType)((int)player + 1);
+        return (PlayerType)(((int)player + 1)%2);
     }
 
     //Tu przekierować kliknięcie w pole przeciwnika, argument dostosować, do potrzeb, byleby posiadał w środku współrzędne
     public void AttackEnemy(int x, int y)
     {
+        Debug.Log(activeHuman);
+        Debug.Log(activePlayer);
+        if(activeHuman)
+            ShotOpponent(x, y);
 
+    }
+
+    public void ShotOpponent(int x, int y)
+    {
+        Debug.Log("shot " + x + " " + y);
+        int badShotCounter = 0; 
+        PlayerType opponent = NextPlayer(activePlayer);
+        try
+        {
+            ShotRaport raport = new ShotRaport(x, y, players[(int)opponent].playerBoard);
+            players[(int)activePlayer].SetPlayerShotResult(raport);
+            players[(int)opponent].TakeOpponentShot(raport);
+            if (activeHuman)
+                board.ApplyMyShot(raport);
+            else
+                board.ApplyOpponentShot(raport);
+            if (players[(int)activePlayer].CheckIfYouWin())
+                PlayerWon(players[(int)activePlayer]);
+            if (raport.GetShotResult().Equals(DmgDone.MISS))
+            {
+                activePlayer = NextPlayer(activePlayer);
+                opponent = NextPlayer(opponent);
+                activeHuman = !activeHuman;
+            }
+            players[(int)activePlayer].YourTurn();
+
+        }
+        catch(IllegalShotException badShot)
+        {
+            Debug.Log(badShot);
+            badShotCounter++;
+            if (badShotCounter == 3)
+            {
+                activePlayer = NextPlayer(activePlayer);
+                opponent = NextPlayer(opponent);
+                activeHuman = !activeHuman;
+            }
+            players[(int)activePlayer].YourTurn();
+        }
     }
 
     public void SetMyShips(List<Warship> ships)
     {
         board.SetWarshipOnMiniBoard(ships);
+    }
+
+
+    public void PlayerWon(Player player)
+    {
+        Debug.Log("Wygrana");
     }
 
 }

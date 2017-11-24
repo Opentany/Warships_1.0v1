@@ -16,4 +16,8 @@ public class HumanPlayer : Player
         //controller.SetMyShips(warshipsContainer.GetWarships());
     }
 
+    public override void YourTurn()
+    {
+        controller.activeHuman = true;
+    }
 }

@@ -19,8 +19,6 @@ public class BotPlayer : Player
             for(int i = 0; i < 10; i++)
             {
                 Warship ship = ships[i];
-                int x;
-                int y;
                 int tries = 10;
                 do
                 {
@@ -70,11 +68,22 @@ public class BotPlayer : Player
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        Board board = new Board();
+        playerBoard = new BoardModel();
+        opponentBoard = new BoardModel();
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
-            board.PlaceWarship(ship);
+            playerBoard.PlaceWarship(ship);
         }
     }
+
+    public override void YourTurn()
+    {
+        Debug.Log("Bot Turn");
+        System.Random rnd = new System.Random();
+        int x = rnd.Next(Board.boardSize);
+        int y = rnd.Next(Board.boardSize);
+        controller.ShotOpponent(x, y);
+    }
+
 
 }

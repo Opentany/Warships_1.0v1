@@ -10,11 +10,13 @@ public class FieldModel {
     private PlacementResult placementResult;
     public Warship warship;
     public int secureFieldCounter;
+    public bool shotted;
 
     public FieldModel(int i, int j)
     {
         x = i;
         y = j;
+        shotted = false;
         warship = null;
         placementResult = PlacementResult.AVAILABLE;
         secureFieldCounter = 0;

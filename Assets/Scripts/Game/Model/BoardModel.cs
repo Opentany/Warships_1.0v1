@@ -15,6 +15,7 @@ public class BoardModel {
         board = new List<List<FieldModel>>();
         warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
+        GenerateBoardModel();
     }
 
     public void GenerateBoardModel()

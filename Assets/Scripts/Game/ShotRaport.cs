@@ -47,4 +47,31 @@ public class ShotRaport  {
         throw new IllegalShotException(x, y);
     }
 
+    public ShotRaport(int x, int y, BoardModel board)
+    {
+        this.x = x;
+        this.y = y;
+        FieldModel field = board.GetBoard()[x][y];
+        if (field.shotted)
+            throw new IllegalShotException(x, y);
+        else
+            field.shotted = true;
+        warship = field.GetWarship();
+        if (warship != null)
+        {
+            warship.ChangeDurability();
+            if (warship.GetIsSinked())
+            {
+                shotResult = DmgDone.SINKED;
+            }
+            else
+            {
+                shotResult = DmgDone.HIT;
+            }
+
+        }
+        shotResult = DmgDone.MISS;
+    }
+
+
 }

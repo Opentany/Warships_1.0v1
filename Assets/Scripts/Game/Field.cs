@@ -102,6 +102,7 @@ public class Field : MonoBehaviour
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
         }
+        gameplayController.AttackEnemy((int)gridPosition.x, (int)gridPosition.y);
     }
 
     public void SetShotResult(DmgDone result) {
