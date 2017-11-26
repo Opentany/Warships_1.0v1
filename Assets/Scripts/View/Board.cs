@@ -12,6 +12,7 @@ public class Board {
     private List<List<Field>> board;
     private List<List<Field>> miniBoard;
     private float screenHorizontalOffset = -2f;
+	private float screenVerticalBigBoardOffset = 4f;
     private float fieldMargin = 0.05f;
     private float screenVerticalOffset = -3f;
     private int fieldsOccupiedByWarships;
@@ -47,7 +48,7 @@ public class Board {
         for (int i = 0; i < boardSize; i++) {
             List<Field> row = new List<Field>();
             for (int j = 0; j < boardSize; j++) {
-                Field field = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+				Field field = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
                 field.gameObject.layer = 1;
                 field.gridPosition = new Vector2(i, j);
                 row.Add(field);
@@ -59,6 +60,7 @@ public class Board {
 
     public void GenerateMiniBoardOnScreen()
     {
+		miniWaterPrefab.SetActive(true);
         miniBoard = new List<List<Field>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + fieldMargin / 2;
         for (int i = 0; i < boardSize; i++)
@@ -86,6 +88,7 @@ public class Board {
     private static void CreateMiniWaterPrefab(GameObject water) {
         miniWaterPrefab = GameObject.Instantiate(water) as GameObject;
         miniWaterPrefab.transform.localScale = miniWaterPrefab.transform.localScale / 2;
+		miniWaterPrefab.SetActive(false);
     }
 
     public List<List<Field>> GetBoard() {

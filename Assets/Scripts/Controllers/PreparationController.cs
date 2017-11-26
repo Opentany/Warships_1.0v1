@@ -107,7 +107,7 @@ public class PreparationController : MonoBehaviour {
                 }
                 else
                 {
-                    pozycja.y = pozycja.y + 0.69f;
+                    pozycja.y = pozycja.y - 0.69f;
                     GameObject.Instantiate(warship4Prefab, pozycja, rotacja);
 
                 }
@@ -126,7 +126,7 @@ public class PreparationController : MonoBehaviour {
                 }
                 else
                 {
-                    pozycja.y = pozycja.y + 0.46f;
+                    pozycja.y = pozycja.y - 0.46f;
                     GameObject.Instantiate(warship3Prefab, pozycja, rotacja);
 
                 }
@@ -145,7 +145,7 @@ public class PreparationController : MonoBehaviour {
                 }
                 else
                 {
-                    pozycja.y = pozycja.y + 0.24f;
+                    pozycja.y = pozycja.y - 0.24f;
                     GameObject.Instantiate(warship2Prefab, pozycja, rotacja);
 
                 }
