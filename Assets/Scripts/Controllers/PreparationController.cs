@@ -207,6 +207,8 @@ public class PreparationController : MonoBehaviour {
             }
         }
     }
+
+
     private Warship CreateWarship(int size)
     {
         Warship statek = null;

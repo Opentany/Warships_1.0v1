@@ -1,0 +1,188 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Field : MonoBehaviour
+{
+
+    public GameObject GameController;
+    public GameObject GameplayController;
+    public Vector2 gridPosition = Vector2.zero;
+    public Vector3 realPosition;
+    public Quaternion realRotation;
+    private DmgDone dmgDone;
+    private PlacementResult placementResult;
+    public Warship warship;
+    private Renderer renderer;
+    public int secureFieldCounter;
+    private PreparationController thsPreparationController;
+    private GameplayController gameplayController;
+    public bool isMini = false;
+
+    public Field() {
+        warship = null;
+        placementResult = PlacementResult.AVAILABLE;
+        secureFieldCounter = 0;
+    }
+
+
+    void Start(){
+        warship = null;
+        placementResult = PlacementResult.AVAILABLE;
+        renderer = GetComponent<Renderer>();
+        secureFieldCounter = 0;
+        FindViews();
+        realPosition = transform.position;
+        realRotation = transform.rotation;
+    }
+
+    private void FindViews() {
+        GameController = GameObject.FindGameObjectWithTag("GameController");
+        GameplayController = GameObject.FindGameObjectWithTag("GameplayController");
+        if (GameController != null)
+        {
+            thsPreparationController = GameController.GetComponent<PreparationController>();
+        }
+        if (GameplayController != null)
+        {
+           gameplayController = GameplayController.GetComponent<GameplayController>();
+        }
+
+    }
+
+    public void SetWarshipColor() {
+        renderer = this.GetComponent<Renderer>();
+        renderer.material.color = Color.green;
+    }
+
+    void OnMouseDown()
+    {
+        if (isMini)
+        {
+            return;
+        }
+        if (gameplayController != null)
+        {
+            OnClickInGameplay();
+        }
+        else if (thsPreparationController != null) {
+            OnClickInPreparation();
+        }
+
+       
+
+    }
+
+    private void OnClickInPreparation()
+    {
+        if (IsPressed())
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
+            if (thsPreparationController.ChooseField(this))
+            {
+                this.enabled = false;
+                this.renderer.material.color = Color.grey;
+            }
+        }
+        else
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
+
+
+        }
+    }
+
+    private void OnClickInGameplay()
+    {
+        if (IsPressed())
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
+        }
+        else
+        {
+            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
+        }
+        gameplayController.AttackEnemy((int)gridPosition.x, (int)gridPosition.y);
+    }
+
+    public void SetShotResult(DmgDone result) {
+        dmgDone = result;
+    }
+
+    public PlacementResult GetPlacementResult() {
+        return placementResult;
+    }
+
+    public void SetPlacementResult(PlacementResult placementResult) {
+        this.placementResult = placementResult;
+        ChangeSecureCounterIfNeeded(placementResult);
+    }
+
+    private void ChangeSecureCounterIfNeeded(PlacementResult placementResult) {
+        if (placementResult.Equals(PlacementResult.SECURE))
+        {
+            secureFieldCounter++;
+        }
+        else {
+            secureFieldCounter = 0;
+        }
+    }
+
+    public Warship GetWarship() {
+        return warship;
+    }
+
+    public void SetWarship(Warship warship) {
+        this.warship = warship;
+    }
+
+    public bool IsPressed() {
+        return this.enabled;
+    }
+
+    public int GetSecureFieldCounter() {
+        return secureFieldCounter;
+    }
+
+    public void DecreaseSecureFieldCounter() {
+        secureFieldCounter--;
+    }
+
+    public void SetColorOnField(DmgDone shotResult)
+    {
+        Debug.Log(gridPosition.x + " "+gridPosition.y + " " +shotResult);
+        renderer = this.GetComponent<Renderer>();
+        if (shotResult.Equals(DmgDone.HIT))
+        {
+            renderer.material.color = Color.red;
+        }
+        else if (shotResult.Equals(DmgDone.SINKED))
+        {
+            renderer.material.color = Color.black;
+        }
+        else if (shotResult.Equals(DmgDone.MISS)) {
+            renderer.material.color = Color.grey;
+        }
+    }
+
+    //TODO
+    public void SetEffectOnField(DmgDone shotResult) {
+                         Debug.Log(gridPosition.x + " "+gridPosition.y + " " +shotResult);
+
+
+        renderer = this.GetComponent<Renderer>();
+        if (shotResult.Equals(DmgDone.HIT))
+        {
+            renderer.material.color = Color.red;
+        }
+        else if (shotResult.Equals(DmgDone.SINKED))
+        {
+            renderer.material.color = Color.black;
+        }
+        else if (shotResult.Equals(DmgDone.MISS))
+        {
+            renderer.material.color = Color.grey;
+        }
+    }
+
+}
