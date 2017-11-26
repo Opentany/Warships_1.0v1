@@ -5,50 +5,30 @@ using UnityEngine;
 
 public class Board {
 
-    public static readonly int boardSize = 10;
+	public static readonly int boardSize = Variables.defaultBoardSize;
 
     private static GameObject waterPrefab;
     private static GameObject miniWaterPrefab;
     private List<List<Field>> board;
     private List<List<Field>> miniBoard;
-    private float screenHorizontalOffset = -2f;
-	private float screenVerticalBigBoardOffset = 4f;
-    private float fieldMargin = 0.05f;
-    private float screenVerticalOffset = -3f;
     private int fieldsOccupiedByWarships;
     private List<Warship> warshipList;
 
     public Board() {
-        board = new List<List<Field>>();
-        miniBoard = new List<List<Field>>();
-        warshipList = new List<Warship>();
-        fieldsOccupiedByWarships = 0;
-    }
-
-    public void GenerateBoard() {
-        board = new List<List<Field>>();
-        for (int i = 0; i < boardSize; i++)
-        {
-            List<Field> row = new List<Field>();
-            for (int j = 0; j < boardSize; j++)
-            {
-                Field field = GameObject.Instantiate(waterPrefab, new Vector2(), Quaternion.Euler(new Vector2())).GetComponent<Field>();
-                field.enabled = false;
-                field.gridPosition = new Vector2(i, j);
-                row.Add(field);
-            }
-            board.Add(row);
-        }
-    }
+		board = new List<List<Field>> ();
+		miniBoard = new List<List<Field>> ();
+		warshipList = new List<Warship> ();
+		fieldsOccupiedByWarships = 0;
+	}
 
 
     public void GenerateBoardOnScreen() {
         board = new List<List<Field>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
+		float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + Variables.fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<Field> row = new List<Field>();
             for (int j = 0; j < boardSize; j++) {
-				Field field = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+				Field field = GameObject.Instantiate(waterPrefab, new Vector2(Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
                 field.gameObject.layer = 1;
                 field.gridPosition = new Vector2(i, j);
                 row.Add(field);
@@ -62,13 +42,13 @@ public class Board {
     {
 		miniWaterPrefab.SetActive(true);
         miniBoard = new List<List<Field>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + fieldMargin / 2;
+		float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + Variables.fieldMargin / 2;
         for (int i = 0; i < boardSize; i++)
         {
             List<Field> row = new List<Field>();
             for (int j = 0; j < boardSize; j++)
             {
-                Field field = GameObject.Instantiate(miniWaterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
+				Field field = GameObject.Instantiate(miniWaterPrefab, new Vector2(Variables.screenHorizontalOffset + i * fieldSize, Variables.miniBoardScreenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<Field>();
                 field.gameObject.layer = 1;
                 field.gridPosition = new Vector2(i, j);
                 field.isMini = true;

@@ -14,7 +14,7 @@ public class Warship{
         x = 0;
         y = 0;
         this.warshipSize = warshipSize;
-        warshipOrientation = WarshipOrientation.VERTICAL;
+		warshipOrientation = Variables.defaultWarshipOrientation;
         isSinked = false;
         durability = (int)warshipSize;
     }

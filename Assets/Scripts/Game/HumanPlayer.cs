@@ -14,7 +14,7 @@ public class HumanPlayer : Player
     {
         playerBoard = new BoardModel();
         opponentBoard = new BoardModel();
-        opponentBoard.SetFieldsOccupiedByWarships(20);
+		opponentBoard.SetFieldsOccupiedByWarships(Variables.fieldsOccupiedByWarships);
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.PlaceWarship(ship);

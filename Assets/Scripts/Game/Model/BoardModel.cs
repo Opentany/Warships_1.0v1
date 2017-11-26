@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardModel {
 
-    public static int boardSize = 10;
+	public static int boardSize = Variables.defaultBoardSize;
     private List<List<FieldModel>> board;
     private int fieldsOccupiedByWarships;
     private List<Warship> warshipList;
