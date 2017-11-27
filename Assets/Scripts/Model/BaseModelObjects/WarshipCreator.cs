@@ -11,10 +11,10 @@ public class WarshipCreator {
 
     private void GenerateWarshipList()
     {
-        warshipList.AddRange(GenerateShips(1, WarshipSize.FOUR));
-        warshipList.AddRange(GenerateShips(2, WarshipSize.THREE));
-        warshipList.AddRange(GenerateShips(3, WarshipSize.TWO));
-        warshipList.AddRange(GenerateShips(4, WarshipSize.ONE));
+		warshipList.AddRange(GenerateShips(Variables.numberOfShipsOfSizeFour, WarshipSize.FOUR));
+		warshipList.AddRange(GenerateShips(Variables.numberOfShipsOfSizeThree, WarshipSize.THREE));
+		warshipList.AddRange(GenerateShips(Variables.numberOfShipsOfSizeTwo, WarshipSize.TWO));
+		warshipList.AddRange(GenerateShips(Variables.numberOfShipsOfSizeOne, WarshipSize.ONE));
     }
 
 

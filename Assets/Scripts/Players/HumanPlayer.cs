@@ -10,7 +10,7 @@
     {
         playerBoard = new ShootingBoard();
         opponentBoard = new ShootingBoard();
-        opponentBoard.SetFieldsOccupiedByWarships(20);
+		opponentBoard.SetFieldsOccupiedByWarships(20);
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.SetWarship(ship);

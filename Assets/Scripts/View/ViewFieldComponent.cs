@@ -122,7 +122,7 @@ public class ViewFieldComponent : MonoBehaviour {
         if (IsPressed())
         {
          //   Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
-            if (thsPreparationController.ChooseFieldComponent(this))
+            if (thsPreparationController.SetWarshipOnField(this))
             {
                 this.enabled = false;
                 this.renderer.material.color = Color.grey;
