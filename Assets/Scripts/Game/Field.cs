@@ -78,10 +78,10 @@ public class Field : MonoBehaviour
         if (IsPressed())
         {
             Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
-            if (thsPreparationController.ChooseField(this))
+            if (thsPreparationController.SetWarshipOnField(this))
             {
                 this.enabled = false;
-                this.renderer.material.color = Color.grey;
+                //this.renderer.material.color = Color.grey;
             }
         }
         else

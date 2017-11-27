@@ -9,10 +9,14 @@ public class PreparationController : MonoBehaviour {
 
     public static Board preparationBoard;
     public GameObject fieldPrefab;
-    public GameObject warship4Prefab;
-    public GameObject warship3Prefab;
-    public GameObject warship2Prefab;
-    public GameObject warship1Prefab;
+    public GameObject warship4HorizontalPrefab;
+    public GameObject warship3HorizontalPrefab;
+    public GameObject warship2HorizontalPrefab;
+    public GameObject warship1HorizontalPrefab;
+    public GameObject warship4VerticalPrefab;
+    public GameObject warship3VerticalPrefab;
+    public GameObject warship2VerticalPrefab;
+    public GameObject warship1VerticalPrefab;
     public GameObject shotFieldPrefab;
     public static Player botPlayer;
     public static Player humanPlayer;
@@ -56,36 +60,36 @@ public class PreparationController : MonoBehaviour {
         ChooseWarship4();
     }
 
-    public bool ChooseField(Field field)
+    public bool SetWarshipOnField(Field field)
     {
         chosenField = field;
         if (chosenField!=null)
         {
-            Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
+            //Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
             if (statek==null)
             {
                 
                 return false;
             }
-            Debug.Log(statek.warshipSize);
+            //Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(preparationBoard, statek))
             {
                 preparationBoard.PlaceWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
-                preparationBoard.DisplayBoard();
+                //preparationBoard.DisplayBoard();
                 return true;
             }
             else
             {
-                Debug.Log("wybierz inne miejsce");
+                //Debug.Log("wybierz inne miejsce");
                 PutBackWarship(statek);
                 return false;
             }
         }
         else
         {
-            Debug.Log("nie wybrano pola");
+            //Debug.Log("nie wybrano pola");
             return false;
         }
     }
@@ -101,14 +105,15 @@ public class PreparationController : MonoBehaviour {
                 if (CheckIfOrientationIsHorizontal())
                 {
                     pozycja.x = pozycja.x + 0.69f;
+                    pozycja.y += 0.1f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship4Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship4HorizontalPrefab, pozycja, rotacja);
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.69f;
-                    GameObject.Instantiate(warship4Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship4VerticalPrefab, pozycja, rotacja);
 
                 }
                 break;
@@ -122,12 +127,12 @@ public class PreparationController : MonoBehaviour {
                     pozycja.x = pozycja.x + 0.46f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship3Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship3HorizontalPrefab, pozycja, rotacja);
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.46f;
-                    GameObject.Instantiate(warship3Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship3VerticalPrefab, pozycja, rotacja);
 
                 }
                 break;
@@ -141,12 +146,12 @@ public class PreparationController : MonoBehaviour {
                     pozycja.x = pozycja.x + 0.24f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship2Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship2HorizontalPrefab, pozycja, rotacja);
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.24f;
-                    GameObject.Instantiate(warship2Prefab, pozycja, rotacja);
+                    GameObject.Instantiate(warship2VerticalPrefab, pozycja, rotacja);
 
                 }
                 break;
@@ -159,18 +164,18 @@ public class PreparationController : MonoBehaviour {
                     {
                         rotacja.z = 0f;
                         rotacja.z = -1.0f;
-                        GameObject.Instantiate(warship1Prefab, pozycja, rotacja);
+                        GameObject.Instantiate(warship1HorizontalPrefab, pozycja, rotacja);
                     }
                     else
                     {
-                        GameObject.Instantiate(warship1Prefab, pozycja, rotacja);
+                        GameObject.Instantiate(warship1VerticalPrefab, pozycja, rotacja);
 
                     }
                     break;
                 }
             default:
             {
-                Debug.Log("Co ja tutaj robię ????");
+                //Debug.Log("Co ja tutaj robię ????");
                 break;
             }
         }
@@ -202,7 +207,7 @@ public class PreparationController : MonoBehaviour {
             }
             default:
             {
-                Debug.Log("That can't be DONE !!!");
+                //Debug.Log("That can't be DONE !!!");
                 break;
             }
         }
@@ -210,14 +215,14 @@ public class PreparationController : MonoBehaviour {
     private Warship CreateWarship(int size)
     {
         Warship statek = null;
-        Debug.Log("chosenWorshipSize to "+size);
+        //Debug.Log("chosenWorshipSize to "+size);
         switch (size)
         {
             case 4:
             {
                 if (warships4.Count==0)
                 {
-                    Debug.Log("Skończyły się statki rozmiaru "+size);
+                    //Debug.Log("Skończyły się statki rozmiaru "+size);
                     break;
                 }
                 statek = warships4[0];                    
@@ -230,7 +235,7 @@ public class PreparationController : MonoBehaviour {
             {
                 if (warships3.Count == 0)
                 {
-                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
                     statek = warships3[0];
@@ -243,7 +248,7 @@ public class PreparationController : MonoBehaviour {
             {
                 if (warships2.Count == 0)
                 {
-                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
                     statek = warships2[0];
@@ -256,7 +261,7 @@ public class PreparationController : MonoBehaviour {
             {
                 if (warships1.Count == 0)
                 {
-                    Debug.Log("Skończyły się statki rozmiaru " + size);
+                    //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
                     statek = warships1[0];
@@ -267,7 +272,7 @@ public class PreparationController : MonoBehaviour {
             }
             default:
             {
-                    Debug.Log("Co ja tutaj robię ????");
+                //    Debug.Log("Co ja tutaj robię ????");
                 break;
             }
         }      
@@ -277,28 +282,32 @@ public class PreparationController : MonoBehaviour {
     public void ChooseWarship4()
     {
         chosenWarshipSize = (int)WarshipSize.FOUR;
-        Debug.Log("Chosen Warship is "+chosenWarshipSize);
+        chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        // Debug.Log("Chosen Warship is "+chosenWarshipSize);
     }
     public void ChooseWarship3()
     {
         chosenWarshipSize = (int)WarshipSize.THREE;
-        Debug.Log("Chosen Warship is " + chosenWarshipSize);
+        chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship2()
     {
         chosenWarshipSize = (int)WarshipSize.TWO;
-        Debug.Log("Chosen Warship is " + chosenWarshipSize);
+        chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship1()
     {
         chosenWarshipSize = (int)WarshipSize.ONE;
-        Debug.Log("Chosen Warship is " + chosenWarshipSize);
+        chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
 
     public void ChangeOrientation()
     {
         chosenWarshipOrientation= CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
-        Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
+       // Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
     }
 
     private bool CheckIfOrientationIsHorizontal()
