@@ -44,7 +44,7 @@ public class BaseBoard<T> where T : BaseField, new(){
         return board[column][row];
     }
 
-    public void SetWarship(Warship warship)
+    public virtual void SetWarship(Warship warship)
     {
         if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
         {

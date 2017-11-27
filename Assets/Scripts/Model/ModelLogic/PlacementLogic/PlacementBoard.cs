@@ -1,18 +1,16 @@
-﻿public class PlacementBoard : BaseBoard<PlacementField>{
+﻿using UnityEngine;
 
-    public void PlaceWarship(Warship warship)
+public class PlacementBoard : BaseBoard<PlacementField>{
+
+    public override void SetWarship(Warship warship)
     {
         if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(this, warship))
         {
-            warshipList.Add(warship);
-            SetWarshipOnBoard(warship);
+            base.SetWarship(warship);
+            SetSecuredFields(warship);
         }
-    }
-
-    private void SetWarshipOnBoard(Warship warship)
-    {
-        SetWarship(warship);
-        SetSecuredFields(warship);
+        else
+            throw new PlacementException(warship.GetXPosition(), warship.GetYPosition());
     }
 
     private void SetSecuredFields(Warship warship)

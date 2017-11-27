@@ -69,11 +69,10 @@ public class PreparationController : MonoBehaviour {
                 
                 return false;
             }
-            Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
-                preparationBoard.SetWarship(statek);
                 placementBoard.SetWarship(statek);
+                preparationBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 preparationBoard.DisplayBoard();
                 return true;

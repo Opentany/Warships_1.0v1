@@ -24,7 +24,7 @@ public class BotPlayer : Player
                 } while (!lastShipOk && tries > 0);
 
                 if (lastShipOk)
-                    board.PlaceWarship(ship);
+                    board.SetWarship(ship);
                 else
                     break;
             }

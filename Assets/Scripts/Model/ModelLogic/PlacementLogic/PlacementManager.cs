@@ -7,7 +7,9 @@ public class PlacementManager{
     {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
-        Debug.Log(x + " " + y);
+        //Debug.Log(x + " " + y);
+        //Debug.Log("Aktualne statki są tu:");
+        //board.GetWarshipList().LogShips();
         if (board.GetBoard()[x][y].GetPlacementResult() == PlacementResult.AVAILABLE)
         {
             if (warship.GetOrientation() == WarshipOrientation.HORIZONTAL)
