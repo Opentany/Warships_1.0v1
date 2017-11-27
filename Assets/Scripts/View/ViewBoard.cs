@@ -19,6 +19,7 @@ public class ViewBoard : BaseBoard<ViewField> {
         warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
     }
+		
 
     public void GenerateBoardOnScreen() {
         board = new List<List<ViewField>>();

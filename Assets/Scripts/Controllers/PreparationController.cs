@@ -31,7 +31,6 @@ public class PreparationController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Debug.Log(GameObject.Find("/GameplayController"));
         preparationBoard = new ViewBoard();
         placementBoard = new PlacementBoard();
         ViewBoard.SetWaterPrefab(fieldPrefab);
@@ -51,10 +50,12 @@ public class PreparationController : MonoBehaviour {
         botPlayer.ArrangeBoard();
         //humanPlayer.ArrangeBoard();
 
+
         botPlayerShips = botPlayer.GetPlayerShips();
         //humanPlayerShips = humanPlayer.GetPlayerShips();
+
         ChooseWarship4();
-    }
+	}
 
     public bool ChooseFieldComponent(ViewFieldComponent field)
     {
@@ -71,13 +72,10 @@ public class PreparationController : MonoBehaviour {
             Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
-				Debug.Log (statek.GetXPosition () + " " + statek.GetYPosition () + " statek");
                 preparationBoard.SetWarship(statek);
                 placementBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 preparationBoard.DisplayBoard();
-				Debug.Log (statek.GetXPosition () + " " + statek.GetYPosition () + " statek");
-
                 return true;
             }
             else
