@@ -668,14 +668,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldPrefab: {fileID: 1226726396362864, guid: 00d6e729db8d138458fc541da7f8013d,
     type: 2}
-  warship4HorizontalPrefab: {fileID: 0}
-  warship3HorizontalPrefab: {fileID: 0}
-  warship2HorizontalPrefab: {fileID: 0}
-  warship1HorizontalPrefab: {fileID: 0}
-  warship4VerticalPrefab: {fileID: 0}
-  warship3VerticalPrefab: {fileID: 0}
-  warship2VerticalPrefab: {fileID: 0}
-  warship1VerticalPrefab: {fileID: 0}
+  warship4HorizontalPrefab: {fileID: 1221629565021194, guid: 7b149009e3ba10f40913735f53fb7c23,
+    type: 2}
+  warship3HorizontalPrefab: {fileID: 1303855574466638, guid: 5c7e4b995eb64b8458ea94f3958009e9,
+    type: 2}
+  warship2HorizontalPrefab: {fileID: 1537890768630418, guid: 087b47c79c5a3594aad51dbc0f353a14,
+    type: 2}
+  warship1HorizontalPrefab: {fileID: 1873526470440244, guid: 26fc9dd614f41ef47a3367c06196ff78,
+    type: 2}
+  warship4VerticalPrefab: {fileID: 1728468037836274, guid: 12fd7ab745ea86341b15cd36e2d32bfc,
+    type: 2}
+  warship3VerticalPrefab: {fileID: 1590024615621996, guid: b7874619e8310e14aa94041d90bcf4c8,
+    type: 2}
+  warship2VerticalPrefab: {fileID: 1257434926126438, guid: dc83dd209ce68e3469ac8659e7c55aa9,
+    type: 2}
+  warship1VerticalPrefab: {fileID: 1914435277629442, guid: c8b32d4dc4462f248a1a431a9fbdaa40,
+    type: 2}
   shotFieldPrefab: {fileID: 0}
 --- !u!114 &445727803
 MonoBehaviour:
