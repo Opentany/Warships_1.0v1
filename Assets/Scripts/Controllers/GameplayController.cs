@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameplayController : MonoBehaviour {
+public class GameplayController: MonoBehaviour{
 
     public GameObject waterPrefab;
 
@@ -13,7 +12,7 @@ public class GameplayController : MonoBehaviour {
 
     private static PlayerType activePlayer;
 
-    public Board board;
+    public ViewBoard board;
 
     public bool activeHuman;
 
@@ -27,8 +26,8 @@ public class GameplayController : MonoBehaviour {
             player.SetGameController(this);
         }
         Debug.Log("Controllers Set");
-        board = new Board();
-        Board.SetWaterPrefab(waterPrefab);
+        board = new ViewBoard();
+        ViewBoard.SetWaterPrefab(waterPrefab);
         board.GenerateBoardOnScreen();
         board.GenerateMiniBoardOnScreen();
         SetMyShips(players[0].GetPlayerShips().GetWarships());

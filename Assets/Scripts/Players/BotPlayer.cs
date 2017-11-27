@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BotPlayer : Player
 {
 
-
-
     public override void ArrangeBoard()
     {
-        BoardModel board = new BoardModel();
+        PlacementBoard board = new PlacementBoard();
         System.Random rnd = new System.Random();
         List<Warship> ships = getAllShips();
         bool lastShipOk = false;
@@ -58,7 +55,7 @@ public class BotPlayer : Player
     public static void getRandomWarship(Warship ship)
     {
         System.Random rnd = new System.Random();
-        int x = rnd.Next(Board.boardSize);
+        int x = rnd.Next(BaseBoard<BaseField>.boardSize);
         int y = rnd.Next(10);
         ship.SetPosition(x, y);
         WarshipOrientation wo = (WarshipOrientation)rnd.Next(2);
@@ -68,23 +65,21 @@ public class BotPlayer : Player
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        playerBoard = new BoardModel();
-        opponentBoard = new BoardModel();
+        playerBoard = new ShootingBoard();
+        opponentBoard = new ShootingBoard();
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
-            playerBoard.PlaceWarship(ship);
+            playerBoard.SetWarship(ship);
         }
-        playerBoard.SetFieldsOccupiedByWarships(20);
     }
 
     public override void YourTurn()
     {
         Debug.Log("Bot Turn");
         System.Random rnd = new System.Random();
-        int x = rnd.Next(Board.boardSize);
-        int y = rnd.Next(Board.boardSize);
+        int x = rnd.Next(BaseBoard<BaseField>.boardSize);
+        int y = rnd.Next(BaseBoard<BaseField>.boardSize);
         controller.ShotOpponent(x, y);
     }
-
 
 }

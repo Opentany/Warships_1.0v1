@@ -2,15 +2,15 @@
 public abstract class Player{
 
 
-    public BoardModel opponentBoard;
-    public BoardModel playerBoard;
+    public ShootingBoard opponentBoard;
+    public ShootingBoard playerBoard;
     public WarshipsContainer shipsContainer;
     private bool isYourTurn;
     public GameplayController controller;
 
     public Player() {
         isYourTurn = false;
-        opponentBoard = new BoardModel();
+        opponentBoard = new ShootingBoard();
     }
 
     public abstract void ArrangeBoard();

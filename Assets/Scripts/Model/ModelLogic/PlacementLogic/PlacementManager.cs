@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlacementManager{
     private static int fieldsOccupiedByWarships = 20;
 
-    public static bool CheckIfPlayerCanPutWarshipOnThisPosition(BoardModel board, Warship warship)
+    public static bool CheckIfPlayerCanPutWarshipOnThisPosition(PlacementBoard board, Warship warship)
     {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
@@ -24,11 +22,11 @@ public class PlacementManager{
         return false;
     }
 
-    private static bool CheckIfCanPutWarshipHorizontal(BoardModel board, Warship warship)
+    private static bool CheckIfCanPutWarshipHorizontal(PlacementBoard board, Warship warship)
     {
         int x = warship.GetXPosition();
 
-        if (x + warship.GetSize() > BoardModel.boardSize)
+        if (x + warship.GetSize() > BaseBoard<BaseField>.boardSize)
             return false;
         for (int i = x; i < x + warship.GetSize(); i++)
         {
@@ -40,11 +38,11 @@ public class PlacementManager{
         return true;
     }
 
-    private static bool CheckIfCanPutWarshipVertical(BoardModel board, Warship warship)
+    private static bool CheckIfCanPutWarshipVertical(PlacementBoard board, Warship warship)
     {
         int y = warship.GetYPosition();
 
-        if (y + warship.GetSize() > BoardModel.boardSize)
+        if (y + warship.GetSize() > BaseBoard<BaseField>.boardSize)
             return false;
         for (int i = y; i < y + warship.GetSize(); i++)
         {

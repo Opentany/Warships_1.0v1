@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ShotRaport  {
+﻿public class ShotRaport  {
 
     private int x;
     private int y;
@@ -25,15 +21,15 @@ public class ShotRaport  {
         return shotResult;
     }
 
-    public ShotRaport(int x, int y, BoardModel board)
+    public ShotRaport(int x, int y, ShootingBoard board)
     {
         this.x = x;
         this.y = y;
-        FieldModel field = board.GetBoard()[x][y];
-        if (field.shotted)
+        ShootingField field = board.GetBoard()[x][y];
+        if (field.hasBeenShot)
             throw new IllegalShotException(x, y);
         else
-            field.shotted = true;
+            field.hasBeenShot = true;
         warship = field.GetWarship();
         if (warship != null)
         {

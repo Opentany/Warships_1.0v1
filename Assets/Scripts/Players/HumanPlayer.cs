@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HumanPlayer : Player
+﻿public class HumanPlayer : Player
 {
 
     public override void ArrangeBoard()
@@ -12,12 +8,12 @@ public class HumanPlayer : Player
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
-        playerBoard = new BoardModel();
-        opponentBoard = new BoardModel();
+        playerBoard = new ShootingBoard();
+        opponentBoard = new ShootingBoard();
         opponentBoard.SetFieldsOccupiedByWarships(20);
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
-            playerBoard.PlaceWarship(ship);
+            playerBoard.SetWarship(ship);
         }
     }
 

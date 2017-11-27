@@ -79,13 +79,6 @@ public class Warship{
         }
     }
 
-    //do przeniesienia w inne miejsce 
-    private Vector3 offset;
-    private Vector3 positionOfField;
-    private bool clickedNotDraged;
-    private Vector2 fieldGridPosition;
-    private int i;
-
     public string toStringShort()
     {
         return "Size: " + warshipSize + " x: " + x + " y: " + y + " " + warshipOrientation; 

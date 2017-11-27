@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PreparationController : MonoBehaviour {
 
-    public static Board preparationBoard;
+    public static ViewBoard preparationBoard;
+    public static PlacementBoard placementBoard;
     public GameObject fieldPrefab;
     public GameObject warship4Prefab;
     public GameObject warship3Prefab;
@@ -19,7 +19,7 @@ public class PreparationController : MonoBehaviour {
 
     private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
-    private static Field chosenField;
+    private static ViewFieldComponent chosenField;
     private static List<Warship> warships4;
     private static List<Warship> warships3;
     private static List<Warship> warships2;
@@ -32,8 +32,9 @@ public class PreparationController : MonoBehaviour {
     void Start()
     {
         Debug.Log(GameObject.Find("/GameplayController"));
-        preparationBoard = new Board();
-        Board.SetWaterPrefab(fieldPrefab);
+        preparationBoard = new ViewBoard();
+        placementBoard = new PlacementBoard();
+        ViewBoard.SetWaterPrefab(fieldPrefab);
         preparationBoard.GenerateBoardOnScreen();
         warshipCreator = new WarshipCreator();
         botPlayer = BotCreator.CreateBotPlayer();
@@ -56,7 +57,7 @@ public class PreparationController : MonoBehaviour {
         ChooseWarship4();
     }
 
-    public bool ChooseField(Field field)
+    public bool ChooseFieldComponent(ViewFieldComponent field)
     {
         chosenField = field;
         if (chosenField!=null)
@@ -69,9 +70,10 @@ public class PreparationController : MonoBehaviour {
                 return false;
             }
             Debug.Log(statek.warshipSize);
-            if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(preparationBoard, statek))
+            if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
-                preparationBoard.PlaceWarship(statek);
+                preparationBoard.SetWarship(statek);
+                placementBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 preparationBoard.DisplayBoard();
                 return true;
@@ -90,7 +92,7 @@ public class PreparationController : MonoBehaviour {
         }
     }
 
-    private void WarshipPlacer(int shipSize, Field field)
+    private void WarshipPlacer(int shipSize, ViewFieldComponent field)
     {
         switch (shipSize)
         {
@@ -313,11 +315,11 @@ public class PreparationController : MonoBehaviour {
             Debug.Log("I wanna start");
 
         //if (true) {
-        if (PlacementManager.CanGameStart(preparationBoard.GetFieldsOccupiedByWarships())) {
+        if (PlacementManager.CanGameStart(placementBoard.GetFieldsOccupiedByWarships())) {
             GameplayController.setPlayers(humanPlayer, botPlayer);
             Debug.Log("Set");
             //humanPlayer.SetPlayerBoard(humanPlayerShips);
-            humanPlayer.SetPlayerBoard(preparationBoard.GetWarshipList());
+            humanPlayer.SetPlayerBoard(placementBoard.GetWarshipList());
             Debug.Log("1st Player");
             botPlayer.SetPlayerBoard(botPlayerShips);
             Debug.Log("2nd Player");
