@@ -20,23 +20,6 @@ public class ViewBoard : BaseBoard<ViewField> {
         fieldsOccupiedByWarships = 0;
     }
 
-    public void GenerateBoard() {
-        board = new List<List<ViewField>>();
-        for (int i = 0; i < boardSize; i++)
-        {
-            List<ViewField> row = new List<ViewField>();
-            for (int j = 0; j < boardSize; j++)
-            {
-                ViewField field = GameObject.Instantiate(waterPrefab, new Vector2(), Quaternion.Euler(new Vector2())).GetComponent<ViewField>();
-                field.viewFieldComponent.enabled = false;
-                field.viewFieldComponent.gridPosition = new Vector2(i, j);
-                row.Add(field);
-            }
-            board.Add(row);
-        }
-    }
-
-
     public void GenerateBoardOnScreen() {
         board = new List<List<ViewField>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
@@ -44,8 +27,8 @@ public class ViewBoard : BaseBoard<ViewField> {
             List<ViewField> row = new List<ViewField>();
             for (int j = 0; j < boardSize; j++) {
                 ViewField field = new ViewField();
-                ViewFieldComponent component = GameObject.Instantiate(waterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
-                field.SetViewFieldComponent(component);
+				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
+				field.SetViewFieldComponent(component);
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
                 row.Add(field);

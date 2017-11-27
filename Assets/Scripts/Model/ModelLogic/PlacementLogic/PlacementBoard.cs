@@ -19,7 +19,7 @@
     {
         int x = warship.GetXPosition();
         int y = warship.GetYPosition();
-        int warshipSize = warship.GetSize();
+		int warshipSize = warship.GetSize();
         int startHorizontal, endHorizontal;
         int startVertical, endVertical;
         if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))

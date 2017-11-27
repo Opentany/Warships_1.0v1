@@ -53,7 +53,6 @@ public class PreparationController : MonoBehaviour {
 
         botPlayerShips = botPlayer.GetPlayerShips();
         //humanPlayerShips = humanPlayer.GetPlayerShips();
-
         ChooseWarship4();
     }
 
@@ -72,10 +71,13 @@ public class PreparationController : MonoBehaviour {
             Debug.Log(statek.warshipSize);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
+				Debug.Log (statek.GetXPosition () + " " + statek.GetYPosition () + " statek");
                 preparationBoard.SetWarship(statek);
                 placementBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 preparationBoard.DisplayBoard();
+				Debug.Log (statek.GetXPosition () + " " + statek.GetYPosition () + " statek");
+
                 return true;
             }
             else

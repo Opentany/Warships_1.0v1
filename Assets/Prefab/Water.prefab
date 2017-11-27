@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4931056176547278}
   - component: {fileID: 212885610541068166}
-  - component: {fileID: 114617443013253966}
+  - component: {fileID: 114582663801697362}
+  - component: {fileID: 114412556776585000}
   - component: {fileID: 61955888988739994}
   m_Layer: 0
   m_Name: Water
@@ -67,7 +68,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
---- !u!114 &114617443013253966
+--- !u!114 &114412556776585000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,15 +76,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1226726396362864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeb53d2268428f48a1a0e94d9dce921, type: 3}
+  m_Script: {fileID: 11500000, guid: 24eb4ea667a9d4e43a41d7ebc11d2b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameController: {fileID: 1368896931520992, guid: d3107a87cbc347644ba44d5778f38c18,
-    type: 2}
+  GameController: {fileID: 0}
+  GameplayController: {fileID: 0}
   gridPosition: {x: 0, y: 0}
   realPosition: {x: 0, y: 0, z: 0}
   realRotation: {x: 0, y: 0, z: 0, w: 0}
-  secureFieldCounter: 0
+  isMini: 0
+--- !u!114 &114582663801697362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226726396362864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24eb4ea667a9d4e43a41d7ebc11d2b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 0}
+  GameplayController: {fileID: 0}
+  gridPosition: {x: 0, y: 0}
+  realPosition: {x: 0, y: 0, z: 0}
+  realRotation: {x: 0, y: 0, z: 0, w: 0}
+  isMini: 0
 --- !u!212 &212885610541068166
 SpriteRenderer:
   m_ObjectHideFlags: 1

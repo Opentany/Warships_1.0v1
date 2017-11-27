@@ -12,28 +12,32 @@ public class ViewFieldComponent : MonoBehaviour {
     private Renderer renderer;
     private PreparationController thsPreparationController;
     private GameplayController gameplayController;
+	public bool isMini;
 
     void Start () {
         renderer = GetComponent<Renderer>();
         FindViews();
         realPosition = transform.position;
         realRotation = transform.rotation;
-    }
+		isMini = false;
+	}
 
 
-    public void OnMouseDown(bool isMini, PlacementResult placementResult, Warship warship)
+    public void OnMouseDown()
     {
+		Debug.Log ("pole " + gridPosition.x + " " + gridPosition.y);
+
         if (isMini)
         {
             return;
         }
         if (gameplayController != null)
         {
-            OnClickInGameplay(placementResult, warship);
+            OnClickInGameplay();
         }
         else if (thsPreparationController != null)
         {
-            OnClickInPreparation(placementResult,warship);
+            OnClickInPreparation();
         }
     }
 
@@ -100,24 +104,24 @@ public class ViewFieldComponent : MonoBehaviour {
         return this.enabled;
     }
 
-    private void OnClickInGameplay(PlacementResult placementResult, Warship warship)
+    private void OnClickInGameplay()
     {
-        if (IsPressed())
+       if (IsPressed())
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
+           // Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
         }
         else
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
+            //Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
         }
         gameplayController.AttackEnemy((int)gridPosition.x, (int)gridPosition.y);
     }
 
-    private void OnClickInPreparation(PlacementResult placementResult, Warship warship)
+    private void OnClickInPreparation()
     {
         if (IsPressed())
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
+         //   Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
             if (thsPreparationController.ChooseFieldComponent(this))
             {
                 this.enabled = false;
@@ -126,7 +130,7 @@ public class ViewFieldComponent : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
+            //Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
 
 
         }
