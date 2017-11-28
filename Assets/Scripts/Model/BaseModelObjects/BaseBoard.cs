@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseBoard<T> where T : BaseField, new(){
 
-    public static int boardSize = 10;
+	public static int boardSize = Variables.defaultBoardSize;
     protected List<List<T>> board;
     protected int fieldsOccupiedByWarships;
     protected List<Warship> warshipList;

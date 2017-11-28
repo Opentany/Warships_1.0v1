@@ -8,7 +8,7 @@ public class Variables {
 	public static readonly int defaultBoardSize = 10;
 	public static float screenHorizontalOffset = -2f;
 	public static float screenVerticalOffset = 4f;
-	public static float miniBoardScreenVerticalOffset = -3f;
+	public static float miniBoardScreenVerticalOffset = -1.2f;
 
 	//FIELD
 	public static float fieldMargin = 0.05f;

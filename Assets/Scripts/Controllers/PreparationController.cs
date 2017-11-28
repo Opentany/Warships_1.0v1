@@ -8,6 +8,7 @@ public class PreparationController : MonoBehaviour {
 
     public static ViewBoard preparationBoard;
     public static PlacementBoard placementBoard;
+	public GameObject warshipToMinimap;
     public GameObject fieldPrefab;
     public GameObject warship4HorizontalPrefab;
     public GameObject warship3HorizontalPrefab;
@@ -35,30 +36,34 @@ public class PreparationController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        preparationBoard = new ViewBoard();
-        placementBoard = new PlacementBoard();
-        ViewBoard.SetWaterPrefab(fieldPrefab);
-        preparationBoard.GenerateBoardOnScreen();
-        warshipCreator = new WarshipCreator();
-        botPlayer = BotCreator.CreateBotPlayer();
+		PrepareBoards ();
+		CreateWarships ();
+		CreatePlayersAndStartArrange();
+	}
 
-        //humanPlayer = BotCreator.CreateBotPlayer();
-        humanPlayer = new HumanPlayer();
+	private void PrepareBoards(){
+		preparationBoard = new ViewBoard();
+		placementBoard = new PlacementBoard();
+		ViewBoard.SetWaterPrefab(fieldPrefab);
+		ViewBoard.SetWarshipPrefab (warshipToMinimap);
+		preparationBoard.GenerateBoardOnScreen();
+	}
 
-        chosenWarshipOrientation = WarshipOrientation.VERTICAL;
-        warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
-        warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
-        warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
-        warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
+	private void CreateWarships(){
+		warshipCreator = new WarshipCreator();
+		chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+		warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
+		warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
+		warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
+		warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
+		ChooseWarship4();
+	}
 
-        botPlayer.ArrangeBoard();
-        //humanPlayer.ArrangeBoard();
-
-
-        botPlayerShips = botPlayer.GetPlayerShips();
-        //humanPlayerShips = humanPlayer.GetPlayerShips();
-
-        ChooseWarship4();
+	private void CreatePlayersAndStartArrange(){
+		botPlayer = BotCreator.CreateBotPlayer();
+		humanPlayer = new HumanPlayer();
+		botPlayer.ArrangeBoard();
+		botPlayerShips = botPlayer.GetPlayerShips();
 	}
 
     public bool SetWarshipOnField(ViewFieldComponent field)

@@ -7,11 +7,8 @@ public class ViewBoard : BaseBoard<ViewField> {
 
     private static GameObject waterPrefab;
     private static GameObject miniWaterPrefab;
+	private static GameObject warshipOnMinimap;
     private List<List<ViewField>> miniBoard;
-    private float screenHorizontalOffset = -2f;
-	private float screenVerticalBigBoardOffset = 4f;
-    private float fieldMargin = 0.05f;
-    private float screenVerticalOffset = -3f;
 
     public ViewBoard() {
         board = new List<List<ViewField>>();
@@ -23,12 +20,12 @@ public class ViewBoard : BaseBoard<ViewField> {
 
     public void GenerateBoardOnScreen() {
         board = new List<List<ViewField>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + Variables.fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<ViewField> row = new List<ViewField>();
             for (int j = 0; j < boardSize; j++) {
                 ViewField field = new ViewField();
-				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
+				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
 				field.SetViewFieldComponent(component);
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
@@ -43,14 +40,14 @@ public class ViewBoard : BaseBoard<ViewField> {
     {
 		miniWaterPrefab.SetActive(true);
         miniBoard = new List<List<ViewField>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + fieldMargin / 2;
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + Variables.fieldMargin / 2;
         for (int i = 0; i < boardSize; i++)
         {
             List<ViewField> row = new List<ViewField>();
             for (int j = 0; j < boardSize; j++)
             {
                 ViewField field = new ViewField();
-                ViewFieldComponent component = GameObject.Instantiate(miniWaterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
+				ViewFieldComponent component = GameObject.Instantiate(miniWaterPrefab, new Vector2(Variables.screenHorizontalOffset + i * fieldSize, Variables.miniBoardScreenVerticalOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
                 field.SetViewFieldComponent(component);
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
@@ -72,6 +69,10 @@ public class ViewBoard : BaseBoard<ViewField> {
         miniWaterPrefab.transform.localScale = miniWaterPrefab.transform.localScale / 2;
 		miniWaterPrefab.SetActive(false);
     }
+
+	public static void SetWarshipPrefab(GameObject warship){
+		warshipOnMinimap = warship;
+	}
 
     public List<List<ViewField>> GetMiniBoard() {
         return miniBoard;
@@ -123,28 +124,30 @@ public class ViewBoard : BaseBoard<ViewField> {
         foreach (Warship warship in warships) {
             if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
             {
-                AddColorHorizontal(warship);
+				AddWarshipFieldHorizontal(warship);
             }
             else {
-                AddColorVertical(warship);
+				AddWarshipFieldVertical(warship);
             }
         }
     }
 
-    private void AddColorHorizontal(Warship warship) {
+	private void AddWarshipFieldHorizontal(Warship warship) {
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-            miniBoard[i][warship.GetYPosition()].SetWarshipColor();
+			miniBoard [i] [warship.GetYPosition ()].viewFieldComponent.ChangeSprite(GetWarshipSpriteRenderer());
         }
     }
 
-    private void AddColorVertical(Warship warship){
+	private void AddWarshipFieldVertical(Warship warship){
         int y = warship.GetYPosition();
-        for (int i = y; i < y + warship.GetSize(); i++)
-        {
-            miniBoard[warship.GetXPosition()][i].SetWarshipColor();
-        }
-    }
+		for (int i = y; i < y + warship.GetSize (); i++) {
+			miniBoard [warship.GetXPosition ()] [i].viewFieldComponent.ChangeSprite (GetWarshipSpriteRenderer ());
+		}
+	}
 
+	private Sprite GetWarshipSpriteRenderer(){
+		return warshipOnMinimap.GetComponent<SpriteRenderer>().sprite;
+	}
 }

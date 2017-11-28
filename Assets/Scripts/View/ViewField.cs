@@ -62,7 +62,7 @@ public class ViewField : BaseField
 
     public void SetColorOnField(DmgDone shotResult)
     {
-        viewFieldComponent.SetEffectOnField(shotResult);
+        viewFieldComponent.SetColorOnField(shotResult);
     }
 
     //TODO
