@@ -88,7 +88,6 @@ public class PreparationController : MonoBehaviour {
                 preparationBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 listOfWarships.Add(statek);
-                //preparationBoard.DisplayBoard();
                 return true;
             }
             else
@@ -125,8 +124,10 @@ public class PreparationController : MonoBehaviour {
         Warship statek = listOfWarships[listOfWarships.Count - 1];
         if (statek != null)
         {
-            PutBackWarship(statek);
+            Debug.Log(statek.GetXPosition()+";"+statek.GetYPosition()+ " usuwam...");
             preparationBoard.RemoveWarship(statek);
+            placementBoard.RemoveWarship(statek);
+            PutBackWarship(statek);
             Debug.Log("Statek został usunięty");
         }
         listOfWarships.RemoveAt(listOfWarships.Count-1);

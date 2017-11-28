@@ -154,6 +154,7 @@ public class ViewBoard : BaseBoard<ViewField> {
             {
                 row += " " + board[i][j].secureFieldCounter;
             }
+            Debug.Log(row);
             row = "";
         }
     }
