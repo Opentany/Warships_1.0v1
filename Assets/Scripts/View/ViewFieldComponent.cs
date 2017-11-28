@@ -15,7 +15,7 @@ public class ViewFieldComponent : MonoBehaviour {
 	public bool isMini;
 
     void Start () {
-		FindViews();
+        FindViews();
         realPosition = transform.position;
         realRotation = transform.rotation;
 		isMini = false;
@@ -57,14 +57,14 @@ public class ViewFieldComponent : MonoBehaviour {
     public void SetWarshipColor()
     {
         renderer = this.GetComponent<SpriteRenderer>();
-        renderer.material.color = Color.green;
+        renderer.material.color = Color.black;
     }
 
-    public void SetEffectOnField(DmgDone shotResult)
-    {
-        Debug.Log(gridPosition.x + " " + gridPosition.y + " " + shotResult);
+	public void SetEffect(){
 
+	}
 
+	public void SetEffectOnField(DmgDone shotResult){
         renderer = this.GetComponent<SpriteRenderer>();
         if (shotResult.Equals(DmgDone.HIT))
         {

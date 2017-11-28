@@ -25,6 +25,10 @@ public class ViewField : BaseField
         viewFieldComponent.SetWarshipColor();
     }
 
+	public void SetEffect(){
+		viewFieldComponent.SetEffect ();
+	}
+
     public void SetShotResult(DmgDone result) {
         dmgDone = result;
     }

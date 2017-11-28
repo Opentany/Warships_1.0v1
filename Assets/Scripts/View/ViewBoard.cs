@@ -87,25 +87,63 @@ public class ViewBoard : BaseBoard<ViewField> {
         }
     }
 
+	private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
+		return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
+	}
+
     public void ApplyMyShot(ShotRaport shotRaport) {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         board[x][y].SetShotResult(shotRaport.GetShotResult());
-        board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+		board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
+			AddEffectOnWholeWarship(shotRaport.GetWarship());
+		}
     }
 
+	private void AddEffectOnWholeWarship(Warship warship){
+		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+		{
+			int x = warship.GetXPosition();
+			for (int i = x; i < x + warship.GetSize(); i++){
+				miniBoard [i] [warship.GetYPosition ()].SetEffect ();
+			}
+		}
+		else {
+			int y = warship.GetYPosition();
+			for (int i = y; i < y + warship.GetSize (); i++) {
+				miniBoard [warship.GetXPosition ()] [i].SetEffect();
+			}
+		}
+	}
 
     public void ApplyOpponentShot(ShotRaport shotRaport) {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         Debug.Log("Bot " + x + " "+ y+ " "+ shotRaport.GetShotResult());
         miniBoard[x][y].SetShotResult(shotRaport.GetShotResult());
-        miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
+		miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
+		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
+			AddColorOnWholeWarship(shotRaport.GetWarship());
+		}
     }
 
-    private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
-        return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
-    }
+	private void AddColorOnWholeWarship(Warship warship){
+		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+		{
+			int x = warship.GetXPosition();
+			for (int i = x; i < x + warship.GetSize(); i++){
+				miniBoard [i] [warship.GetYPosition ()].SetWarshipColor ();
+			}
+		}
+		else {
+			int y = warship.GetYPosition();
+			for (int i = y; i < y + warship.GetSize (); i++) {
+				miniBoard [warship.GetXPosition ()] [i].SetWarshipColor ();
+			}
+		}
+	}
+		
 
     public void DisplayBoard()
     {
@@ -150,4 +188,6 @@ public class ViewBoard : BaseBoard<ViewField> {
 	private Sprite GetWarshipSpriteRenderer(){
 		return warshipOnMinimap.GetComponent<SpriteRenderer>().sprite;
 	}
+
+
 }
