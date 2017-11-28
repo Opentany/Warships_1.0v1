@@ -84,9 +84,9 @@ public class PlacementBoard : BaseBoard<PlacementField>{
 
     private void RemoveSecuredFieldsAroundWarship(int startVertical, int endVertical, int startHorizontal, int endHorizontal)
     {
-        for (int i = startVertical; i <= endVertical; i++)
+        for (int i = startHorizontal; i <= endHorizontal; i++)
         {
-            for (int j = startHorizontal; j <= endHorizontal; j++)
+            for (int j = startVertical; j <= endVertical; j++)
             {
                 if (board[i][j].GetSecureFieldCounter() == 1)
                 {
