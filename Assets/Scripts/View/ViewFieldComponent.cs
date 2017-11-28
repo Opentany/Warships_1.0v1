@@ -6,10 +6,11 @@ public class ViewFieldComponent : MonoBehaviour {
 
     public GameObject GameController;
     public GameObject GameplayController;
-    public Vector2 gridPosition = Vector2.zero;
+
+	public Vector2 gridPosition = Vector2.zero;
     public Vector3 realPosition;
     public Quaternion realRotation;
-    private static SpriteRenderer renderer;
+    private SpriteRenderer renderer;
     private PreparationController thsPreparationController;
     private GameplayController gameplayController;
 	public bool isMini;
@@ -59,26 +60,7 @@ public class ViewFieldComponent : MonoBehaviour {
         renderer = this.GetComponent<SpriteRenderer>();
         renderer.material.color = Color.black;
     }
-
-	public void SetEffect(){
-
-	}
-
-	public void SetEffectOnField(DmgDone shotResult){
-        renderer = this.GetComponent<SpriteRenderer>();
-        if (shotResult.Equals(DmgDone.HIT))
-        {
-            renderer.material.color = Color.red;
-        }
-        else if (shotResult.Equals(DmgDone.SINKED))
-        {
-            renderer.material.color = Color.black;
-        }
-        else if (shotResult.Equals(DmgDone.MISS))
-        {
-            renderer.material.color = Color.grey;
-        }
-    }
+		
 
     public void SetColorOnField(DmgDone shotResult)
     {

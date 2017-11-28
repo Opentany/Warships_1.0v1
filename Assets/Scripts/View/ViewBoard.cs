@@ -8,6 +8,7 @@ public class ViewBoard : BaseBoard<ViewField> {
     private static GameObject waterPrefab;
     private static GameObject miniWaterPrefab;
 	private static GameObject warshipOnMinimap;
+	private static GameObject animationHolder;
     private List<List<ViewField>> miniBoard;
 
     public ViewBoard() {
@@ -19,6 +20,7 @@ public class ViewBoard : BaseBoard<ViewField> {
 		
 
     public void GenerateBoardOnScreen() {
+		Debug.Log (animationHolder);
         board = new List<List<ViewField>>();
         float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + Variables.fieldMargin;
         for (int i = 0; i < boardSize; i++) {
@@ -27,6 +29,7 @@ public class ViewBoard : BaseBoard<ViewField> {
                 ViewField field = new ViewField();
 				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
 				field.SetViewFieldComponent(component);
+				field.SetViewAnimationComponent (CreateNewAnimationComponent(i,j,fieldSize));
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
                 row.Add(field);
@@ -34,6 +37,12 @@ public class ViewBoard : BaseBoard<ViewField> {
             board.Add(row);
         }
     }
+
+	private ViewAnimationComponent CreateNewAnimationComponent(int i, int j, float fieldSize){
+		ViewAnimationComponent animationComponent = GameObject.Instantiate (animationHolder, new Vector2 (Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewAnimationComponent> ();
+		animationComponent.gridPosition = new Vector2 (i, j);
+		return animationComponent;
+	}
 
 
     public void GenerateMiniBoardOnScreen()
@@ -48,7 +57,7 @@ public class ViewBoard : BaseBoard<ViewField> {
             {
                 ViewField field = new ViewField();
 				ViewFieldComponent component = GameObject.Instantiate(miniWaterPrefab, new Vector2(Variables.screenHorizontalOffset + i * fieldSize, Variables.miniBoardScreenVerticalOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
-                field.SetViewFieldComponent(component);
+				field.SetViewFieldComponent(component);
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
                 field.isMini = true;
@@ -72,6 +81,10 @@ public class ViewBoard : BaseBoard<ViewField> {
 
 	public static void SetWarshipPrefab(GameObject warship){
 		warshipOnMinimap = warship;
+	}
+
+	public static void SetAnimationHolder(GameObject animation){
+		animationHolder = animation;
 	}
 
     public List<List<ViewField>> GetMiniBoard() {
@@ -106,13 +119,13 @@ public class ViewBoard : BaseBoard<ViewField> {
 		{
 			int x = warship.GetXPosition();
 			for (int i = x; i < x + warship.GetSize(); i++){
-				miniBoard [i] [warship.GetYPosition ()].SetEffect ();
+				board [i] [warship.GetYPosition ()].SetEffect ();
 			}
 		}
 		else {
 			int y = warship.GetYPosition();
 			for (int i = y; i < y + warship.GetSize (); i++) {
-				miniBoard [warship.GetXPosition ()] [i].SetEffect();
+				board [warship.GetXPosition ()] [i].SetEffect();
 			}
 		}
 	}

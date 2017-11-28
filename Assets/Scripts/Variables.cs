@@ -21,4 +21,8 @@ public class Variables {
 	public static int numberOfShipsOfSizeTwo = 3;
 	public static int numberOfShipsOfSizeOne = 4;
 
+	//ANIMATION
+	public static string animationTriggerHit = "Hit";
+	public static string animationTriggerMiss = "Miss";
+
 }

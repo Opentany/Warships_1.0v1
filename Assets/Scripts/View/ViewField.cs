@@ -9,6 +9,7 @@ public class ViewField : BaseField
     public int secureFieldCounter;
     public bool isMini = false;
     public ViewFieldComponent viewFieldComponent;
+	public ViewAnimationComponent viewAnimationComponent;
 
     public ViewField() :base() {
         warship = null;
@@ -21,12 +22,16 @@ public class ViewField : BaseField
         this.viewFieldComponent = component;
     }
 
+	public void SetViewAnimationComponent(ViewAnimationComponent animationComponent){
+		this.viewAnimationComponent = animationComponent;
+	}
+
     public void SetWarshipColor() {
         viewFieldComponent.SetWarshipColor();
     }
 
 	public void SetEffect(){
-		viewFieldComponent.SetEffect ();
+		viewAnimationComponent.SetEffect (Variables.animationTriggerHit);
 	}
 
     public void SetShotResult(DmgDone result) {
@@ -68,10 +73,9 @@ public class ViewField : BaseField
     {
         viewFieldComponent.SetColorOnField(shotResult);
     }
-
-    //TODO
+		
     public void SetEffectOnField(DmgDone shotResult) {
-        viewFieldComponent.SetEffectOnField(shotResult);       
+        viewAnimationComponent.SetEffectOnField(shotResult);       
     }
 
 }

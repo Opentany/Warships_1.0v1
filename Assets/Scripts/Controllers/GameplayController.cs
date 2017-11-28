@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameplayController: MonoBehaviour{
 
     public GameObject waterPrefab;
+	public GameObject animationHolder;
 
     public static List<Player> players;
 
@@ -28,6 +29,7 @@ public class GameplayController: MonoBehaviour{
         Debug.Log("Controllers Set");
         board = new ViewBoard();
         ViewBoard.SetWaterPrefab(waterPrefab);
+		ViewBoard.SetAnimationHolder (animationHolder);
         board.GenerateBoardOnScreen();
         board.GenerateMiniBoardOnScreen();
         SetMyShips(players[0].GetPlayerShips().GetWarships());

@@ -10,6 +10,7 @@ public class PreparationController : MonoBehaviour {
     public static PlacementBoard placementBoard;
 	public GameObject warshipToMinimap;
     public GameObject fieldPrefab;
+	public GameObject animationHolder;
     public GameObject warship4HorizontalPrefab;
     public GameObject warship3HorizontalPrefab;
     public GameObject warship2HorizontalPrefab;
@@ -46,6 +47,7 @@ public class PreparationController : MonoBehaviour {
 		placementBoard = new PlacementBoard();
 		ViewBoard.SetWaterPrefab(fieldPrefab);
 		ViewBoard.SetWarshipPrefab (warshipToMinimap);
+		ViewBoard.SetAnimationHolder (animationHolder);
 		preparationBoard.GenerateBoardOnScreen();
 	}
 
