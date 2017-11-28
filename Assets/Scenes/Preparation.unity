@@ -666,11 +666,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647132edbb68d854c8387c1ded83b007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warshipToMinimap: {fileID: 1102090974433500, guid: bf9a5b9153c5e514c9a0fba06fc34f1c,
-    type: 2}
+  warshipToMinimap: {fileID: 0}
   fieldPrefab: {fileID: 1226726396362864, guid: 00d6e729db8d138458fc541da7f8013d,
-    type: 2}
-  animationHolder: {fileID: 1302129000066982, guid: 1a994a2338a50824c80514d5ae7bafaf,
     type: 2}
   warship4HorizontalPrefab: {fileID: 1221629565021194, guid: 7b149009e3ba10f40913735f53fb7c23,
     type: 2}
@@ -1216,7 +1213,7 @@ RectTransform:
   m_GameObject: {fileID: 780731193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0054854755, y: 0.0054854755, z: 0.0054854755}
+  m_LocalScale: {x: 0.005205772, y: 0.005205772, z: 0.005205772}
   m_Children:
   - {fileID: 1228213200}
   - {fileID: 1912210839}
@@ -2522,7 +2519,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445727801}
-        m_MethodName: ChangeOrientation
+        m_MethodName: UndoneLastWarship
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2567,72 +2564,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1791231178}
---- !u!1001 &1870781534
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4897880955303256, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1302129000066982, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212717303471021094, guid: 1a994a2338a50824c80514d5ae7bafaf,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 212717303471021094, guid: 1a994a2338a50824c80514d5ae7bafaf,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 212717303471021094, guid: 1a994a2338a50824c80514d5ae7bafaf,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 212717303471021094, guid: 1a994a2338a50824c80514d5ae7bafaf,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 1a994a2338a50824c80514d5ae7bafaf, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1909309004
 GameObject:
   m_ObjectHideFlags: 0

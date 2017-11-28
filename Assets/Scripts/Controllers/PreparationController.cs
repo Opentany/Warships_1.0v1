@@ -23,6 +23,8 @@ public class PreparationController : MonoBehaviour {
     public static Player botPlayer;
     public static Player humanPlayer;
 
+    private static List<GameObject> listOfWarshipsOnBoard;
+    private static List<Warship> listOfWarships;
     private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
     private static ViewFieldComponent chosenField;
@@ -59,6 +61,8 @@ public class PreparationController : MonoBehaviour {
 		warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
 		warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
 		ChooseWarship4();
+        listOfWarshipsOnBoard = new List<GameObject>();
+        listOfWarships =new List<Warship>();
 	}
 
 	private void CreatePlayersAndStartArrange(){
@@ -85,12 +89,12 @@ public class PreparationController : MonoBehaviour {
                 placementBoard.SetWarship(statek);
                 preparationBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
-                //preparationBoard.DisplayBoard();
+                listOfWarships.Add(statek);
                 return true;
             }
             else
             {
-                //Debug.Log("wybierz inne miejsce");
+                Debug.Log("wybierz inne miejsce");
                 PutBackWarship(statek);
                 return false;
             }
@@ -102,6 +106,36 @@ public class PreparationController : MonoBehaviour {
         }
     }
 
+    public void UndoneLastWarship()
+    {
+        if (listOfWarshipsOnBoard.Count != 0 &&listOfWarships.Count!=0)
+        {
+            RemoveWarshipFromList();
+            PutBackWarshipFromBoard();
+        }
+    }
+    private void PutBackWarshipFromBoard()
+    {
+        GameObject statek = listOfWarshipsOnBoard[listOfWarshipsOnBoard.Count - 1];
+        listOfWarshipsOnBoard.RemoveAt(listOfWarshipsOnBoard.Count-1);
+        Destroy(statek);
+    }
+
+    private void RemoveWarshipFromList()
+    {
+        Warship statek = listOfWarships[listOfWarships.Count - 1];
+        if (statek != null)
+        {
+            Debug.Log(statek.GetXPosition()+";"+statek.GetYPosition()+ " usuwam...");
+            preparationBoard.RemoveWarship(statek);
+            placementBoard.RemoveWarship(statek);
+            PutBackWarship(statek);
+            Debug.Log("Statek został usunięty");
+        }
+        listOfWarships.RemoveAt(listOfWarships.Count-1);
+
+
+    }
     private void WarshipPlacer(int shipSize, ViewFieldComponent field)
     {
         switch (shipSize)
@@ -116,12 +150,12 @@ public class PreparationController : MonoBehaviour {
                     pozycja.y += 0.1f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship4HorizontalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship4HorizontalPrefab, pozycja, rotacja));
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.69f;
-                    GameObject.Instantiate(warship4VerticalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship4VerticalPrefab, pozycja, rotacja));
 
                 }
                 break;
@@ -135,12 +169,12 @@ public class PreparationController : MonoBehaviour {
                     pozycja.x = pozycja.x + 0.46f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship3HorizontalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship3HorizontalPrefab, pozycja, rotacja));
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.46f;
-                    GameObject.Instantiate(warship3VerticalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship3VerticalPrefab, pozycja, rotacja));
 
                 }
                 break;
@@ -154,12 +188,12 @@ public class PreparationController : MonoBehaviour {
                     pozycja.x = pozycja.x + 0.24f;
                     rotacja.z = 0f;
                     rotacja.z = -1.0f;
-                    GameObject.Instantiate(warship2HorizontalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship2HorizontalPrefab, pozycja, rotacja));
                 }
                 else
                 {
                     pozycja.y = pozycja.y - 0.24f;
-                    GameObject.Instantiate(warship2VerticalPrefab, pozycja, rotacja);
+                    listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship2VerticalPrefab, pozycja, rotacja));
 
                 }
                 break;
@@ -172,11 +206,11 @@ public class PreparationController : MonoBehaviour {
                     {
                         rotacja.z = 0f;
                         rotacja.z = -1.0f;
-                        GameObject.Instantiate(warship1HorizontalPrefab, pozycja, rotacja);
+                        listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship1HorizontalPrefab, pozycja, rotacja));
                     }
                     else
                     {
-                        GameObject.Instantiate(warship1VerticalPrefab, pozycja, rotacja);
+                        listOfWarshipsOnBoard.Add(GameObject.Instantiate(warship1VerticalPrefab, pozycja, rotacja));
 
                     }
                     break;
@@ -188,7 +222,6 @@ public class PreparationController : MonoBehaviour {
             }
         }
     }
-
     private void PutBackWarship(Warship warship)
     {
         switch ((int)warship.warshipSize)
@@ -232,7 +265,7 @@ public class PreparationController : MonoBehaviour {
             {
                 if (warships4.Count==0)
                 {
-                    //Debug.Log("Skończyły się statki rozmiaru "+size);
+                    Debug.Log("Skończyły się statki rozmiaru "+size);
                     break;
                 }
                 statek = warships4[0];                    
