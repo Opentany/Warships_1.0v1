@@ -84,6 +84,9 @@ public class PreparationController : MonoBehaviour {
                 
                 return false;
             }
+			int x = statek.GetXPosition ();
+			int y = statek.GetYPosition ();
+			Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].securePoints);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
                 placementBoard.SetWarship(statek);
@@ -95,8 +98,8 @@ public class PreparationController : MonoBehaviour {
             else
             {
                 Debug.Log("wybierz inne miejsce");
-				int x = statek.GetXPosition ();
-				int y = statek.GetYPosition ();
+				//int x = statek.GetXPosition ();
+				//int y = statek.GetYPosition ();
 				Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].GetPlacementResult());
                 PutBackWarship(statek);
                 return false;

@@ -93,6 +93,7 @@ public class PlacementBoard : BaseBoard<PlacementField>{
                 if (board[i][j].GetSecureFieldCounter() == 1)
                 {
                     board[i][j].SetPlacementResult(PlacementResult.AVAILABLE);
+					board [i] [j].securePoints = 0;
                 }
                 else
                 {
