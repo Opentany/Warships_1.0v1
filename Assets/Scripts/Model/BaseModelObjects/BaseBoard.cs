@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseBoard<T> where T : BaseField, new(){
 
-    public static int boardSize = 10;
+	public static int boardSize = Variables.defaultBoardSize;
     protected List<List<T>> board;
     protected int fieldsOccupiedByWarships;
     protected List<Warship> warshipList;
@@ -99,7 +99,7 @@ public class BaseBoard<T> where T : BaseField, new(){
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-            board[i][warship.GetYPosition()].SetWarship(null);
+			board [i] [warship.GetYPosition ()].RemoveWarship();
         }
         fieldsOccupiedByWarships -= warship.GetSize();
     }
@@ -109,7 +109,7 @@ public class BaseBoard<T> where T : BaseField, new(){
         int y = warship.GetYPosition();
         for (int i = y; i < y + warship.GetSize(); i++)
         {
-            board[warship.GetXPosition()][i].SetWarship(null);
+			board [warship.GetXPosition ()] [i].RemoveWarship();
         }
         fieldsOccupiedByWarships -= warship.GetSize();
     }

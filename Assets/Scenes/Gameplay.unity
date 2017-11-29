@@ -141,6 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterPrefab: {fileID: 1226726396362864, guid: 00d6e729db8d138458fc541da7f8013d,
     type: 2}
+  animationHolder: {fileID: 1302129000066982, guid: 1a994a2338a50824c80514d5ae7bafaf,
+    type: 2}
+  activeHuman: 0
 --- !u!4 &445727802
 Transform:
   m_ObjectHideFlags: 0

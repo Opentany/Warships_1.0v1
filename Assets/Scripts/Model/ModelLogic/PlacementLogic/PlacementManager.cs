@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class PlacementManager{
-    private static int fieldsOccupiedByWarships = 20;
+	private static int fieldsOccupiedByWarships = Variables.fieldsOccupiedByWarships;
 
     public static bool CheckIfPlayerCanPutWarshipOnThisPosition(PlacementBoard board, Warship warship)
     {

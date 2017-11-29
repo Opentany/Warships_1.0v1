@@ -44,10 +44,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>E:/Programy/Unity/Editor/Data/Managed\UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>E:/Programy/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +55,6 @@
      <Compile Include="Assets\Scripts\Controllers\GameplayController.cs" />
      <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
      <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseBoard.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseField.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\Warship.cs" />
@@ -64,6 +63,7 @@
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\WarshipsContainer.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\WarshipSize.cs" />
      <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementBoard.cs" />
+     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementException.cs" />
      <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementField.cs" />
      <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementManager.cs" />
      <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementResult.cs" />
@@ -76,62 +76,43 @@
      <Compile Include="Assets\Scripts\Players\BotPlayer.cs" />
      <Compile Include="Assets\Scripts\Players\HumanPlayer.cs" />
      <Compile Include="Assets\Scripts\Players\Player.cs" />
+     <Compile Include="Assets\Scripts\Variables.cs" />
+     <Compile Include="Assets\Scripts\View\ViewAnimationComponent.cs" />
      <Compile Include="Assets\Scripts\View\ViewBoard.cs" />
      <Compile Include="Assets\Scripts\View\ViewField.cs" />
      <Compile Include="Assets\Scripts\View\ViewFieldComponent.cs" />
-=======
-     <Compile Include="Assets\Scripts\Game\Board.cs" />
-     <Compile Include="Assets\Scripts\Game\BotCreator.cs" />
-     <Compile Include="Assets\Scripts\Game\BotPlayer.cs" />
-     <Compile Include="Assets\Scripts\Game\DmgDone.cs" />
-     <Compile Include="Assets\Scripts\Game\Field.cs" />
-     <Compile Include="Assets\Scripts\Game\HumanPlayer.cs" />
-     <Compile Include="Assets\Scripts\Game\IllegalShotException.cs" />
-     <Compile Include="Assets\Scripts\Game\Model\BoardModel.cs" />
-     <Compile Include="Assets\Scripts\Game\Model\FieldModel.cs" />
-     <Compile Include="Assets\Scripts\Game\PlacementManager.cs" />
-     <Compile Include="Assets\Scripts\Game\PlacementResult.cs" />
-     <Compile Include="Assets\Scripts\Game\Player.cs" />
-     <Compile Include="Assets\Scripts\Game\ShotRaport.cs" />
-     <Compile Include="Assets\Scripts\Game\Warship.cs" />
-     <Compile Include="Assets\Scripts\Game\WarshipCreator.cs" />
-     <Compile Include="Assets\Scripts\Game\WarshipOrientation.cs" />
-     <Compile Include="Assets\Scripts\Game\WarshipsContainer.cs" />
-     <Compile Include="Assets\Scripts\Game\WarshipSize.cs" />
-     <Compile Include="Assets\Scripts\Variables.cs" />
->>>>>>> origin/master
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Timeline">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UIAutomation">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.GoogleAudioSpatializer">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>E:/Programy/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Users/Opentany/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>C:/Users/malbor806/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Users/Opentany/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/malbor806/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

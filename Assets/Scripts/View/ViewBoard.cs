@@ -7,11 +7,9 @@ public class ViewBoard : BaseBoard<ViewField> {
 
     private static GameObject waterPrefab;
     private static GameObject miniWaterPrefab;
+	private static GameObject warshipOnMinimap;
+	private static GameObject animationHolder;
     private List<List<ViewField>> miniBoard;
-    private float screenHorizontalOffset = -2f;
-	private float screenVerticalBigBoardOffset = 4f;
-    private float fieldMargin = 0.05f;
-    private float screenVerticalOffset = -3f;
 
     public ViewBoard() {
         board = new List<List<ViewField>>();
@@ -22,14 +20,16 @@ public class ViewBoard : BaseBoard<ViewField> {
 		
 
     public void GenerateBoardOnScreen() {
+		Debug.Log (animationHolder);
         board = new List<List<ViewField>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + fieldMargin;
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x + Variables.fieldMargin;
         for (int i = 0; i < boardSize; i++) {
             List<ViewField> row = new List<ViewField>();
             for (int j = 0; j < boardSize; j++) {
                 ViewField field = new ViewField();
-				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (screenHorizontalOffset + i * fieldSize, screenVerticalBigBoardOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
+				ViewFieldComponent component = GameObject.Instantiate (waterPrefab, new Vector2 (Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewFieldComponent>();
 				field.SetViewFieldComponent(component);
+				field.SetViewAnimationComponent (CreateNewAnimationComponent(i,j,fieldSize));
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
                 row.Add(field);
@@ -38,20 +38,26 @@ public class ViewBoard : BaseBoard<ViewField> {
         }
     }
 
+	private ViewAnimationComponent CreateNewAnimationComponent(int i, int j, float fieldSize){
+		ViewAnimationComponent animationComponent = GameObject.Instantiate (animationHolder, new Vector2 (Variables.screenHorizontalOffset + i * fieldSize, Variables.screenVerticalOffset - j * fieldSize), Quaternion.Euler (new Vector2 ())).GetComponent<ViewAnimationComponent> ();
+		animationComponent.gridPosition = new Vector2 (i, j);
+		return animationComponent;
+	}
+
 
     public void GenerateMiniBoardOnScreen()
     {
 		miniWaterPrefab.SetActive(true);
         miniBoard = new List<List<ViewField>>();
-        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + fieldMargin / 2;
+        float fieldSize = waterPrefab.GetComponent<BoxCollider2D>().size.x / 2 + Variables.fieldMargin / 2;
         for (int i = 0; i < boardSize; i++)
         {
             List<ViewField> row = new List<ViewField>();
             for (int j = 0; j < boardSize; j++)
             {
                 ViewField field = new ViewField();
-                ViewFieldComponent component = GameObject.Instantiate(miniWaterPrefab, new Vector2(screenHorizontalOffset + i * fieldSize, screenVerticalOffset + j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
-                field.SetViewFieldComponent(component);
+				ViewFieldComponent component = GameObject.Instantiate(miniWaterPrefab, new Vector2(Variables.screenHorizontalOffset + i * fieldSize, Variables.miniBoardScreenVerticalOffset - j * fieldSize), Quaternion.Euler(new Vector2())).GetComponent<ViewFieldComponent>();
+				field.SetViewFieldComponent(component);
                 field.viewFieldComponent.gameObject.layer = 1;
                 field.viewFieldComponent.gridPosition = new Vector2(i, j);
                 field.isMini = true;
@@ -73,6 +79,14 @@ public class ViewBoard : BaseBoard<ViewField> {
 		miniWaterPrefab.SetActive(false);
     }
 
+	public static void SetWarshipPrefab(GameObject warship){
+		warshipOnMinimap = warship;
+	}
+
+	public static void SetAnimationHolder(GameObject animation){
+		animationHolder = animation;
+	}
+
     public List<List<ViewField>> GetMiniBoard() {
         return miniBoard;
     }
@@ -86,25 +100,63 @@ public class ViewBoard : BaseBoard<ViewField> {
         }
     }
 
+	private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
+		return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
+	}
+
     public void ApplyMyShot(ShotRaport shotRaport) {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         board[x][y].SetShotResult(shotRaport.GetShotResult());
-        board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+		board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
+			AddEffectOnWholeWarship(shotRaport.GetWarship());
+		}
     }
 
+	private void AddEffectOnWholeWarship(Warship warship){
+		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+		{
+			int x = warship.GetXPosition();
+			for (int i = x; i < x + warship.GetSize(); i++){
+				board [i] [warship.GetYPosition ()].SetEffect ();
+			}
+		}
+		else {
+			int y = warship.GetYPosition();
+			for (int i = y; i < y + warship.GetSize (); i++) {
+				board [warship.GetXPosition ()] [i].SetEffect();
+			}
+		}
+	}
 
     public void ApplyOpponentShot(ShotRaport shotRaport) {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
         Debug.Log("Bot " + x + " "+ y+ " "+ shotRaport.GetShotResult());
         miniBoard[x][y].SetShotResult(shotRaport.GetShotResult());
-        miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
+		miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
+		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
+			AddColorOnWholeWarship(shotRaport.GetWarship());
+		}
     }
 
-    private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
-        return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
-    }
+	private void AddColorOnWholeWarship(Warship warship){
+		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
+		{
+			int x = warship.GetXPosition();
+			for (int i = x; i < x + warship.GetSize(); i++){
+				miniBoard [i] [warship.GetYPosition ()].SetWarshipColor ();
+			}
+		}
+		else {
+			int y = warship.GetYPosition();
+			for (int i = y; i < y + warship.GetSize (); i++) {
+				miniBoard [warship.GetXPosition ()] [i].SetWarshipColor ();
+			}
+		}
+	}
+		
 
     public void DisplayBoard()
     {
@@ -115,6 +167,7 @@ public class ViewBoard : BaseBoard<ViewField> {
             {
                 row += " " + board[i][j].secureFieldCounter;
             }
+            Debug.Log(row);
             row = "";
         }
     }
@@ -123,28 +176,32 @@ public class ViewBoard : BaseBoard<ViewField> {
         foreach (Warship warship in warships) {
             if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
             {
-                AddColorHorizontal(warship);
+				AddWarshipFieldHorizontal(warship);
             }
             else {
-                AddColorVertical(warship);
+				AddWarshipFieldVertical(warship);
             }
         }
     }
 
-    private void AddColorHorizontal(Warship warship) {
+	private void AddWarshipFieldHorizontal(Warship warship) {
         int x = warship.GetXPosition();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-            miniBoard[i][warship.GetYPosition()].SetWarshipColor();
+			miniBoard [i] [warship.GetYPosition ()].viewFieldComponent.ChangeSprite(GetWarshipSpriteRenderer());
         }
     }
 
-    private void AddColorVertical(Warship warship){
+	private void AddWarshipFieldVertical(Warship warship){
         int y = warship.GetYPosition();
-        for (int i = y; i < y + warship.GetSize(); i++)
-        {
-            miniBoard[warship.GetXPosition()][i].SetWarshipColor();
-        }
-    }
+		for (int i = y; i < y + warship.GetSize (); i++) {
+			miniBoard [warship.GetXPosition ()] [i].viewFieldComponent.ChangeSprite (GetWarshipSpriteRenderer ());
+		}
+	}
+
+	private Sprite GetWarshipSpriteRenderer(){
+		return warshipOnMinimap.GetComponent<SpriteRenderer>().sprite;
+	}
+
 
 }

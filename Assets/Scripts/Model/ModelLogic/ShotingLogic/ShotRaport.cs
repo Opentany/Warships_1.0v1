@@ -49,5 +49,8 @@
         }
     }
 
+	public Warship GetWarship(){
+		return warship;
+	}
 
 }
