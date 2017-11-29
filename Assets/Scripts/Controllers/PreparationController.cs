@@ -333,33 +333,42 @@ public class PreparationController : MonoBehaviour {
     {
         chosenWarshipSize = (int)WarshipSize.FOUR;
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        UpdateOrientation();
         // Debug.Log("Chosen Warship is "+chosenWarshipSize);
     }
     public void ChooseWarship3()
     {
         chosenWarshipSize = (int)WarshipSize.THREE;
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        UpdateOrientation();
         //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship2()
     {
         chosenWarshipSize = (int)WarshipSize.TWO;
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        UpdateOrientation();
         //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
     public void ChooseWarship1()
     {
         chosenWarshipSize = (int)WarshipSize.ONE;
         chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+        UpdateOrientation();
         //Debug.Log("Chosen Warship is " + chosenWarshipSize);
     }
 
     public void ChangeOrientation()
     {
         chosenWarshipOrientation= CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
+        UpdateOrientation();
+        // Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
+    }
+
+    private void UpdateOrientation()
+    {
         GameObject text = GameObject.FindWithTag("Rotate Text");
         text.GetComponent<Text>().text = chosenWarshipOrientation.ToString();
-        // Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
     }
 
     private bool CheckIfOrientationIsHorizontal()
