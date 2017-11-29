@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PreparationController : MonoBehaviour {
@@ -356,7 +357,9 @@ public class PreparationController : MonoBehaviour {
     public void ChangeOrientation()
     {
         chosenWarshipOrientation= CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
-       // Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
+        GameObject text = GameObject.FindWithTag("Rotate Text");
+        text.GetComponent<Text>().text = chosenWarshipOrientation.ToString();
+        // Debug.Log("Orientacja statku zmieniona na "+chosenWarshipOrientation);
     }
 
     private bool CheckIfOrientationIsHorizontal()
