@@ -95,7 +95,10 @@ public class ViewFieldComponent : MonoBehaviour {
 
     private void OnClickInPreparation()
     {
-        if (IsPressed())
+		thsPreparationController.SetWarshipOnField (this);
+
+
+	/*	if (IsPressed())
         {
          //   Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
             if (thsPreparationController.SetWarshipOnField(this))
@@ -108,7 +111,7 @@ public class ViewFieldComponent : MonoBehaviour {
             //Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
 
 
-        }
+        }*/
     }
 
 

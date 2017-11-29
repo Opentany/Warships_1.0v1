@@ -51,6 +51,7 @@ public class ViewField : BaseField
         if (placementResult.Equals(PlacementResult.SECURE))
         {
             secureFieldCounter++;
+			Debug.Log ("secure counter " + secureFieldCounter);
         }
         else {
             secureFieldCounter = 0;

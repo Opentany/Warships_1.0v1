@@ -95,6 +95,9 @@ public class PreparationController : MonoBehaviour {
             else
             {
                 Debug.Log("wybierz inne miejsce");
+				int x = statek.GetXPosition ();
+				int y = statek.GetYPosition ();
+				Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].GetPlacementResult());
                 PutBackWarship(statek);
                 return false;
             }

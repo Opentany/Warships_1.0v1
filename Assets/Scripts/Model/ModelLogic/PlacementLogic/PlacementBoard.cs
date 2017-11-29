@@ -46,6 +46,7 @@ public class PlacementBoard : BaseBoard<PlacementField>{
                 if (!CheckIfFieldHasWarshipOnCurrentIndexs(i, j))
                 {
                     board[i][j].SetPlacementResult(PlacementResult.SECURE);
+					board[i][j].securePoints++;
                 }
             }
         }
@@ -88,6 +89,7 @@ public class PlacementBoard : BaseBoard<PlacementField>{
         {
             for (int j = startVertical; j <= endVertical; j++)
             {
+				Debug.Log (i + " " + j + " " + board [i] [j].GetSecureFieldCounter ());
                 if (board[i][j].GetSecureFieldCounter() == 1)
                 {
                     board[i][j].SetPlacementResult(PlacementResult.AVAILABLE);
