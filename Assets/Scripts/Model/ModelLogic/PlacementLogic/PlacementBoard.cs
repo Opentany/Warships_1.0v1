@@ -90,10 +90,10 @@ public class PlacementBoard : BaseBoard<PlacementField>{
             for (int j = startVertical; j <= endVertical; j++)
             {
 				Debug.Log (i + " " + j + " " + board [i] [j].GetSecureFieldCounter ());
-                if (board[i][j].GetSecureFieldCounter() == 1)
+                if (board[i][j].GetSecureFieldCounter() <= 1)
                 {
                     board[i][j].SetPlacementResult(PlacementResult.AVAILABLE);
-					board [i] [j].securePoints = 0;
+                    board[i][j].securePoints = 0;
                 }
                 else
                 {
