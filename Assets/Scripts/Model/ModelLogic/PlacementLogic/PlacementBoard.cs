@@ -32,8 +32,8 @@ public class PlacementBoard : BaseBoard<PlacementField>{
     {
         SecureBorder border = new SecureBorder(warship);
         for (int i = border.startX; i <= border.endX; i++)
-        for (int j = border.startY; j <= border.endY; j++)
-            board[i][j].securePoints--;
+            for (int j = border.startY; j <= border.endY; j++)
+                board[i][j].securePoints--;
     }
 
     public void IsEverythingOk()
