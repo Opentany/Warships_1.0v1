@@ -101,7 +101,7 @@ public class ViewBoard : BaseBoard<ViewField> {
     }
 
 	private bool CheckIfFieldWasShot(ShotRaport shotRaport) {
-		return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
+		return (!shotRaport.GetShotResult().Equals(DmgDone.MISS));
 	}
 
     public void ApplyMyShot(ShotRaport shotRaport) {
@@ -117,15 +117,15 @@ public class ViewBoard : BaseBoard<ViewField> {
 	private void AddEffectOnWholeWarship(Warship warship){
 		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
 		{
-			int x = warship.GetXPosition();
+			int x = warship.GetX();
 			for (int i = x; i < x + warship.GetSize(); i++){
-				board [i] [warship.GetYPosition ()].SetEffect ();
+				board [i] [warship.GetY ()].SetEffect ();
 			}
 		}
 		else {
-			int y = warship.GetYPosition();
+			int y = warship.GetY();
 			for (int i = y; i < y + warship.GetSize (); i++) {
-				board [warship.GetXPosition ()] [i].SetEffect();
+				board [warship.GetX ()] [i].SetEffect();
 			}
 		}
 	}
@@ -144,33 +144,18 @@ public class ViewBoard : BaseBoard<ViewField> {
 	private void AddColorOnWholeWarship(Warship warship){
 		if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
 		{
-			int x = warship.GetXPosition();
+			int x = warship.GetX();
 			for (int i = x; i < x + warship.GetSize(); i++){
-				miniBoard [i] [warship.GetYPosition ()].SetWarshipColor ();
+				miniBoard [i] [warship.GetY ()].SetWarshipColor ();
 			}
 		}
 		else {
-			int y = warship.GetYPosition();
+			int y = warship.GetY();
 			for (int i = y; i < y + warship.GetSize (); i++) {
-				miniBoard [warship.GetXPosition ()] [i].SetWarshipColor ();
+				miniBoard [warship.GetX ()] [i].SetWarshipColor ();
 			}
 		}
 	}
-		
-
-    public void DisplayBoard()
-    {
-        string row="";
-        for (int i = 0; i < boardSize; i++)
-        {
-            for (int j = 0; j < boardSize; j++)
-            {
-                row += " " + board[i][j].secureFieldCounter;
-            }
-            Debug.Log(row);
-            row = "";
-        }
-    }
 
     public void SetWarshipOnMiniBoard(List<Warship> warships) {
         foreach (Warship warship in warships) {
@@ -185,17 +170,17 @@ public class ViewBoard : BaseBoard<ViewField> {
     }
 
 	private void AddWarshipFieldHorizontal(Warship warship) {
-        int x = warship.GetXPosition();
+        int x = warship.GetX();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-			miniBoard [i] [warship.GetYPosition ()].viewFieldComponent.ChangeSprite(GetWarshipSpriteRenderer());
+			miniBoard [i] [warship.GetY ()].viewFieldComponent.ChangeSprite(GetWarshipSpriteRenderer());
         }
     }
 
 	private void AddWarshipFieldVertical(Warship warship){
-        int y = warship.GetYPosition();
+        int y = warship.GetY();
 		for (int i = y; i < y + warship.GetSize (); i++) {
-			miniBoard [warship.GetXPosition ()] [i].viewFieldComponent.ChangeSprite (GetWarshipSpriteRenderer ());
+			miniBoard [warship.GetX ()] [i].viewFieldComponent.ChangeSprite (GetWarshipSpriteRenderer ());
 		}
 	}
 

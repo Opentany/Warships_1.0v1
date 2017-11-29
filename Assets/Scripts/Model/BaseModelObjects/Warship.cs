@@ -23,11 +23,11 @@ public class Warship{
         return warshipOrientation;
     }
 
-    public int GetXPosition() {
+    public int GetX() {
         return x;
     }
 
-    public int GetYPosition() {
+    public int GetY() {
         return y;
     }
 
@@ -36,7 +36,7 @@ public class Warship{
         this.y = y;
     }
 
-    public bool GetIsSinked() {
+    public bool IsSinked() {
         return isSinked;
     }
 
@@ -61,10 +61,10 @@ public class Warship{
         warshipOrientation = orientation;
     }
     private void ChangeOrientation() {
-        warshipOrientation = CheckIfOrientationIsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
+        warshipOrientation = IsHorizontal() ? WarshipOrientation.VERTICAL : WarshipOrientation.HORIZONTAL;
     }
 
-    private bool CheckIfOrientationIsHorizontal() {
+    private bool IsHorizontal() {
         return warshipOrientation.Equals(WarshipOrientation.HORIZONTAL);
     }
 

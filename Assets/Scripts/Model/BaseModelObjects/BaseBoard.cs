@@ -60,19 +60,19 @@ public class BaseBoard<T> where T : BaseField, new(){
 
     protected virtual void SetWarshipHorizontal(Warship warship)
     {
-        int x = warship.GetXPosition();
+        int x = warship.GetX();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-            board[i][warship.GetYPosition()].SetWarship(warship);
+            board[i][warship.GetY()].SetWarship(warship);
         }
     }
 
     protected virtual void SetWarshipVertical(Warship warship)
     {
-        int y = warship.GetYPosition();
+        int y = warship.GetY();
         for (int i = y; i < y + warship.GetSize(); i++)
         {
-            board[warship.GetXPosition()][i].SetWarship(warship);
+            board[warship.GetX()][i].SetWarship(warship);
         }
     }
 
@@ -96,20 +96,20 @@ public class BaseBoard<T> where T : BaseField, new(){
 
     private void RemoveWarshipHorizontal(Warship warship)
     {
-        int x = warship.GetXPosition();
+        int x = warship.GetX();
         for (int i = x; i < x + warship.GetSize(); i++)
         {
-			board [i] [warship.GetYPosition ()].RemoveWarship();
+			board [i] [warship.GetY ()].RemoveWarship();
         }
         fieldsOccupiedByWarships -= warship.GetSize();
     }
 
     private void RemoveWarshipVertical(Warship warship)
     {
-        int y = warship.GetYPosition();
+        int y = warship.GetY();
         for (int i = y; i < y + warship.GetSize(); i++)
         {
-			board [warship.GetXPosition ()] [i].RemoveWarship();
+			board [warship.GetX ()] [i].RemoveWarship();
         }
         fieldsOccupiedByWarships -= warship.GetSize();
     }

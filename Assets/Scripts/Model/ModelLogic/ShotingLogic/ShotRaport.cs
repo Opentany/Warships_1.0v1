@@ -34,7 +34,7 @@
         if (warship != null)
         {
             warship.ChangeDurability();
-            if (warship.GetIsSinked())
+            if (warship.IsSinked())
             {
                 shotResult = DmgDone.SINKED;
             }

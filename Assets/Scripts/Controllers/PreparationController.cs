@@ -74,18 +74,18 @@ public class PreparationController : MonoBehaviour {
 
     public bool SetWarshipOnField(ViewFieldComponent field)
     {
+        //placementBoard.IsEverythingOk();
         chosenField = field;
         if (chosenField!=null)
         {
             //Debug.Log("wybrano pole "+chosenField.gridPosition.x+";"+chosenField.gridPosition.y);
             var statek = CreateWarship(chosenWarshipSize);
             if (statek==null)
-            {
-                
+            {  
                 return false;
             }
-			int x = statek.GetXPosition ();
-			int y = statek.GetYPosition ();
+			int x = statek.GetX ();
+			int y = statek.GetY ();
 			Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].securePoints);
             if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition(placementBoard, statek))
             {
@@ -98,9 +98,7 @@ public class PreparationController : MonoBehaviour {
             else
             {
                 Debug.Log("wybierz inne miejsce");
-				//int x = statek.GetXPosition ();
-				//int y = statek.GetYPosition ();
-				Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].GetPlacementResult());
+				Debug.Log (x + " " + y + " " + placementBoard.GetBoard()[x][y].securePoints);
                 PutBackWarship(statek);
                 return false;
             }
@@ -114,7 +112,8 @@ public class PreparationController : MonoBehaviour {
 
     public void UndoneLastWarship()
     {
-        if (listOfWarshipsOnBoard.Count != 0 &&listOfWarships.Count!=0)
+        //placementBoard.IsEverythingOk();
+        if (listOfWarshipsOnBoard.Count != 0 && listOfWarships.Count!=0)
         {
             RemoveWarshipFromList();
             PutBackWarshipFromBoard();
@@ -132,7 +131,7 @@ public class PreparationController : MonoBehaviour {
         Warship statek = listOfWarships[listOfWarships.Count - 1];
         if (statek != null)
         {
-            Debug.Log(statek.GetXPosition()+";"+statek.GetYPosition()+ " usuwam...");
+            Debug.Log(statek.GetX()+";"+statek.GetY()+ " usuwam...");
             preparationBoard.RemoveWarship(statek);
             placementBoard.RemoveWarship(statek);
             PutBackWarship(statek);

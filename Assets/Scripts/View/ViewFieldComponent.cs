@@ -82,36 +82,12 @@ public class ViewFieldComponent : MonoBehaviour {
 
     private void OnClickInGameplay()
     {
-       if (IsPressed())
-        {
-           // Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
-        }
-        else
-        {
-            //Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
-        }
         gameplayController.AttackEnemy((int)gridPosition.x, (int)gridPosition.y);
     }
 
     private void OnClickInPreparation()
     {
 		thsPreparationController.SetWarshipOnField (this);
-
-
-	/*	if (IsPressed())
-        {
-         //   Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " placement: " + placementResult.ToString());
-            if (thsPreparationController.SetWarshipOnField(this))
-            {
-                this.enabled = false;
-            }
-        }
-        else
-        {
-            //Debug.Log("Field: " + gridPosition.x + " " + gridPosition.y + " is not available" + " placement: " + placementResult.ToString() + " " + warship.GetOrientation().ToString());
-
-
-        }*/
     }
 
 
