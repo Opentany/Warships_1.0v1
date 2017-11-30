@@ -234,7 +234,7 @@
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementException.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementField.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementManager.cs" />
-    <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementResult.cs" />
+    <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\SecureBorder.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\DmgDone.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\IllegalShotException.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\ShootingBoard.cs" />
