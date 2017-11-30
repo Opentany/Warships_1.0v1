@@ -8,6 +8,10 @@ TagManager:
   - Warship
   - GameplayController
   - Rotate Text
+  - Warship4Text
+  - Warship3Text
+  - Warship2Text
+  - Warship1Text
   layers:
   - Default
   - TransparentFX

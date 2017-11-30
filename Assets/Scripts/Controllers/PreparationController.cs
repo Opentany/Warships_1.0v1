@@ -94,6 +94,7 @@ public class PreparationController : MonoBehaviour {
                 preparationBoard.SetWarship(statek);
                 WarshipPlacer((int)statek.warshipSize, chosenField);
                 listOfWarships.Add(statek);
+                UpdateStatus(statek.warshipSize);
                 return true;
             }
             else
@@ -136,6 +137,7 @@ public class PreparationController : MonoBehaviour {
             preparationBoard.RemoveWarship(statek);
             placementBoard.RemoveWarship(statek);
             PutBackWarship(statek);
+            UpdateStatus(statek.warshipSize);
             Debug.Log("Statek został usunięty");
         }
         listOfWarships.RemoveAt(listOfWarships.Count-1);
@@ -368,6 +370,42 @@ public class PreparationController : MonoBehaviour {
     {
         GameObject text = GameObject.FindWithTag("Rotate Text");
         text.GetComponent<Text>().text = chosenWarshipOrientation.ToString();
+    }
+
+    private void UpdateStatus(WarshipSize size)
+    {
+        switch ((int)size)
+        {
+            case 4:
+            {
+                GameObject text = GameObject.FindWithTag("Warship4Text");
+                text.GetComponent<Text>().text =  warships4.Count + "/1";
+                break;
+            }
+            case 3:
+            {
+                GameObject text = GameObject.FindWithTag("Warship3Text");
+                text.GetComponent<Text>().text = warships3.Count + "/2";
+                    break;
+            }
+            case 2:
+            {
+                GameObject text = GameObject.FindWithTag("Warship2Text");
+                text.GetComponent<Text>().text = warships2.Count + "/3";
+                    break;
+            }
+            case 1:
+            {
+                GameObject text = GameObject.FindWithTag("Warship1Text");
+                text.GetComponent<Text>().text = warships1.Count + "/4";
+                    break;
+            }
+            default:
+            {
+                //Debug.Log("That can't be DONE !!!");
+                break;
+            }
+        }
     }
 
     private bool CheckIfOrientationIsHorizontal()
