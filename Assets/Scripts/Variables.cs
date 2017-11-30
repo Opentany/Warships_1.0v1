@@ -25,4 +25,7 @@ public class Variables {
 	public static string animationTriggerHit = "Hit";
 	public static string animationTriggerMiss = "Miss";
 
+	//TIME
+	public static int TIME_UNTIL_NEXT_SCENE_LOAD = 5;
+
 }

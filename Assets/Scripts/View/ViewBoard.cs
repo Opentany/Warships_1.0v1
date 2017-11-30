@@ -109,6 +109,7 @@ public class ViewBoard : BaseBoard<ViewField> {
         int y = shotRaport.GetY();
         board[x][y].SetShotResult(shotRaport.GetShotResult());
 		board[x][y].SetEffectOnField(shotRaport.GetShotResult());
+		board[x][y].SetColorOnField (shotRaport.GetShotResult ());
 		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
 			AddEffectOnWholeWarship(shotRaport.GetWarship());
 		}
