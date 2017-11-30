@@ -65,14 +65,7 @@ public class ViewFieldComponent : MonoBehaviour {
     public void SetColorOnField(DmgDone shotResult)
     {
         renderer = this.GetComponent<SpriteRenderer>();
-		if (shotResult.Equals(DmgDone.HIT) || shotResult.Equals(DmgDone.SINKED))
-        {
-            renderer.material.color = Color.red;
-        }
-        else if (shotResult.Equals(DmgDone.MISS))
-        {
-            renderer.material.color = Color.grey;
-        }
+        renderer.material.color = Color.grey;
     }
 
     public bool IsPressed()
