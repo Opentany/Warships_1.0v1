@@ -25,11 +25,13 @@ public abstract class Player{
 
     public virtual void TakeOpponentShot(ShotRaport shotRaport) {
         playerBoard.ApplyShot(shotRaport);
+		controller.UpdatePlayerCounter (this,shotRaport.GetShotResult ());
     }
 
     public virtual void SetPlayerShotResult(ShotRaport shotRaport)
     {
         opponentBoard.ApplyShot(shotRaport);
+		controller.UpdatePlayerCounter (this, shotRaport.GetShotResult ());
     }
 
     public WarshipsContainer GetPlayerShips()
@@ -45,5 +47,9 @@ public abstract class Player{
     {
         this.controller = controller;
     }
+
+	public int GetNumberOfRemainingWarship(){
+		return playerBoard.GetFieldsOccupiedByWarships ();
+	}
 
 }

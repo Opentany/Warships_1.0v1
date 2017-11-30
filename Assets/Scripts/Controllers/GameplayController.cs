@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameplayController: MonoBehaviour{
@@ -9,6 +10,8 @@ public class GameplayController: MonoBehaviour{
 	public GameObject animationHolder;
 	public GameObject winText;
 	public GameObject loseText;
+	public GameObject player1WarshipsLeft;
+	public GameObject player2WarshipsLeft;
 
     public static List<Player> players;
 
@@ -86,10 +89,11 @@ public class GameplayController: MonoBehaviour{
             ShotRaport raport = new ShotRaport(x, y, players[(int)opponent].playerBoard);
             players[(int)activePlayer].SetPlayerShotResult(raport);
             players[(int)opponent].TakeOpponentShot(raport);
-            if (activeHuman)
+			if (activeHuman){
                 board.ApplyMyShot(raport);
-            else
+			}else{
                 board.ApplyOpponentShot(raport);
+			}
             if (players[(int)opponent].CheckIfYouLose()){
                 PlayerWon(players[(int)activePlayer]);
                 return;
@@ -116,6 +120,18 @@ public class GameplayController: MonoBehaviour{
             players[(int)activePlayer].YourTurn();
         }
     }
+
+	public void UpdatePlayerCounter(Player player, DmgDone shotResult){
+		if (shotResult.Equals (DmgDone.HIT) || shotResult.Equals (DmgDone.SINKED)) {
+			if(player.Equals(players[0])){
+				player1WarshipsLeft.GetComponent<Text> ().text = player.GetNumberOfRemainingWarship ().ToString();
+			}
+			else{
+				player2WarshipsLeft.GetComponent<Text> ().text = player.GetNumberOfRemainingWarship ().ToString();
+
+			}
+		}
+	}
 
     public void SetMyShips(List<Warship> ships)
     {
