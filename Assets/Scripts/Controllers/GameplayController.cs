@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameplayController: MonoBehaviour{
 
     public GameObject waterPrefab;
 	public GameObject animationHolder;
+	public GameObject winText;
+	public GameObject loseText;
 
     public static List<Player> players;
 
@@ -120,10 +123,23 @@ public class GameplayController: MonoBehaviour{
     }
 
 
-    public void PlayerWon(Player player)
+	public void PlayerWon(Player player)
     {
+		Canvas canvas = this.GetComponent<Canvas> ();
+	
+		if (players [0].Equals (player)) {
+			winText.SetActive (true);
+		} else {
+			loseText.SetActive (true);
+		}
         Debug.Log("Wygrana");
-        SceneManager.LoadScene("MenuScene");
+		StartCoroutine (Won ());
     }
+
+	private IEnumerator Won(){
+		yield return new WaitForSeconds(Variables.TIME_UNTIL_NEXT_SCENE_LOAD);
+		SceneManager.LoadScene("MenuScene");
+
+	}
 
 }
