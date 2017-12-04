@@ -23,6 +23,9 @@ public class PreparationController : MonoBehaviour {
     public GameObject shotFieldPrefab;
     public static Player botPlayer;
     public static Player humanPlayer;
+    public GameObject horizontalButton;
+    public GameObject verticalButton;
+
 
     private static List<GameObject> listOfWarshipsOnBoard;
     private static List<Warship> listOfWarships;
@@ -368,8 +371,15 @@ public class PreparationController : MonoBehaviour {
 
     private void UpdateOrientation()
     {
-        GameObject text = GameObject.FindWithTag("Rotate Text");
-        text.GetComponent<Text>().text = chosenWarshipOrientation.ToString();
+        if (chosenWarshipOrientation.Equals(WarshipOrientation.HORIZONTAL)) {
+            verticalButton.SetActive(false);
+            horizontalButton.SetActive(true);
+        }
+        else
+        {
+            horizontalButton.SetActive(false);
+            verticalButton.SetActive(true);
+        }
     }
 
     private void UpdateStatus(WarshipSize size)
