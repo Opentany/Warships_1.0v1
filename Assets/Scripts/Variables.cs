@@ -28,4 +28,7 @@ public class Variables {
 	//TIME
 	public static int TIME_UNTIL_NEXT_SCENE_LOAD = 5;
 
+    //AVARAGE BOT LVL
+    public static float BOT_PRECISION = 0.7f;
+
 }

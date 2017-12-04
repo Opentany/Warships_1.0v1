@@ -16,6 +16,14 @@
         return y;
     }
 
+    public Warship GetWarship()
+    {
+        if (shotResult.Equals(DmgDone.SINKED))
+            return warship;
+        else
+            return null;
+    }
+
     public DmgDone GetShotResult()
     {
         return shotResult;
@@ -48,9 +56,5 @@
             shotResult = DmgDone.MISS;
         }
     }
-
-	public Warship GetWarship(){
-		return warship;
-	}
 
 }

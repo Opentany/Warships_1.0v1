@@ -12,6 +12,7 @@
     public void SetShotResult(DmgDone dmgDone)
     {
         this.dmgDone = dmgDone;
+        hasBeenShot = true;
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿public class ShootingBoard : BaseBoard<ShootingField> {
 
-    public void ApplyShot(ShotRaport shotRaport)
+    public virtual void ApplyShot(ShotRaport shotRaport)
     {
         int x = shotRaport.GetX();
         int y = shotRaport.GetY();
@@ -13,7 +13,7 @@
 
     private bool CheckIfFieldWasShot(ShotRaport shotRaport)
     {
-        return (shotRaport.GetShotResult().Equals(DmgDone.HIT) || shotRaport.GetShotResult().Equals(DmgDone.SINKED));
+        return (!shotRaport.GetShotResult().Equals(DmgDone.MISS));
     }
 
 }
