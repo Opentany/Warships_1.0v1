@@ -4,19 +4,19 @@ using System.Collections.Generic;
 public class ComplexShootingBoard : ShootingBoard
 {
     public List<Position> likelyToHit;
-    private bool alwaysWisely;
+    private bool alwaysWise;
     Random rnd;
 
     public ComplexShootingBoard(bool alwaysWisely) :base()
     {
         likelyToHit = new List<Position>();
-        this.alwaysWisely = alwaysWisely;
+        this.alwaysWise = alwaysWisely;
         rnd = new Random();
     }
 
-    public void ApplyShotWisely(ShotRaport shotRaport)
+    public override void ApplyShot(ShotRaport shotRaport)
     {
-        ApplyShot(shotRaport);
+        base.ApplyShot(shotRaport);
         OrganiseBorder(shotRaport);
     }
 
@@ -25,13 +25,16 @@ public class ComplexShootingBoard : ShootingBoard
         ShipRevealer revealer = new ShipRevealer(this, raport);
         Warship ship = revealer.GetWarship();
         SecureBorder border = new SecureBorder(ship);
-        if (raport.GetShotResult().Equals(DmgDone.SINKED) && (alwaysWisely || rnd.NextDouble() < Variables.BOT_PRECISION) )
+        if (alwaysWise || rnd.NextDouble() < Variables.BOT_PRECISION)
         {
-            CompleteBorder(border);
-        }
-        else
-        {
-            IncompleteBorder(border);
+            if (raport.GetShotResult().Equals(DmgDone.SINKED) && (alwaysWise || rnd.NextDouble() < Variables.BOT_PRECISION))
+            {
+                CompleteBorder(border);
+            }
+            else
+            {
+                IncompleteBorder(border);
+            }
         }
         DeleteFromLikelyList();
     }

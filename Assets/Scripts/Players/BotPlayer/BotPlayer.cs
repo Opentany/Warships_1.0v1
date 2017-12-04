@@ -52,20 +52,10 @@ public abstract class BotPlayer : Player
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
         playerBoard = new ShootingBoard();
-        opponentBoard = new ShootingBoard();
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.SetWarship(ship);
         }
-    }
-
-    public override void YourTurn()
-    {
-        Debug.Log("Bot Turn");
-        System.Random rnd = new System.Random();
-        int x = rnd.Next(BaseBoard<BaseField>.boardSize);
-        int y = rnd.Next(BaseBoard<BaseField>.boardSize);
-        controller.ShotOpponent(x, y);
     }
 
 }

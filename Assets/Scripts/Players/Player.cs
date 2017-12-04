@@ -2,10 +2,10 @@
 public abstract class Player{
 
 
-    public ShootingBoard opponentBoard;
+    protected ShootingBoard opponentBoard;
     public ShootingBoard playerBoard;
     public WarshipsContainer shipsContainer;
-    private bool isYourTurn;
+    public bool isYourTurn;
     public GameplayController controller;
 
     public Player() {
