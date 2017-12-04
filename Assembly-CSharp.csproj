@@ -54,7 +54,9 @@
      <Compile Include="Assets\Scripts\Controllers\DragDrop.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameplayController.cs" />
      <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\MultiplayerController.cs" />
      <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\SinglePlayerController.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseBoard.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseField.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\Warship.cs" />
