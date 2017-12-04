@@ -12,7 +12,8 @@ TagManager:
   - Warship3Text
   - Warship2Text
   - Warship1Text
-  - RotateButton
+  - horizontalButton
+  - verticalButton
   layers:
   - Default
   - TransparentFX
