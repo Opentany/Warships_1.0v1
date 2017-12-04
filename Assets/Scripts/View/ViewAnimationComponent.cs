@@ -25,10 +25,14 @@ public class ViewAnimationComponent : MonoBehaviour {
 		if (shotResult.Equals(DmgDone.HIT) || shotResult.Equals(DmgDone.SINKED))
 		{
 			SetEffect (Variables.animationTriggerHit);
+			AudioClip audio = Resources.Load ("boom") as AudioClip;
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
 		}
 		else if (shotResult.Equals(DmgDone.MISS))
 		{
 			SetEffect (Variables.animationTriggerMiss);
+			AudioClip audio = Resources.Load ("splash") as AudioClip;
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
 		}
 	}
 }

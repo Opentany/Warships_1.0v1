@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SinglePlayerController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public void LoadEasyLevel(string botLevelName){
+		BotLevelInfo.botLevel = botLevelName;
+		LoadPreparationScene ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void LoadMediumLevel(string botLevelName){
+		BotLevelInfo.botLevel = botLevelName;
+		LoadPreparationScene ();
+	}
+
+	public void LoadHardLevel(string botLevelName){
+		BotLevelInfo.botLevel = botLevelName;
+		LoadPreparationScene ();
+	}
+
+	private void LoadPreparationScene(){
+		SceneManager.LoadScene ("Preparation");
 	}
 }
