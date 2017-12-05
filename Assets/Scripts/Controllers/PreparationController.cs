@@ -95,8 +95,7 @@ public class PreparationController : MonoBehaviour {
 
 	public void ChooseWarship(int size){
 		warshipPlacer.SetCurrentlySelectedSize (size);
-		warshipPlacer.SetWarshipChosenOrientation(WarshipOrientation.VERTICAL);
-		UpdateOrientation ();
+		ChangeOrientation ();
 	}
 
    
