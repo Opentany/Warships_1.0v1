@@ -1,8 +1,21 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
-public abstract class BotPlayer : Player
+public class BotPlayer : Player
 {
+
+    protected ComplexShootingBoard opponentBoard;
+    private List<Position> likelyToHit;
+    private readonly float PRECISION;
+    private Random rnd;
+
+    public BotPlayer(float precision):base()
+    {
+        rnd = new Random();
+        this.PRECISION = precision;
+        opponentBoard = new ComplexShootingBoard(precision);
+        likelyToHit = opponentBoard.likelyToHit;
+    }
 
     public override void ArrangeBoard()
     {
@@ -34,7 +47,7 @@ public abstract class BotPlayer : Player
         for (int i = 0; i < 10; i++)
         {
             Warship ship = ships[i];
-            Debug.Log(ship.toStringShort());
+            UnityEngine.Debug.Log(ship.toStringShort());
         }
     }
 
@@ -46,7 +59,6 @@ public abstract class BotPlayer : Player
         ship.SetPosition(x, y);
         WarshipOrientation wo = (WarshipOrientation)rnd.Next(2);
         ship.SetWarshipOrientation(wo);
-
     }
 
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
@@ -56,6 +68,41 @@ public abstract class BotPlayer : Player
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.SetWarship(ship);
         }
+    }
+
+    public override void SetPlayerShotResult(ShotRaport shotRaport)
+    {
+        base.SetPlayerShotResult(shotRaport);
+        opponentBoard.ApplyShot(shotRaport);
+    }
+
+    public override void YourTurn()
+    {
+        int x;
+        int y;
+        if (likelyToHit.Count > 0 && rnd.NextDouble() < PRECISION)
+        {
+            UnityEngine.Debug.Log("Likely!");
+            string s = "";
+            foreach (Position p in likelyToHit)
+            {
+                s += "[" + p.x + " " + p.y + "] ";
+            }
+            UnityEngine.Debug.Log(s);
+            Position pos = likelyToHit[rnd.Next(likelyToHit.Count)];
+            x = pos.x;
+            y = pos.y;
+        }
+        else
+        {
+            do
+            {
+                x = rnd.Next(BaseBoard<BaseField>.boardSize);
+                y = rnd.Next(BaseBoard<BaseField>.boardSize);
+            }
+            while (opponentBoard.GetBoard()[x][y].hasBeenShot);
+        }
+        controller.ShotOpponent(x, y);
     }
 
 }

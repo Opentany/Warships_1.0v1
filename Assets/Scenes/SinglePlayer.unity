@@ -357,7 +357,7 @@ RectTransform:
   m_LocalScale: {x: 1.0008248, y: 1.0008248, z: 1.0008248}
   m_Children: []
   m_Father: {fileID: 1345686815}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -405,13 +405,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1349689477}
         m_MethodName: LoadMediumLevel
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: medium
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -754,12 +754,11 @@ RectTransform:
   m_GameObject: {fileID: 1345686811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.005488933, y: 0.005488933, z: 0.005488933}
+  m_LocalScale: {x: 0.0054856725, y: 0.0054856725, z: 0.0054856725}
   m_Children:
   - {fileID: 417543684}
   - {fileID: 800790263}
   - {fileID: 1440043359}
-  - {fileID: 1451168208}
   - {fileID: 1820903187}
   - {fileID: 704089156}
   - {fileID: 1665153984}
@@ -1075,7 +1074,7 @@ RectTransform:
   m_LocalScale: {x: 1.0008248, y: 1.0008248, z: 1.0008248}
   m_Children: []
   m_Father: {fileID: 1345686815}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1123,13 +1122,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1349689477}
         m_MethodName: LoadHardLevel
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: hard
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -1270,7 +1269,7 @@ RectTransform:
   m_LocalScale: {x: 1.0008248, y: 1.0008248, z: 1.0008248}
   m_Children: []
   m_Father: {fileID: 1345686815}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1318,13 +1317,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1349689477}
         m_MethodName: LoadEasyLevel
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: easy
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,

@@ -34,11 +34,18 @@ public class SecureBorder
     {
         List<Position> list = new List<Position>();
         list.AddRange(Corners());
-        if (!ship.GetSize().Equals(WarshipSize.ONE))
+        if ((int)ship.GetSize() != 1)
+        {
+            UnityEngine.Debug.Log("Size "+ship.GetSize());
             if (ship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL))
                 list.AddRange(HorizontalEdge());
             else
                 list.AddRange(VerticalEdge());
+        }
+        string s = "EdgeBorder ";
+        foreach (Position p in list)
+            s += " [ " + p.x + " " + p.y + " ]";
+        UnityEngine.Debug.Log(s);
         return list;
     }
 

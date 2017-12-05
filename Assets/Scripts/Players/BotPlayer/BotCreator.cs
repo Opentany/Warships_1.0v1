@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class BotCreator  {
 
-    public static BotPlayer CreateBotPlayer(/* BotLevel level */) {
-        BotLevel level = BotLevel.GREAT;
+    public static BotPlayer CreateBotPlayer() {
+        BotLevel level = BotLevelInfo.botLevel;
         switch (level)
         {
             case BotLevel.EASY:
-                return new EasyBot();
+                return new BotPlayer(Variables.EASY_PRECISION);
             case BotLevel.AVERAGE:
-                return new GreaterBot(BotLevel.AVERAGE);
+                return new BotPlayer(Variables.EASY_PRECISION);
             case BotLevel.GREAT:
-                return new GreaterBot(BotLevel.GREAT);
+                return new BotPlayer(Variables.EASY_PRECISION);
             default:
                 throw new BotLogicException("Unknown bot level");
         }
     }
-
-
 }
