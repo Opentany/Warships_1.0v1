@@ -63,13 +63,12 @@ public class ShipRevealer
 
     private void GetStartinPoint()
     {
-        int startX = shotRaport.GetX();
-        int startY = shotRaport.GetY();
+        startX = shotRaport.GetX();
+        startY = shotRaport.GetY();
         if (orientation.Equals(WarshipOrientation.HORIZONTAL))
         {
             while (startX > 0 && !board[startX - 1][startY].dmgDone.Equals(DmgDone.MISS))
                 startX--;
-
         }
         else
         {
@@ -83,18 +82,17 @@ public class ShipRevealer
         if (orientation.Equals(WarshipOrientation.HORIZONTAL))
         {
             int endX = startX;
-            while (endX < Variables.defaultBoardSize && !board[endX + 1][startY].dmgDone.Equals(DmgDone.MISS))
+            while (endX < Variables.defaultBoardSize -1 && !board[endX + 1][startY].dmgDone.Equals(DmgDone.MISS))
                 endX++;
             size = (WarshipSize)(endX - startX + 1);
         }
         else
         {
             int endY = startY;
-            while (endY < Variables.defaultBoardSize && !board[startX][endY + 1].dmgDone.Equals(DmgDone.MISS))
+            while (endY < Variables.defaultBoardSize - 1 && !board[startX][endY + 1].dmgDone.Equals(DmgDone.MISS))
                 endY++;
             size = (WarshipSize)(endY - startY + 1);
         }
-        UnityEngine.Debug.Log("Size " + size);
     }
 
     public WarshipOrientation PossibleOrientation()
@@ -133,7 +131,6 @@ public class ShipRevealer
                 row += "\n";
             }
             UnityEngine.Debug.Log(row);
-            //throw new BotLogicException("Not sinked ship surrounded by shot fields");
         }
         return WarshipOrientation.VERTICAL;
     }
