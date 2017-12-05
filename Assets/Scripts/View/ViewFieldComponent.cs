@@ -6,6 +6,7 @@ public class ViewFieldComponent : MonoBehaviour {
 
     public GameObject GameController;
     public GameObject GameplayController;
+	private WarshipPlacer warshipPlacer;
 
 	public Vector2 gridPosition = Vector2.zero;
     public Vector3 realPosition;
@@ -20,6 +21,7 @@ public class ViewFieldComponent : MonoBehaviour {
         realPosition = transform.position;
         realRotation = transform.rotation;
 		isMini = false;
+		warshipPlacer = new WarshipPlacer ();
 	}
 
 
@@ -87,8 +89,9 @@ public class ViewFieldComponent : MonoBehaviour {
 
     private void OnClickInPreparation()
     {
-		thsPreparationController.SetWarshipOnField (this);
-    }
+		//thsPreparationController.SetWarshipOnField (this);
+		warshipPlacer.TryPutWarshipOnField(this);
+	}
 
 
 	public void ChangeSprite(Sprite warshipSprite){

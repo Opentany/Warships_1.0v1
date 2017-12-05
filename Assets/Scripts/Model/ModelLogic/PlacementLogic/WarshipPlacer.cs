@@ -1,16 +1,150 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class WarshipPlacer : MonoBehaviour {
+public class WarshipPlacer  {
 
-	// Use this for initialization
-	void Start () {
-		
+	public static List<GameObject> warshipsOnBoard;
+	public static List<List<GameObject>> warshipPrefabList;
+
+	public static WarshipOrientation chosenWarshipOrientation = WarshipOrientation.VERTICAL;
+	public static int chosenWarshipSize;
+
+	public static List<List<Warship>> allWarships;
+	public static List<Warship> warshipsAddedToBoard;
+	private float[] warshipOffsetHorizontal = {0.0f, 0.24f, 0.46f, 0.69f}; 
+	private float[] warshipOffsetVertical = {0.0f, -0.24f, -0.46f, -0.69f}; 
+
+
+	public WarshipPlacer(){
+		warshipsOnBoard = new List<GameObject>();
+		warshipsAddedToBoard = new List<Warship>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void SetCurrentlySelectedSize(int warshipSize){
+		chosenWarshipSize = warshipSize;
 	}
+
+	public void SetWarshipPrefabList(List<List<GameObject>> warshipsPrefab){
+		warshipPrefabList = warshipsPrefab;
+	}
+
+	public void SetWarshipChosenOrientation(WarshipOrientation orientation){
+		chosenWarshipOrientation = orientation;
+	}
+
+	public WarshipOrientation GetWarshipChosenOrientation(){
+		return chosenWarshipOrientation;
+	}
+
+	public void SetAllWarshipList(List<List<Warship>> warships){
+		allWarships = warships;
+	}
+
+	public int GetNumberOfWarshipOnBoard(){
+		return warshipsOnBoard.Count;
+	}
+		
+	public void TryPutWarshipOnField(ViewFieldComponent field){
+		if (field!=null){
+			Warship warship = GetWarshipOfChosenSize();
+			if (warship != null) {
+				Debug.Log ("current or " + chosenWarshipOrientation);
+				warship.SetPosition (Convert.ToInt32(field.gridPosition.x), Convert.ToInt32(field.gridPosition.y));
+				warship.SetWarshipOrientation (chosenWarshipOrientation);
+				if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition (PreparationController.placementBoard, warship)) {
+					PutWarshipOnBoard (warship, field);
+					allWarships [chosenWarshipSize - 1].RemoveAt (0);
+					UpdateStatus(warship.warshipSize);
+				}
+				else
+				{
+					Debug.Log("wybierz inne miejsce");
+				}
+			}
+		}
+	}
+
+
+	public Warship GetWarshipOfChosenSize(){
+		int index = chosenWarshipSize - 1;
+		return allWarships[index].Count != 0 ? allWarships[index][0] : null;
+	}
+
+	public void PutWarshipOnBoard(Warship warship, ViewFieldComponent field){
+		PreparationController.placementBoard.SetWarship(warship);
+		PreparationController.preparationBoard.SetWarship(warship);
+		PutWarship(warship.warshipSize, field.realPosition, field.realRotation);
+		warshipsAddedToBoard.Add (warship);
+	}
+
+	public void PutWarship(WarshipSize warshipSize, Vector2 position, Quaternion rotation){
+		foreach (WarshipSize size in System.Enum.GetValues(typeof(WarshipSize))) {
+			if (warshipSize.Equals(size)){
+				int index = (int)warshipSize - 1;
+				if (CheckIfOrientationIsHorizontal ()) {
+					position.x += warshipOffsetHorizontal [index];
+					rotation.z = -1f;
+					warshipsOnBoard.Add (GameObject.Instantiate (warshipPrefabList [index] [1], position, rotation));
+				} else {
+					position.y += warshipOffsetVertical [index];
+					warshipsOnBoard.Add (GameObject.Instantiate (warshipPrefabList [index] [0], position, rotation));
+				}
+			}
+		}
+	}
+		
+		
+	public bool CheckIfOrientationIsHorizontal(){
+		return chosenWarshipOrientation.Equals(WarshipOrientation.HORIZONTAL);
+	}
+
+	private void UpdateStatus(WarshipSize warshipSize){
+		foreach(WarshipSize size in System.Enum.GetValues(typeof(WarshipSize))){
+			if (warshipSize.Equals (size)) {
+				UpdateInfo (warshipSize);
+			}
+		}
+	}
+
+	private void UpdateInfo(WarshipSize warshipSize){
+		Debug.Log ("update " + warshipSize.ToString ());
+		int index = (int)warshipSize - 1;
+		string tagToFind = "Warship" + (index+1).ToString () + "Text";
+		GameObject text = GameObject.FindWithTag (tagToFind);
+		text.GetComponent<Text>().text = allWarships[index].Count + "/" + (index+1).ToString();
+	}
+
+	public void RemoveWarshipFromBoard(){
+		int index = warshipsAddedToBoard.Count - 1;
+		Warship warship = GetLastAddedWarship (index);
+		RemoveFromModelBoard (warship, index);
+		RemoveFromViewBoard (index);
+		UpdateStatus (warship.warshipSize);
+	}
+
+	private Warship GetLastAddedWarship(int index){
+		return index >= 0 ? warshipsAddedToBoard [index] : null;
+	}
+
+	private void RemoveFromModelBoard(Warship warship, int index){
+		PreparationController.preparationBoard.RemoveWarship(warship);
+		PreparationController.placementBoard.RemoveWarship(warship);
+		warshipsAddedToBoard.RemoveAt (index);
+		UpdateAllWarshipList (warship);
+	}
+
+	private void UpdateAllWarshipList(Warship warship){
+		int index = warship.GetSize () - 1;
+		allWarships [index].Add (warship);
+	}
+
+	private void RemoveFromViewBoard(int index){
+		GameObject warship = warshipsOnBoard [index];
+		warshipsOnBoard.RemoveAt (index);
+		GameObject.Destroy (warship);
+	}
+
 }
