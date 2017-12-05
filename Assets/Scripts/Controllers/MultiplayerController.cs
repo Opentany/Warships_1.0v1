@@ -5,12 +5,19 @@ using UnityEngine;
 public class MultiplayerController : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+		Connect();
 	}
+
+    void Connect()
+    {
+        PhotonNetwork.ConnectUsingSettings("Warships_1.0v1");
+    }
+
+    void OnGUI()
+    {
+        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

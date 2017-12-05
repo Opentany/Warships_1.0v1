@@ -21,6 +21,11 @@ public class SinglePlayerController : MonoBehaviour {
 		LoadPreparationScene ();
 	}
 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
 	private void LoadPreparationScene(){
 		SceneManager.LoadScene ("Preparation");
 	}
