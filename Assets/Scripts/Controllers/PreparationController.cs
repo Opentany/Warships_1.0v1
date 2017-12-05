@@ -13,30 +13,16 @@ public class PreparationController : MonoBehaviour {
 	public GameObject warshipToMinimap;
     public GameObject fieldPrefab;
 	public GameObject animationHolder;
-    public GameObject warship4HorizontalPrefab;
-    public GameObject warship3HorizontalPrefab;
-    public GameObject warship2HorizontalPrefab;
-    public GameObject warship1HorizontalPrefab;
-    public GameObject warship4VerticalPrefab;
-    public GameObject warship3VerticalPrefab;
-    public GameObject warship2VerticalPrefab;
-    public GameObject warship1VerticalPrefab;
-    public GameObject shotFieldPrefab;
     public static Player botPlayer;
     public static Player humanPlayer;
     public GameObject horizontalButton;
     public GameObject verticalButton;
 
-
     private static WarshipCreator warshipCreator;
-    private static ViewFieldComponent chosenField;
     private WarshipsContainer botPlayerShips;
     private WarshipsContainer humanPlayerShips;
 
-    public static int chosenWarshipSize;
-    // Use this for initialization
-    void Start()
-    {
+    void Start() {
 		PrepareBoards ();
 		CreateWarships ();
 		CreatePlayersAndStartArrange();
@@ -68,23 +54,18 @@ public class PreparationController : MonoBehaviour {
 
 	private List<List<GameObject>> CreatePrefabList(){
 		List<List<GameObject>> warshipPrefabList = new List<List<GameObject>> ();
-		List<GameObject> prefab1 = new List<GameObject> ();
-		prefab1.Add (warship1VerticalPrefab);
-		prefab1.Add (warship1HorizontalPrefab);
-		warshipPrefabList.Add (prefab1);
-		List<GameObject> prefab2 = new List<GameObject> ();
-		prefab2.Add (warship2VerticalPrefab);
-		prefab2.Add (warship2HorizontalPrefab);
-		warshipPrefabList.Add (prefab2);
-		List<GameObject> prefab3 = new List<GameObject> ();
-		prefab3.Add (warship3VerticalPrefab);
-		prefab3.Add (warship3HorizontalPrefab);
-		warshipPrefabList.Add (prefab3);
-		List<GameObject> prefab4 = new List<GameObject> ();
-		prefab4.Add (warship4VerticalPrefab);
-		prefab4.Add (warship4HorizontalPrefab);
-		warshipPrefabList.Add (prefab4);
+		for (int i = 1; i <= 4; i++) {
+			List<GameObject> prefabs = new List<GameObject> ();
+			prefabs.Add (Resources.Load (GetPrefabPath (i, "vertical")) as GameObject);
+			prefabs.Add (Resources.Load (GetPrefabPath (i, "horizontal")) as GameObject);
+			warshipPrefabList.Add (prefabs);
+		}
+
 		return warshipPrefabList;
+	}
+
+	private string GetPrefabPath(int i, string type){
+		return "Prefab/warship" + i.ToString() + "_" + type; 
 	}
 
     public void UndoneLastWarship(){
