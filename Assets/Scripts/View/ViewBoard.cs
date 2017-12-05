@@ -13,6 +13,9 @@ public class ViewBoard : BaseBoard<ViewField> {
 	private WarshipPlacer warshipPlacer;
 
     public ViewBoard() {
+		SetWaterPrefab (Resources.Load ("Prefab/Water") as GameObject);
+		SetWarshipPrefab (Resources.Load ("Prefab/warship1") as GameObject);
+		SetAnimationHolder (Resources.Load ("Prefab/AnimationHolder") as GameObject);
         board = new List<List<ViewField>>();
         miniBoard = new List<List<ViewField>>();
         warshipList = new List<Warship>();

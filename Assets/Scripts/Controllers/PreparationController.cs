@@ -10,15 +10,11 @@ public class PreparationController : MonoBehaviour {
     public static ViewBoard preparationBoard;
     public static PlacementBoard placementBoard;
 	public static WarshipPlacer warshipPlacer;
-	public GameObject warshipToMinimap;
-    public GameObject fieldPrefab;
-	public GameObject animationHolder;
     public static Player botPlayer;
     public static Player humanPlayer;
     public GameObject horizontalButton;
     public GameObject verticalButton;
 
-    private static WarshipCreator warshipCreator;
     private WarshipsContainer botPlayerShips;
     private WarshipsContainer humanPlayerShips;
 
@@ -31,18 +27,13 @@ public class PreparationController : MonoBehaviour {
 	private void PrepareBoards(){
 		preparationBoard = new ViewBoard();
 		placementBoard = new PlacementBoard();
-		ViewBoard.SetWaterPrefab(fieldPrefab);
-		ViewBoard.SetWarshipPrefab (warshipToMinimap);
-		ViewBoard.SetAnimationHolder (animationHolder);
 		preparationBoard.GenerateBoardOnScreen();
 	}
 
 	private void CreateWarships(){
-		warshipCreator = new WarshipCreator();
 		warshipPlacer = new global::WarshipPlacer ();
 		ChooseWarship ((int)WarshipSize.FOUR);
-		warshipPlacer.SetAllWarshipList(warshipCreator.GetWarshipsList ());
-		warshipPlacer.SetWarshipPrefabList (CreatePrefabList ());
+		warshipPlacer.CreatePrefabList ();
 	}
 
 	private void CreatePlayersAndStartArrange(){
@@ -51,22 +42,7 @@ public class PreparationController : MonoBehaviour {
 		botPlayer.ArrangeBoard();
 		botPlayerShips = botPlayer.GetPlayerShips();
 	}
-
-	private List<List<GameObject>> CreatePrefabList(){
-		List<List<GameObject>> warshipPrefabList = new List<List<GameObject>> ();
-		for (int i = 1; i <= 4; i++) {
-			List<GameObject> prefabs = new List<GameObject> ();
-			prefabs.Add (Resources.Load (GetPrefabPath (i, "vertical")) as GameObject);
-			prefabs.Add (Resources.Load (GetPrefabPath (i, "horizontal")) as GameObject);
-			warshipPrefabList.Add (prefabs);
-		}
-
-		return warshipPrefabList;
-	}
-
-	private string GetPrefabPath(int i, string type){
-		return "Prefab/warship" + i.ToString() + "_" + type; 
-	}
+		
 
     public void UndoneLastWarship(){
 		if (warshipPlacer.GetNumberOfWarshipOnBoard() != 0){
@@ -90,8 +66,7 @@ public class PreparationController : MonoBehaviour {
             verticalButton.SetActive(false);
             horizontalButton.SetActive(true);
         }
-        else
-        {
+        else{
             horizontalButton.SetActive(false);
             verticalButton.SetActive(true);
         }
@@ -110,13 +85,9 @@ public class PreparationController : MonoBehaviour {
             LoadScene(sceneName);    
         }        
     }
-
-
-    public void LoadScene(string sceneName)
-    {
+		
+    public void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
     }
 }
-
-
-
+	

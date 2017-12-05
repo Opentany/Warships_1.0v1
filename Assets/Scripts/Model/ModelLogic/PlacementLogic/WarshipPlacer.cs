@@ -14,6 +14,8 @@ public class WarshipPlacer  {
 
 	public static List<List<Warship>> allWarships;
 	public static List<Warship> warshipsAddedToBoard;
+	private static WarshipCreator warshipCreator;
+
 	private float[] warshipOffsetHorizontal = {0.0f, 0.24f, 0.46f, 0.69f}; 
 	private float[] warshipOffsetVertical = {0.0f, -0.24f, -0.46f, -0.69f}; 
 
@@ -21,6 +23,8 @@ public class WarshipPlacer  {
 	public WarshipPlacer(){
 		warshipsOnBoard = new List<GameObject>();
 		warshipsAddedToBoard = new List<Warship>();
+		warshipCreator = new WarshipCreator ();
+		allWarships = warshipCreator.GetWarshipsList ();
 	}
 
 	public void SetCurrentlySelectedSize(int warshipSize){
@@ -39,12 +43,22 @@ public class WarshipPlacer  {
 		return chosenWarshipOrientation;
 	}
 
-	public void SetAllWarshipList(List<List<Warship>> warships){
-		allWarships = warships;
-	}
-
 	public int GetNumberOfWarshipOnBoard(){
 		return warshipsOnBoard.Count;
+	}
+
+	public void CreatePrefabList(){
+		warshipPrefabList = new List<List<GameObject>> ();
+		for (int i = 1; i <= 4; i++) {
+			List<GameObject> prefabs = new List<GameObject> ();
+			prefabs.Add (Resources.Load (GetPrefabPath (i, "vertical")) as GameObject);
+			prefabs.Add (Resources.Load (GetPrefabPath (i, "horizontal")) as GameObject);
+			warshipPrefabList.Add (prefabs);
+		}
+	}
+
+	private string GetPrefabPath(int i, string type){
+		return "Prefab/warship" + i.ToString() + "_" + type; 
 	}
 		
 	public void TryPutWarshipOnField(ViewFieldComponent field){
