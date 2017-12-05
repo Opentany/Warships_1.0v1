@@ -9,8 +9,6 @@
     public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
     {
         playerBoard = new ShootingBoard();
-        opponentBoard = new ShootingBoard();
-		opponentBoard.SetFieldsOccupiedByWarships(Variables.fieldsOccupiedByWarships);
         this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.SetWarship(ship);

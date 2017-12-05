@@ -49,6 +49,13 @@ public class SecureBorder
             list.AddRange(LikelyHorizontal());
         if ((int)ship.GetSize() == 1 || ship.GetOrientation().Equals(WarshipOrientation.VERTICAL))
             list.AddRange(LikelyVertical());
+        UnityEngine.Debug.Log("New Likely!");
+        string s = "";
+        foreach (Position p in list)
+        {
+            s += "[" + p.x + " " + p.y + "] ";
+        }
+        UnityEngine.Debug.Log(s);
         return list;
     }
 

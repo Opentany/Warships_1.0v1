@@ -94,6 +94,7 @@ public class ShipRevealer
                 endY++;
             size = (WarshipSize)(endY - startY + 1);
         }
+        UnityEngine.Debug.Log("Size " + size);
     }
 
     public WarshipOrientation PossibleOrientation()
@@ -122,10 +123,19 @@ public class ShipRevealer
             return WarshipOrientation.VERTICAL;
         if (canHor)
             return WarshipOrientation.HORIZONTAL;
-        if(!shotRaport.GetShotResult().Equals(DmgDone.SINKED))
-            throw new BotLogicException("Not sinked ship surrounded by shot fields");
-        else
-            return WarshipOrientation.VERTICAL;
+        if (!shotRaport.GetShotResult().Equals(DmgDone.SINKED))
+        {
+            string row = "";
+            for (int i = 0; i < Variables.defaultBoardSize; i++)
+            {
+                for (int j = 0; j < Variables.defaultBoardSize; j++)
+                    row +=( board[j][i].hasBeenShot ? 1 : 0 ) + " ";
+                row += "\n";
+            }
+            UnityEngine.Debug.Log(row);
+            //throw new BotLogicException("Not sinked ship surrounded by shot fields");
+        }
+        return WarshipOrientation.VERTICAL;
     }
 
 }

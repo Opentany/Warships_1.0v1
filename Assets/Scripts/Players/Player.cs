@@ -1,8 +1,6 @@
 ﻿
 public abstract class Player{
 
-
-    protected ShootingBoard opponentBoard;
     public ShootingBoard playerBoard;
     public WarshipsContainer shipsContainer;
     public bool isYourTurn;
@@ -10,7 +8,6 @@ public abstract class Player{
 
     public Player() {
         isYourTurn = false;
-        opponentBoard = new ShootingBoard();
     }
 
     public abstract void ArrangeBoard();
@@ -30,7 +27,6 @@ public abstract class Player{
 
     public virtual void SetPlayerShotResult(ShotRaport shotRaport)
     {
-        opponentBoard.ApplyShot(shotRaport);
 		controller.UpdatePlayerCounter (this, shotRaport.GetShotResult ());
     }
 

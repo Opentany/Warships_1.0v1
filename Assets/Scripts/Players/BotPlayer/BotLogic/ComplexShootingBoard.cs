@@ -17,13 +17,17 @@ public class ComplexShootingBoard : ShootingBoard
     public override void ApplyShot(ShotRaport shotRaport)
     {
         base.ApplyShot(shotRaport);
-        OrganiseBorder(shotRaport);
+        UnityEngine.Debug.Log("Complex");
+        if(!shotRaport.GetShotResult().Equals(DmgDone.MISS))
+            OrganiseBorder(shotRaport);
+        DeleteFromLikelyList();
     }
 
     private void OrganiseBorder(ShotRaport raport)
     {
         ShipRevealer revealer = new ShipRevealer(this, raport);
         Warship ship = revealer.GetWarship();
+        ship.toStringShort();
         SecureBorder border = new SecureBorder(ship);
         if (alwaysWise || rnd.NextDouble() < Variables.BOT_PRECISION)
         {
@@ -36,7 +40,6 @@ public class ComplexShootingBoard : ShootingBoard
                 IncompleteBorder(border);
             }
         }
-        DeleteFromLikelyList();
     }
 
     private void CompleteBorder(SecureBorder border)
@@ -66,7 +69,7 @@ public class ComplexShootingBoard : ShootingBoard
         }
         foreach(Position pos in toRemove)
         {
-            likelyToHit.Remove(pos);
+            likelyToHit.RemoveAll(x => x.Equals(pos));
         }
     }
 
