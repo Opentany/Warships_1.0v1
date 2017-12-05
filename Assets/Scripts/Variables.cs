@@ -31,4 +31,10 @@ public class Variables {
     //AVARAGE BOT LVL
     public static float BOT_PRECISION = 0.8f;
 
+	//SOUND
+	public static string BOOM_SOUND_PATH = "Sound/boom";
+	public static string SPLASH_SOUND_PATH = "Sound/splash";
+	public static string WIN_SOUND_PATH = "Sound/win";
+	public static string DEFEAT_SOUND_PATH = "Sound/defeat";
+
 }
