@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BotLevelInfo : MonoBehaviour {
 
-	public static string botLevel = "easy";
+    public static BotLevel botLevel = BotLevel.EASY;
 }

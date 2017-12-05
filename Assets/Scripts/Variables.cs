@@ -31,7 +31,9 @@ public class Variables {
 	public static int TIME_UNTIL_NEXT_SCENE_LOAD = 5;
 
     //AVARAGE BOT LVL
-    public static float BOT_PRECISION = 0.8f;
+    public static float EASY_PRECISION = 0.5f;
+    public static float MEDIUM_PRECISION = 0.75f;
+    public static float HARD_PRECISION = 1.0f;
 
 	//SOUND
 	public static string BOOM_SOUND_PATH = "Sound/boom";

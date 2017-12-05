@@ -4,13 +4,13 @@ using System.Collections.Generic;
 public class ComplexShootingBoard : ShootingBoard
 {
     public List<Position> likelyToHit;
-    private bool alwaysWise;
+    private readonly float PRECISION;
     Random rnd;
 
-    public ComplexShootingBoard(bool alwaysWisely) :base()
+    public ComplexShootingBoard(float precision) :base()
     {
         likelyToHit = new List<Position>();
-        this.alwaysWise = alwaysWisely;
+        this.PRECISION = precision;
         rnd = new Random();
     }
 
@@ -29,9 +29,9 @@ public class ComplexShootingBoard : ShootingBoard
         Warship ship = revealer.GetWarship();
         ship.toStringShort();
         SecureBorder border = new SecureBorder(ship);
-        if (alwaysWise || rnd.NextDouble() < Variables.BOT_PRECISION)
+        if (rnd.NextDouble() < PRECISION)
         {
-            if (raport.GetShotResult().Equals(DmgDone.SINKED) && (alwaysWise || rnd.NextDouble() < Variables.BOT_PRECISION))
+            if (raport.GetShotResult().Equals(DmgDone.SINKED) && rnd.NextDouble() < PRECISION)
             {
                 CompleteBorder(border);
             }
