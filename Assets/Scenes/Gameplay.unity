@@ -420,8 +420,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364135770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 151.5, y: 242.5, z: 0}
-  m_LocalScale: {x: 0.37875, y: 0.37875, z: 0.37875}
+  m_LocalPosition: {x: 112, y: 179.5, z: 0}
+  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
   m_Children:
   - {fileID: 124916001}
   - {fileID: 412288836}
@@ -546,6 +546,22 @@ MonoBehaviour:
   loseText: {fileID: 412288835}
   player1WarshipsLeft: {fileID: 122625399}
   player2WarshipsLeft: {fileID: 1085166718}
+  warship4HorizontalPrefab: {fileID: 1221629565021194, guid: 7b149009e3ba10f40913735f53fb7c23,
+    type: 2}
+  warship3HorizontalPrefab: {fileID: 1303855574466638, guid: 5c7e4b995eb64b8458ea94f3958009e9,
+    type: 2}
+  warship2HorizontalPrefab: {fileID: 1537890768630418, guid: 087b47c79c5a3594aad51dbc0f353a14,
+    type: 2}
+  warship1HorizontalPrefab: {fileID: 1873526470440244, guid: 26fc9dd614f41ef47a3367c06196ff78,
+    type: 2}
+  warship4VerticalPrefab: {fileID: 1728468037836274, guid: 12fd7ab745ea86341b15cd36e2d32bfc,
+    type: 2}
+  warship3VerticalPrefab: {fileID: 1303855574466638, guid: 5c7e4b995eb64b8458ea94f3958009e9,
+    type: 2}
+  warship2VerticalPrefab: {fileID: 1257434926126438, guid: dc83dd209ce68e3469ac8659e7c55aa9,
+    type: 2}
+  warship1VerticalPrefab: {fileID: 1914435277629442, guid: c8b32d4dc4462f248a1a431a9fbdaa40,
+    type: 2}
   activeHuman: 0
 --- !u!4 &445727802
 Transform:

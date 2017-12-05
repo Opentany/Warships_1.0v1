@@ -12,6 +12,14 @@ public class GameplayController: MonoBehaviour{
 	public GameObject loseText;
 	public GameObject player1WarshipsLeft;
 	public GameObject player2WarshipsLeft;
+	public GameObject warship4HorizontalPrefab;
+	public GameObject warship3HorizontalPrefab;
+	public GameObject warship2HorizontalPrefab;
+	public GameObject warship1HorizontalPrefab;
+	public GameObject warship4VerticalPrefab;
+	public GameObject warship3VerticalPrefab;
+	public GameObject warship2VerticalPrefab;
+	public GameObject warship1VerticalPrefab;
 
     public static List<Player> players;
 

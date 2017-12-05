@@ -27,15 +27,12 @@ public class PreparationController : MonoBehaviour {
     public GameObject verticalButton;
 
 
+	private static List<List<Warship>> allWarships;
     private static List<GameObject> listOfWarshipsOnBoard;
     private static List<Warship> listOfWarships;
     private static WarshipCreator warshipCreator;
     private static WarshipOrientation chosenWarshipOrientation;
     private static ViewFieldComponent chosenField;
-    private static List<Warship> warships4;
-    private static List<Warship> warships3;
-    private static List<Warship> warships2;
-    private static List<Warship> warships1;
     private WarshipsContainer botPlayerShips;
     private WarshipsContainer humanPlayerShips;
 
@@ -60,10 +57,7 @@ public class PreparationController : MonoBehaviour {
 	private void CreateWarships(){
 		warshipCreator = new WarshipCreator();
 		chosenWarshipOrientation = WarshipOrientation.VERTICAL;
-		warships4 = warshipCreator.GetWarships(WarshipSize.FOUR);
-		warships3 = warshipCreator.GetWarships(WarshipSize.THREE);
-		warships2 = warshipCreator.GetWarships(WarshipSize.TWO);
-		warships1 = warshipCreator.GetWarships(WarshipSize.ONE);
+		allWarships = warshipCreator.GetWarshipsList ();
 		ChooseWarship4();
         listOfWarshipsOnBoard = new List<GameObject>();
         listOfWarships =new List<Warship>();
@@ -147,7 +141,7 @@ public class PreparationController : MonoBehaviour {
 
 
     }
-    private void WarshipPlacer(int shipSize, ViewFieldComponent field)
+    public void WarshipPlacer(int shipSize, ViewFieldComponent field)
     {
         switch (shipSize)
         {
@@ -239,23 +233,23 @@ public class PreparationController : MonoBehaviour {
         {
             case 4:
             {
-                warships4.Add(warship);
+				allWarships [0].Add (warship);
                 break;
             }
             case 3:
             {
-                warships3.Add(warship);
-                    break;
+				allWarships [1].Add (warship);
+                break;
             }
             case 2:
             {
-                warships2.Add(warship);
-                    break;
+				allWarships [2].Add (warship);
+                break;
             }
             case 1:
             {
-                warships1.Add(warship);
-                    break;
+				allWarships [3].Add (warship);
+                break;
             }
             default:
             {
@@ -274,52 +268,56 @@ public class PreparationController : MonoBehaviour {
         {
             case 4:
             {
-                if (warships4.Count==0)
+				if (allWarships[0].Count == 0)// warships4.Count==0)
                 {
                     Debug.Log("Skończyły się statki rozmiaru "+size);
                     break;
                 }
-                statek = warships4[0];                    
-                warships4.Remove(statek);
+				statek = allWarships [0][0];//warships4[0];                    
+				allWarships[0].Remove(statek);
+      //          warships4.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
             case 3:
             {
-                if (warships3.Count == 0)
+				if (allWarships[1].Count == 0)//  if (warships3.Count == 0)
                 {
                     //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
-                    statek = warships3[0];
-                warships3.Remove(statek);
+				statek = allWarships [1][0];//warships3[0];
+				allWarships[1].Remove(statek);
+    //            warships3.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
             case 2:
             {
-                if (warships2.Count == 0)
+				if (allWarships[2].Count == 0) //if (warships2.Count == 0)
                 {
                     //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
-                    statek = warships2[0];
-                warships2.Remove(statek);
+				statek = allWarships [2][0];//warships2[0];
+				allWarships[2].Remove(statek);
+  //              warships2.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
             }
             case 1:
             {
-                if (warships1.Count == 0)
+				if (allWarships[3].Count == 0) //if (warships1.Count == 0)
                 {
                     //Debug.Log("Skończyły się statki rozmiaru " + size);
                     break;
                 }
-                    statek = warships1[0];
-                warships1.Remove(statek);
+				statek = allWarships [3][0];//warships1[0];
+				allWarships[3].Remove(statek);
+//				warships1.Remove(statek);
                 statek.SetPosition(Convert.ToInt32(chosenField.gridPosition.x), Convert.ToInt32(chosenField.gridPosition.y));
                 statek.SetWarshipOrientation(chosenWarshipOrientation);
                 break;
@@ -389,25 +387,25 @@ public class PreparationController : MonoBehaviour {
             case 4:
             {
                 GameObject text = GameObject.FindWithTag("Warship4Text");
-                text.GetComponent<Text>().text =  warships4.Count + "/1";
+				text.GetComponent<Text>().text =  allWarships[0].Count + "/1";
                 break;
             }
             case 3:
             {
                 GameObject text = GameObject.FindWithTag("Warship3Text");
-                text.GetComponent<Text>().text = warships3.Count + "/2";
+				text.GetComponent<Text>().text = allWarships[1].Count + "/2";
                     break;
             }
             case 2:
             {
                 GameObject text = GameObject.FindWithTag("Warship2Text");
-                text.GetComponent<Text>().text = warships2.Count + "/3";
+				text.GetComponent<Text>().text = allWarships[2].Count + "/3";
                     break;
             }
             case 1:
             {
                 GameObject text = GameObject.FindWithTag("Warship1Text");
-                text.GetComponent<Text>().text = warships1.Count + "/4";
+				text.GetComponent<Text>().text = allWarships[3].Count + "/4";
                     break;
             }
             default:

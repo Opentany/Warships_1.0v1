@@ -103,6 +103,7 @@ public class ViewBoard : BaseBoard<ViewField> {
 		board[x][y].SetColorOnField (shotRaport.GetShotResult ());
 		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
 			AddEffectOnWholeWarship(shotRaport.GetWarship());
+		//	PreparationController.WarshipPlacer (board [x] [y], shotRaport.GetWarship ().GetSize ());
 		}
     }
 

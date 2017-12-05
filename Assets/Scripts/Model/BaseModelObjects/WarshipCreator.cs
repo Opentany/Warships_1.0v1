@@ -22,6 +22,20 @@ public class WarshipCreator {
         return warshipList;
     }
 
+	public List<List<Warship>> GetWarshipsList(){
+		List<List<Warship>> warships = new List<List<Warship>> ();
+		List<Warship> newWarship = GetWarships (WarshipSize.FOUR);
+		warships.Add (newWarship);
+		newWarship = GetWarships(WarshipSize.THREE);
+		warships.Add (newWarship);
+		newWarship = GetWarships(WarshipSize.TWO);
+		warships.Add (newWarship);
+		newWarship = GetWarships(WarshipSize.ONE);
+		warships.Add (newWarship);
+
+		return warships;
+	}
+
     public List<Warship> GetWarships(WarshipSize bySize)
     {
         if (warshipList == null) return null;
