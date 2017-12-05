@@ -28,4 +28,12 @@ public class Variables {
 	//TIME
 	public static int TIME_UNTIL_NEXT_SCENE_LOAD = 5;
 
+
+	//SOUND
+	public static string BOOM_SOUND_PATH = "Sound/boom";
+	public static string SPLASH_SOUND_PATH = "Sound/splash";
+	public static string WIN_SOUND_PATH = "Sound/win";
+	public static string DEFEAT_SOUND_PATH = "Sound/defeat";
+
+
 }
