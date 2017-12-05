@@ -39,4 +39,10 @@ public class Variables {
 	public static string WIN_SOUND_PATH = "Sound/win";
 	public static string DEFEAT_SOUND_PATH = "Sound/defeat";
 
+	//PREFAB PATHS
+	public static string WATER_PREFAB_PATH = "Prefab/Water";
+	public static string WARSHIP_PREFAB_PATH = "Prefab/warship1";
+	public static string ANIMATION_HOLDER_PATH = "Prefab/AnimationHolder";
+
+
 }
