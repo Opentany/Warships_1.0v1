@@ -26,6 +26,7 @@ public class ViewField : BaseField
 
 	public void SetEffect(){
 		viewAnimationComponent.SetEffect (Variables.animationTriggerHit);
+		viewAnimationComponent.SetEffect (Variables.animationTriggerBack);
 	}
 
     public void SetShotResult(DmgDone result) {

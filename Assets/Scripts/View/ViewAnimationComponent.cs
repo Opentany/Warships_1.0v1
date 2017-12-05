@@ -22,9 +22,10 @@ public class ViewAnimationComponent : MonoBehaviour {
 	}
 
 	public void SetEffectOnField(DmgDone shotResult){
-		if (shotResult.Equals(DmgDone.HIT) || shotResult.Equals(DmgDone.SINKED))
+		if (shotResult.Equals(DmgDone.HIT)) 
 		{
 			SetEffect (Variables.animationTriggerHit);
+			SetEffect (Variables.animationTriggerFire);
 			Handheld.Vibrate ();
 			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
@@ -33,6 +34,13 @@ public class ViewAnimationComponent : MonoBehaviour {
 		{
 			SetEffect (Variables.animationTriggerMiss);
 			AudioClip audio = Resources.Load (Variables.SPLASH_SOUND_PATH) as AudioClip;
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+		}
+		else if (shotResult.Equals(DmgDone.SINKED)){
+			SetEffect (Variables.animationTriggerHit);
+			SetEffect(Variables.animationTriggerBack);
+			Handheld.Vibrate ();
+			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
 		}
 	}

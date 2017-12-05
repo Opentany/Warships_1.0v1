@@ -60,7 +60,7 @@ public class ViewFieldComponent : MonoBehaviour {
     public void SetWarshipColor()
     {
         renderer = this.GetComponent<SpriteRenderer>();
-        renderer.material.color = Color.black;
+		renderer.material.color = Color.white;
     }
 		
 
@@ -87,9 +87,7 @@ public class ViewFieldComponent : MonoBehaviour {
         gameplayController.AttackEnemy((int)gridPosition.x, (int)gridPosition.y);
     }
 
-    private void OnClickInPreparation()
-    {
-		//thsPreparationController.SetWarshipOnField (this);
+    private void OnClickInPreparation(){
 		warshipPlacer.TryPutWarshipOnField(this);
 	}
 
