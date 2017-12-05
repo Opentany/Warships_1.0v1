@@ -12,6 +12,7 @@ public class GameplayController: MonoBehaviour{
 	public GameObject loseText;
 	public GameObject player1WarshipsLeft;
 	public GameObject player2WarshipsLeft;
+	private AndroidToast androidToast;
 
     public static List<Player> players;
 
@@ -28,6 +29,7 @@ public class GameplayController: MonoBehaviour{
     // Use this for initialization
     void Start() {
         Debug.Log("Prepare Game");
+		androidToast = new AndroidToast ();
         foreach (Player player in players)
         {
             player.SetGameController(this);
@@ -109,6 +111,7 @@ public class GameplayController: MonoBehaviour{
         }
         catch(IllegalShotException badShot)
         {
+			androidToast.CreateToastWithMessage (Variables.INCORRECT_SHOT);
             Debug.Log(badShot);
             badShotCounter++;
             if (badShotCounter == 3)

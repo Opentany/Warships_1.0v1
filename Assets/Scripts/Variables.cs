@@ -44,5 +44,18 @@ public class Variables {
 	public static string WARSHIP_PREFAB_PATH = "Prefab/warship1";
 	public static string ANIMATION_HOLDER_PATH = "Prefab/AnimationHolder";
 
+	//ANDROID TOAST NAME
+	public static string UNITY_PLAYER_PATH = "com.unity3d.player.UnityPlayer";
+	public static string CURRENT_ACTIVITY = "currentActivity";
+	public static string GET_APPLICATION_CONTEXT = "getApplicationContext";
+	public static string TOAST_PATH = "android.widget.Toast";
+	public static string JAVA_STRING_PATH = "java.lang.String";
+	public static string TOAST_LENGTH = "LENGTH_SHORT";
+
+	//TOAST MESSAGE
+	public static string CHOOSE_DIFFRENT_FIELD = "Choose a different field";
+	public static string NO_MORE_SHIPS_OF_SIZE = "There are no more ships size ";
+	public static string NO_ALL_SHIPS_ON_BORAD = "You have not put all the ships on the board yet";
+	public static string INCORRECT_SHOT = "This shot is incorrect";
 
 }

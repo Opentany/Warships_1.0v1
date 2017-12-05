@@ -74,16 +74,18 @@ public class PreparationController : MonoBehaviour {
 
     public void StartGame(string sceneName) {
         Debug.Log("I wanna start");
-        if (PlacementManager.CanGameStart(placementBoard.GetFieldsOccupiedByWarships())) {
-            GameplayController.setPlayers(humanPlayer, botPlayer);
-            Debug.Log("Set");
-            //humanPlayer.SetPlayerBoard(humanPlayerShips);
-            humanPlayer.SetPlayerBoard(placementBoard.GetWarshipList());
-            Debug.Log("1st Player");
-            botPlayer.SetPlayerBoard(botPlayerShips);
-            Debug.Log("2nd Player");
-            LoadScene(sceneName);    
-        }        
+		if (PlacementManager.CanGameStart (placementBoard.GetFieldsOccupiedByWarships ())) {
+			GameplayController.setPlayers (humanPlayer, botPlayer);
+			Debug.Log ("Set");
+			//humanPlayer.SetPlayerBoard(humanPlayerShips);
+			humanPlayer.SetPlayerBoard (placementBoard.GetWarshipList ());
+			Debug.Log ("1st Player");
+			botPlayer.SetPlayerBoard (botPlayerShips);
+			Debug.Log ("2nd Player");
+			LoadScene (sceneName);    
+		} else {
+			warshipPlacer.androidToast.CreateToastWithMessage (Variables.NO_ALL_SHIPS_ON_BORAD);
+		}      
     }
 		
     public void LoadScene(string sceneName) {

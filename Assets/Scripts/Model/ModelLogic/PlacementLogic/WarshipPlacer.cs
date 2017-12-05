@@ -8,6 +8,7 @@ public class WarshipPlacer  {
 
 	public static List<GameObject> warshipsOnBoard;
 	public static List<List<GameObject>> warshipPrefabList;
+	public AndroidToast androidToast;
 
 	public static WarshipOrientation chosenWarshipOrientation = WarshipOrientation.VERTICAL;
 	public static int chosenWarshipSize;
@@ -24,6 +25,7 @@ public class WarshipPlacer  {
 		warshipsOnBoard = new List<GameObject>();
 		warshipsAddedToBoard = new List<Warship>();
 		warshipCreator = new WarshipCreator ();
+		androidToast = new AndroidToast ();
 		allWarships = warshipCreator.GetWarshipsList ();
 	}
 
@@ -65,18 +67,17 @@ public class WarshipPlacer  {
 		if (field!=null){
 			Warship warship = GetWarshipOfChosenSize();
 			if (warship != null) {
-				Debug.Log ("current or " + chosenWarshipOrientation);
-				warship.SetPosition (Convert.ToInt32(field.gridPosition.x), Convert.ToInt32(field.gridPosition.y));
+				warship.SetPosition (Convert.ToInt32 (field.gridPosition.x), Convert.ToInt32 (field.gridPosition.y));
 				warship.SetWarshipOrientation (chosenWarshipOrientation);
 				if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition (PreparationController.placementBoard, warship)) {
 					PutWarshipOnBoard (warship, field);
 					allWarships [chosenWarshipSize - 1].RemoveAt (0);
-					UpdateStatus(warship.warshipSize);
+					UpdateStatus (warship.warshipSize);
+				} else {
+					androidToast.CreateToastWithMessage (Variables.CHOOSE_DIFFRENT_FIELD);
 				}
-				else
-				{
-					Debug.Log("wybierz inne miejsce");
-				}
+			} else {
+				androidToast.CreateToastWithMessage (Variables.NO_MORE_SHIPS_OF_SIZE + chosenWarshipSize.ToString ());
 			}
 		}
 	}
@@ -126,7 +127,6 @@ public class WarshipPlacer  {
 	}
 
 	private void UpdateInfo(WarshipSize warshipSize){
-		Debug.Log ("update " + warshipSize.ToString ());
 		int index = (int)warshipSize - 1;
 		string tagToFind = "Warship" + (index+1).ToString () + "Text";
 		GameObject text = GameObject.FindWithTag (tagToFind);
