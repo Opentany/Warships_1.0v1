@@ -76,15 +76,17 @@ public class WarshipPlacer  {
 	public void PutWarshipOnBoard(Warship warship, ViewFieldComponent field){
 		PreparationController.placementBoard.SetWarship(warship);
 		PreparationController.preparationBoard.SetWarship(warship);
-		PutWarship(warship.warshipSize, field.realPosition, field.realRotation);
+		PutWarship(warship, field);
 		warshipsAddedToBoard.Add (warship);
 	}
 
-	public void PutWarship(WarshipSize warshipSize, Vector2 position, Quaternion rotation){
+	public void PutWarship(Warship warship, ViewFieldComponent field){
+		Vector2 position = field.realPosition;
+		Quaternion rotation = field.realRotation;
 		foreach (WarshipSize size in System.Enum.GetValues(typeof(WarshipSize))) {
-			if (warshipSize.Equals(size)){
-				int index = (int)warshipSize - 1;
-				if (CheckIfOrientationIsHorizontal ()) {
+			if (warship.warshipSize.Equals(size)){
+				int index = warship.GetSize() - 1;
+				if (warship.GetOrientation().Equals(WarshipOrientation.HORIZONTAL)) {
 					position.x += warshipOffsetHorizontal [index];
 					rotation.z = -1f;
 					warshipsOnBoard.Add (GameObject.Instantiate (warshipPrefabList [index] [1], position, rotation));

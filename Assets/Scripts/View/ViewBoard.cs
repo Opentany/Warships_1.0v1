@@ -10,12 +10,14 @@ public class ViewBoard : BaseBoard<ViewField> {
 	private static GameObject warshipOnMinimap;
 	private static GameObject animationHolder;
     private List<List<ViewField>> miniBoard;
+	private WarshipPlacer warshipPlacer;
 
     public ViewBoard() {
         board = new List<List<ViewField>>();
         miniBoard = new List<List<ViewField>>();
         warshipList = new List<Warship>();
         fieldsOccupiedByWarships = 0;
+		warshipPlacer = new WarshipPlacer ();
     }
 		
 
@@ -103,7 +105,8 @@ public class ViewBoard : BaseBoard<ViewField> {
 		board[x][y].SetColorOnField (shotRaport.GetShotResult ());
 		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
 			AddEffectOnWholeWarship(shotRaport.GetWarship());
-		//	PreparationController.WarshipPlacer (board [x] [y], shotRaport.GetWarship ().GetSize ());
+			Warship warship = shotRaport.GetWarship ();
+			warshipPlacer.PutWarship (shotRaport.GetWarship (), board[warship.GetX()][warship.GetY()].viewFieldComponent);
 		}
     }
 
