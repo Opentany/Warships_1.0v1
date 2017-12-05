@@ -119,14 +119,14 @@ public class ViewBoard : BaseBoard<ViewField> {
 			int x = warship.GetX();
 			for (int i = x; i < x + warship.GetSize(); i++){
 				board [i] [warship.GetY ()].SetEffect ();
-				board [i] [warship.GetY ()].viewFieldComponent.SetWarshipColor ();
+				board [i] [warship.GetY ()].viewFieldComponent.SetColorWhenWarshipSinked();
 			}
 		}
 		else {
 			int y = warship.GetY();
 			for (int i = y; i < y + warship.GetSize (); i++) {
 				board [warship.GetX ()] [i].SetEffect();
-				board [warship.GetX ()] [i].viewFieldComponent.SetWarshipColor ();
+				board [warship.GetX ()] [i].viewFieldComponent.SetColorWhenWarshipSinked();
 			}
 		}
 	}
@@ -137,9 +137,9 @@ public class ViewBoard : BaseBoard<ViewField> {
         Debug.Log("Bot " + x + " "+ y+ " "+ shotRaport.GetShotResult());
         miniBoard[x][y].SetShotResult(shotRaport.GetShotResult());
 		miniBoard[x][y].SetColorOnField(shotRaport.GetShotResult());
-		if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
+	/*	if (shotRaport.GetShotResult().Equals(DmgDone.SINKED)){
 			AddColorOnWholeWarship(shotRaport.GetWarship());
-		}
+		}*/
     }
 
 	private void AddColorOnWholeWarship(Warship warship){

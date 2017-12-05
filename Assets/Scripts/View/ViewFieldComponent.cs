@@ -60,9 +60,13 @@ public class ViewFieldComponent : MonoBehaviour {
     public void SetWarshipColor()
     {
         renderer = this.GetComponent<SpriteRenderer>();
-		renderer.material.color = Color.white;
+		renderer.material.color = Color.red;
     }
 		
+	public void SetColorWhenWarshipSinked(){
+		renderer = this.GetComponent<SpriteRenderer>();
+		renderer.material.color = Color.white;
+	}
 
     public void SetColorOnField(DmgDone shotResult)
     {
