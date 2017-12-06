@@ -40,6 +40,7 @@ public class MultiplayerController : MonoBehaviour
         roomOptions.PlayerTtl = 120000;
         PhotonNetwork.CreateRoom(roomName,roomOptions,TypedLobby.Default);
     }
+    
 
     public void JoinRoom(string roomName)
     {
@@ -59,6 +60,7 @@ public class MultiplayerController : MonoBehaviour
        
         var text = GameObject.FindGameObjectWithTag("Player_Name");
         text.GetComponent<Text>().text = PhotonNetwork.playerName;
+        PhotonNetwork.LoadLevel("Preparation_Multi");
     }
 	
 }
