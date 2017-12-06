@@ -129,6 +129,7 @@
      <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
      <Compile Include="Assets\Scripts\Controllers\MultiplayerController.cs" />
      <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\SettingsController.cs" />
      <Compile Include="Assets\Scripts\Controllers\SinglePlayerController.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseBoard.cs" />
      <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseField.cs" />
