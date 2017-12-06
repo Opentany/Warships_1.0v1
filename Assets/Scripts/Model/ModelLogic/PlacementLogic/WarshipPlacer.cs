@@ -130,7 +130,7 @@ public class WarshipPlacer  {
 		int index = (int)warshipSize - 1;
 		string tagToFind = "Warship" + (index+1).ToString () + "Text";
 		GameObject text = GameObject.FindWithTag (tagToFind);
-		text.GetComponent<Text>().text = allWarships[index].Count + "/" + (-1*(index+1-5)).ToString();
+		text.GetComponent<Text>().text = allWarships[index].Count + "/" + (-index+4).ToString();
 	}
 
 	public void RemoveWarshipFromBoard(){
