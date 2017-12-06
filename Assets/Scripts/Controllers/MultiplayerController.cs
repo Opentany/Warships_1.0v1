@@ -29,6 +29,9 @@ public class MultiplayerController : MonoBehaviour
     {
         RefreshRoomList();
         Debug.Log("dołączono");
+        GameObject lobby = GameObject.FindGameObjectWithTag("Lobby");
+        LobbyController lobbycon = lobby.GetComponent<LobbyController>();
+        lobbycon.RefreshRoomList();
     }
 
     public void RefreshRoomList()
