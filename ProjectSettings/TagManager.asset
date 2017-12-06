@@ -15,6 +15,7 @@ TagManager:
   - horizontalButton
   - verticalButton
   - Player_Name
+  - ListOfRooms
   layers:
   - Default
   - TransparentFX
