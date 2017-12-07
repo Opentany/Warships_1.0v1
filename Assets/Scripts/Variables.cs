@@ -60,4 +60,16 @@ public class Variables {
 	public static string NO_ALL_SHIPS_ON_BORAD = "You have not put all the ships on the board yet";
 	public static string INCORRECT_SHOT = "This shot is incorrect";
 
+	//SETTING FILE PATH
+	public static string SETTINGS_PATH = Application.persistentDataPath + "/settings.dat";
+
+	//MUSIC NAME
+	public static string MENU_MUSIC = "MenuMusic";
+	public static string PREPARATION_MUSIC = "PreparationMusic";
+	public static string GAMEPLAY_MUSIC = "GameplayMusic";
+
+	//MUSIC PATH
+	public static string MENU_MUSIC_PATH = "Music/MenuScene";
+	public static string PREPARATION_MUSIC_PATH = "Music/Preparation";
+	public static string GAMEPLAY_MUSIC_PATH = "Music/Gameplay";
 }

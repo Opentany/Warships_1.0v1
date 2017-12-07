@@ -10,12 +10,12 @@ public class GameplayController: MonoBehaviour{
 	public GameObject animationHolder;
 	public GameObject winText;
 	public GameObject loseText;
-
     private int player1WarshipsLeftCounter;
 	private GameObject player1WarshipsLeft;
-
     private int player2WarshipsLeftCounter;
 	private GameObject player2WarshipsLeft;
+	public GameObject victoryPicture;
+	public GameObject deafeatPicture;
 
 	private AndroidToast androidToast;
 
@@ -29,10 +29,14 @@ public class GameplayController: MonoBehaviour{
 
     public static bool ready = false;
 
+	private static bool isEndOfGame = false;
+
     // Use this for initialization
     void Start() {
+		SettingsController.SetMusicVolumeInScene ();
+		MusicController.SetActualMusic (Variables.GAMEPLAY_MUSIC);
         Debug.Log("Prepare Game");
-
+		isEndOfGame = false;
 		androidToast = new AndroidToast ();
         ViewBoard viewBoard = new ViewBoard();
         ViewBoard.SetWaterPrefab(waterPrefab);
@@ -147,15 +151,15 @@ public class GameplayController: MonoBehaviour{
 	public void PlayerWon(Player player)
     {
 		Canvas canvas = this.GetComponent<Canvas> ();
-	
+		isEndOfGame = true;
 		if (players [0].Equals (player)) {
-			winText.SetActive (true);
+			victoryPicture.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.WIN_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		} else {
-			loseText.SetActive (true);
+			deafeatPicture.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.DEFEAT_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
         Debug.Log("Wygrana");
 		StartCoroutine (Won ());
@@ -164,6 +168,10 @@ public class GameplayController: MonoBehaviour{
 	private IEnumerator Won(){
 		yield return new WaitForSeconds(Variables.TIME_UNTIL_NEXT_SCENE_LOAD);
 		SceneManager.LoadScene("MenuScene");
+	}
+
+	public static bool IsGameEnd(){
+		return isEndOfGame;
 	}
 
 }

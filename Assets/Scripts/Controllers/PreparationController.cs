@@ -15,6 +15,8 @@ public class PreparationController : MonoBehaviour {
     public bool otherPlayerReady;
 
     void Start() {
+        SettingsController.SetMusicVolumeInScene();
+        MusicController.SetActualMusic(Variables.PREPARATION_MUSIC);
         otherPlayerReady = false;
         PreparePlayers();
         PrepareBoards();

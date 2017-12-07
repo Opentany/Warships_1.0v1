@@ -15,6 +15,8 @@ TagManager:
   - horizontalButton
   - verticalButton
   - Player_Name
+  - ListOfRooms
+  - Lobby
   - ShipCounter1
   - ShipCounter2
   layers:
