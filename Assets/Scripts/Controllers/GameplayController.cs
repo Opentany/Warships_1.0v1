@@ -11,9 +11,9 @@ public class GameplayController: MonoBehaviour{
 	public GameObject winText;
 	public GameObject loseText;
     private int player1WarshipsLeftCounter;
-	private GameObject player1WarshipsLeft;
+	public GameObject player1WarshipsLeft;
     private int player2WarshipsLeftCounter;
-	private GameObject player2WarshipsLeft;
+	public GameObject player2WarshipsLeft;
 	public GameObject victoryPicture;
 	public GameObject deafeatPicture;
 
@@ -43,10 +43,6 @@ public class GameplayController: MonoBehaviour{
         ViewBoard.SetAnimationHolder(animationHolder);
         viewBoard.GenerateBoardOnScreen();
         viewBoard.GenerateMiniBoardOnScreen();
-        player1WarshipsLeft = GameObject.FindGameObjectWithTag("ShipCounter1");
-        UnityEngine.Debug.Log(player1WarshipsLeft);
-        player2WarshipsLeft = GameObject.FindGameObjectWithTag("ShipCounter2");
-        UnityEngine.Debug.Log(player2WarshipsLeft);
         player1WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
         player2WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
         foreach (DevicePlayer player in players)
