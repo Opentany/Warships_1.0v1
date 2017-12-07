@@ -189,5 +189,4 @@ public class ViewBoard : BaseBoard<ViewField> {
 		return warshipOnMinimap.GetComponent<SpriteRenderer>().sprite;
 	}
 
-
 }

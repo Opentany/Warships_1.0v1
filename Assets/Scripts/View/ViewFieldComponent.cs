@@ -5,7 +5,7 @@ using UnityEngine;
 public class ViewFieldComponent : MonoBehaviour {
 
     public GameObject GameController;
-    public GameObject GameplayController;
+    public GameObject GameplayControl;
 	private WarshipPlacer warshipPlacer;
 
 	public Vector2 gridPosition = Vector2.zero;
@@ -33,7 +33,7 @@ public class ViewFieldComponent : MonoBehaviour {
         {
             return;
         }
-        if (gameplayController != null)
+		if (gameplayController != null && !GameplayController.IsGameEnd())
         {
             OnClickInGameplay();
         }
@@ -46,14 +46,14 @@ public class ViewFieldComponent : MonoBehaviour {
     private void FindViews()
     {
         GameController = GameObject.FindGameObjectWithTag("GameController");
-        GameplayController = GameObject.FindGameObjectWithTag("GameplayController");
+        GameplayControl = GameObject.FindGameObjectWithTag("GameplayController");
         if (GameController != null)
         {
             thsPreparationController = GameController.GetComponent<PreparationController>();
         }
-        if (GameplayController != null)
+        if (GameplayControl != null)
         {
-            gameplayController = GameplayController.GetComponent<GameplayController>();
+            gameplayController = GameplayControl.GetComponent<GameplayController>();
         }
     }
 

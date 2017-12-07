@@ -26,10 +26,13 @@ public class GameplayController: MonoBehaviour{
 
     public static bool ready = false;
 
+	private static bool isEndOfGame = false;
+
     // Use this for initialization
     void Start() {
 		SettingsController.SetMusicVolumeInScene ();
         Debug.Log("Prepare Game");
+		isEndOfGame = false;
 		androidToast = new AndroidToast ();
         foreach (Player player in players)
         {
@@ -146,7 +149,7 @@ public class GameplayController: MonoBehaviour{
 	public void PlayerWon(Player player)
     {
 		Canvas canvas = this.GetComponent<Canvas> ();
-	
+		isEndOfGame = true;
 		if (players [0].Equals (player)) {
 			winText.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.WIN_SOUND_PATH) as AudioClip;
@@ -163,7 +166,10 @@ public class GameplayController: MonoBehaviour{
 	private IEnumerator Won(){
 		yield return new WaitForSeconds(Variables.TIME_UNTIL_NEXT_SCENE_LOAD);
 		SceneManager.LoadScene("MenuScene");
+	}
 
+	public static bool IsGameEnd(){
+		return isEndOfGame;
 	}
 
 }
