@@ -8,8 +8,8 @@ public class GameplayController: MonoBehaviour{
 
     public GameObject waterPrefab;
 	public GameObject animationHolder;
-	public GameObject winText;
-	public GameObject loseText;
+	public GameObject victoryPicture;
+	public GameObject deafeatPicture;
 	public GameObject player1WarshipsLeft;
 	public GameObject player2WarshipsLeft;
 	private AndroidToast androidToast;
@@ -152,11 +152,11 @@ public class GameplayController: MonoBehaviour{
 		Canvas canvas = this.GetComponent<Canvas> ();
 		isEndOfGame = true;
 		if (players [0].Equals (player)) {
-			winText.SetActive (true);
+			victoryPicture.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.WIN_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		} else {
-			loseText.SetActive (true);
+			deafeatPicture.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.DEFEAT_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
