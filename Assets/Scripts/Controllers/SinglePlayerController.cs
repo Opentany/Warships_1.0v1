@@ -27,6 +27,8 @@ public class SinglePlayerController : MonoBehaviour {
     }
 
 	private void LoadPreparationScene(){
-		SceneManager.LoadScene ("Preparation");
+        PreparationController.humanDevicePlayer = new HumanPlayer();
+        PreparationController.otherPlayer = BotCreator.CreateBotPlayer();
+        SceneManager.LoadScene ("Preparation");
 	}
 }

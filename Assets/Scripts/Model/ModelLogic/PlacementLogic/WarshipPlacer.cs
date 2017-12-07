@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WarshipPlacer  {
 
-	public static List<GameObject> warshipsOnBoard;
+    public static List<GameObject> warshipsOnBoard;
 	public static List<List<GameObject>> warshipPrefabList;
 	public AndroidToast androidToast;
 
@@ -29,7 +29,12 @@ public class WarshipPlacer  {
 		allWarships = warshipCreator.GetWarshipsList ();
 	}
 
-	public void SetCurrentlySelectedSize(int warshipSize){
+    public bool isReady()
+    {
+        return HumanPlayer.placementBoard.GetFieldsOccupiedByWarships() == Variables.fieldsOccupiedByWarships;
+    }
+
+    public void SetCurrentlySelectedSize(int warshipSize){
 		chosenWarshipSize = warshipSize;
 	}
 
@@ -69,7 +74,7 @@ public class WarshipPlacer  {
 			if (warship != null) {
 				warship.SetPosition (Convert.ToInt32 (field.gridPosition.x), Convert.ToInt32 (field.gridPosition.y));
 				warship.SetWarshipOrientation (chosenWarshipOrientation);
-				if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition (PreparationController.placementBoard, warship)) {
+				if (PlacementManager.CheckIfPlayerCanPutWarshipOnThisPosition (HumanPlayer.placementBoard, warship)) {
 					PutWarshipOnBoard (warship, field);
 					allWarships [chosenWarshipSize - 1].RemoveAt (0);
 					UpdateStatus (warship.warshipSize);
@@ -89,8 +94,8 @@ public class WarshipPlacer  {
 	}
 
 	public void PutWarshipOnBoard(Warship warship, ViewFieldComponent field){
-		PreparationController.placementBoard.SetWarship(warship);
-		PreparationController.preparationBoard.SetWarship(warship);
+		HumanPlayer.placementBoard.SetWarship(warship);
+		HumanPlayer.viewBoard.SetWarship(warship);
 		PutWarship(warship, field);
 		warshipsAddedToBoard.Add (warship);
 	}
@@ -146,8 +151,8 @@ public class WarshipPlacer  {
 	}
 
 	private void RemoveFromModelBoard(Warship warship, int index){
-		PreparationController.preparationBoard.RemoveWarship(warship);
-		PreparationController.placementBoard.RemoveWarship(warship);
+        HumanPlayer.viewBoard.RemoveWarship(warship);
+		HumanPlayer.placementBoard.RemoveWarship(warship);
 		warshipsAddedToBoard.RemoveAt (index);
 		UpdateAllWarshipList (warship);
 	}

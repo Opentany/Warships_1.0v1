@@ -1,51 +1,18 @@
-﻿
-public abstract class Player{
+﻿public interface Player
+{
 
-    public ShootingBoard playerBoard;
-    public WarshipsContainer shipsContainer;
-    public bool isYourTurn;
-    public GameplayController controller;
+    void SetPlayerShotResult(ShotRaport shotRaport);
 
-    public Player() {
-        isYourTurn = false;
-    }
+    ShotRaport TakeOpponentShot(Position target);
 
-    public abstract void ArrangeBoard();
+    void SetGameController(GameplayController gameplayController);
 
-    public bool IsYourTurn() {
-        return isYourTurn;
-    }
+    void SetPreparationController(PreparationController preparationController);
 
-    public abstract void YourTurn();
+    void ArrangeBoard();
 
-    public abstract void SetPlayerBoard(WarshipsContainer playerBoard);
+    void SetPlayerBoard();
 
-    public virtual void TakeOpponentShot(ShotRaport shotRaport) {
-        playerBoard.ApplyShot(shotRaport);
-		controller.UpdatePlayerCounter (this,shotRaport.GetShotResult ());
-    }
-
-    public virtual void SetPlayerShotResult(ShotRaport shotRaport)
-    {
-		controller.UpdatePlayerCounter (this, shotRaport.GetShotResult ());
-    }
-
-    public WarshipsContainer GetPlayerShips()
-    {
-        return shipsContainer;
-    }
-
-    public bool CheckIfYouLose() {
-        return playerBoard.GetFieldsOccupiedByWarships() == 0;
-    }
-
-    public void SetGameController(GameplayController controller)
-    {
-        this.controller = controller;
-    }
-
-	public int GetNumberOfRemainingWarship(){
-		return playerBoard.GetFieldsOccupiedByWarships ();
-	}
+    void YourTurn();
 
 }

@@ -10,59 +10,64 @@ public class GameplayController: MonoBehaviour{
 	public GameObject animationHolder;
 	public GameObject winText;
 	public GameObject loseText;
-	public GameObject player1WarshipsLeft;
-	public GameObject player2WarshipsLeft;
+
+    private int player1WarshipsLeftCounter;
+	private GameObject player1WarshipsLeft;
+
+    private int player2WarshipsLeftCounter;
+	private GameObject player2WarshipsLeft;
+
 	private AndroidToast androidToast;
 
     public static List<Player> players;
 
-    private enum PlayerType {HUMAN, BOT };
+    private enum PlayerType {DEVICE_HUMAN, OTHER_PLAYER };
 
     private static PlayerType activePlayer;
 
-    public ViewBoard board;
-
-    public bool activeHuman;
+    public bool activeDeviceHuman;
 
     public static bool ready = false;
 
     // Use this for initialization
     void Start() {
         Debug.Log("Prepare Game");
+
 		androidToast = new AndroidToast ();
-        foreach (Player player in players)
+        ViewBoard viewBoard = new ViewBoard();
+        ViewBoard.SetWaterPrefab(waterPrefab);
+        ViewBoard.SetAnimationHolder(animationHolder);
+        viewBoard.GenerateBoardOnScreen();
+        viewBoard.GenerateMiniBoardOnScreen();
+        player1WarshipsLeft = GameObject.FindGameObjectWithTag("ShipCounter1");
+        UnityEngine.Debug.Log(player1WarshipsLeft);
+        player2WarshipsLeft = GameObject.FindGameObjectWithTag("ShipCounter2");
+        UnityEngine.Debug.Log(player2WarshipsLeft);
+        player1WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
+        player2WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
+        foreach (DevicePlayer player in players)
         {
             player.SetGameController(this);
+            player.playerBoard.IsEverythingOk();
         }
         Debug.Log("Controllers Set");
-        board = new ViewBoard();
-        ViewBoard.SetWaterPrefab(waterPrefab);
-		ViewBoard.SetAnimationHolder (animationHolder);
-        board.GenerateBoardOnScreen();
-        board.GenerateMiniBoardOnScreen();
-        SetMyShips(players[0].GetPlayerShips().GetWarships());
+        HumanPlayer.SetViewBoard(viewBoard);
+        ((HumanPlayer) players[0]).SetShipsOnBoard();     
         System.Random rnd = new System.Random();
-        activePlayer = (PlayerType)0;
-        activeHuman = (activePlayer.Equals(PlayerType.HUMAN));
+        activePlayer = (PlayerType) rnd.Next(2);
+        activeDeviceHuman = (activePlayer.Equals(PlayerType.DEVICE_HUMAN));
         Debug.Log("Start Game");
         ready = true;
+        players[(int)activePlayer].YourTurn();
     }
 
-    public void GameLoop(){
-
-    	while (!players[0].CheckIfYouLose() || !players[1].CheckIfYouLose()){
-
-    	}
-    }
-
-
-    public static void setPlayers(Player human, Player bot)
+    public static void setPlayers(HumanPlayer deviceHuman, Player otherPlayer)
     {
         Debug.Log("Setting players");
         players = new List<Player>
         {
-            human,
-            bot
+            deviceHuman,
+            otherPlayer
         };
     }
 
@@ -74,29 +79,22 @@ public class GameplayController: MonoBehaviour{
     //Tu przekierować kliknięcie w pole przeciwnika, argument dostosować, do potrzeb, byleby posiadał w środku współrzędne
     public void AttackEnemy(int x, int y)
     {
-        Debug.Log(activeHuman);
+        Debug.Log(activeDeviceHuman);
         Debug.Log(activePlayer);
-        if(activeHuman)
+        if(activeDeviceHuman)
             ShotOpponent(x, y);
-
     }
 
     public void ShotOpponent(int x, int y)
     {
-        Debug.Log("shot " + x + " " + y);
         int badShotCounter = 0; 
         PlayerType opponent = NextPlayer(activePlayer);
         try
         {
-            ShotRaport raport = new ShotRaport(x, y, players[(int)opponent].playerBoard);
+            ShotRaport raport = players[(int)opponent].TakeOpponentShot(new Position(x,y));
             players[(int)activePlayer].SetPlayerShotResult(raport);
-            players[(int)opponent].TakeOpponentShot(raport);
-			if (activeHuman){
-                board.ApplyMyShot(raport);
-			}else{
-                board.ApplyOpponentShot(raport);
-			}
-            if (players[(int)opponent].CheckIfYouLose()){
+            bool activeWon = UpdatePlayerCounter(players[(int)opponent], raport.GetShotResult());
+            if (activeWon){
                 PlayerWon(players[(int)activePlayer]);
                 return;
             }
@@ -104,7 +102,7 @@ public class GameplayController: MonoBehaviour{
             {
                 activePlayer = NextPlayer(activePlayer);
                 opponent = NextPlayer(opponent);
-                activeHuman = !activeHuman;
+                activeDeviceHuman = !activeDeviceHuman;
             }
             players[(int)activePlayer].YourTurn();
 
@@ -118,29 +116,33 @@ public class GameplayController: MonoBehaviour{
             {
                 activePlayer = NextPlayer(activePlayer);
                 opponent = NextPlayer(opponent);
-                activeHuman = !activeHuman;
+                activeDeviceHuman = !activeDeviceHuman;
             }
             players[(int)activePlayer].YourTurn();
         }
     }
 
-	public void UpdatePlayerCounter(Player player, DmgDone shotResult){
+    public bool UpdatePlayerCounter(Player player, DmgDone shotResult){
 		if (shotResult.Equals (DmgDone.HIT) || shotResult.Equals (DmgDone.SINKED)) {
 			if(player.Equals(players[0])){
-				player1WarshipsLeft.GetComponent<Text> ().text = player.GetNumberOfRemainingWarship ().ToString();
+                player1WarshipsLeftCounter--;
+                Debug.Log(player1WarshipsLeft);
+                Debug.Log(player1WarshipsLeft.GetComponent<Text>());
+                Debug.Log(player1WarshipsLeft.GetComponent<Text>().text);
+                player1WarshipsLeft.GetComponent<Text>().text = ""+player1WarshipsLeftCounter;
+                return player1WarshipsLeftCounter == 0;
 			}
 			else{
-				player2WarshipsLeft.GetComponent<Text> ().text = player.GetNumberOfRemainingWarship ().ToString();
-
-			}
+                player2WarshipsLeftCounter--;
+                Debug.Log(player2WarshipsLeft);
+                Debug.Log(player2WarshipsLeft.GetComponent<Text>());
+                Debug.Log(player2WarshipsLeft.GetComponent<Text>().text);
+                player2WarshipsLeft.GetComponent<Text>().text = "" + player2WarshipsLeftCounter;
+                return player2WarshipsLeftCounter == 0;
+            }
 		}
+        return false;
 	}
-
-    public void SetMyShips(List<Warship> ships)
-    {
-        board.SetWarshipOnMiniBoard(ships);
-    }
-
 
 	public void PlayerWon(Player player)
     {
@@ -162,7 +164,6 @@ public class GameplayController: MonoBehaviour{
 	private IEnumerator Won(){
 		yield return new WaitForSeconds(Variables.TIME_UNTIL_NEXT_SCENE_LOAD);
 		SceneManager.LoadScene("MenuScene");
-
 	}
 
 }

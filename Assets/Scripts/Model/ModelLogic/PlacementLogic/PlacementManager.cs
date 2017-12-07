@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class PlacementManager{
-	private static int FULL_PLACEMENT = Variables.fieldsOccupiedByWarships;
+
     private static int BOARD_SIZE = Variables.defaultBoardSize;
 
     public static bool CheckIfPlayerCanPutWarshipOnThisPosition(PlacementBoard board, Warship warship)
@@ -27,6 +27,11 @@ public class PlacementManager{
             return false;
         for (int i = x; i < x + warship.GetSize(); i++)
         {
+            if (board == null)
+                Debug.Log("Plansza null");
+            if (board.GetBoard() == null)
+                Debug.Log("Plansza nie zainicjowana");
+
             if (board.GetBoard()[i][warship.GetY()].isSecure())
             {
                 return false;
@@ -49,11 +54,6 @@ public class PlacementManager{
             }
         }
         return true;
-    }
-
-
-    public static bool CanGameStart(int warshipsField) {
-        return warshipsField == FULL_PLACEMENT;
     }
  
 }
