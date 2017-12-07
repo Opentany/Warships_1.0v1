@@ -30,6 +30,10 @@ public class SettingsController : MonoBehaviour {
 		volumeOfSounds = soundsSlider.GetComponent<Slider> ().value;
 	}
 
+	public static float GetSoundVolume(){
+		return volumeOfSounds;
+	}
+
 	public void SetMusicVolume(){
 		volumeOfMusic = musicSlider.GetComponent<Slider> ().value;
 		SetMusicVolumeInScene ();

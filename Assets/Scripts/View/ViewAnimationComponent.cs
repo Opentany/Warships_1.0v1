@@ -30,13 +30,13 @@ public class ViewAnimationComponent : MonoBehaviour {
 				Handheld.Vibrate ();			
 			}
 			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
 		else if (shotResult.Equals(DmgDone.MISS))
 		{
 			SetEffect (Variables.animationTriggerMiss);
 			AudioClip audio = Resources.Load (Variables.SPLASH_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
 		else if (shotResult.Equals(DmgDone.SINKED)){
 			SetEffect (Variables.animationTriggerHit);
@@ -45,7 +45,7 @@ public class ViewAnimationComponent : MonoBehaviour {
 				Handheld.Vibrate ();			
 			}
 			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
 	}
 }

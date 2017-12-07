@@ -150,11 +150,11 @@ public class GameplayController: MonoBehaviour{
 		if (players [0].Equals (player)) {
 			winText.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.WIN_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		} else {
 			loseText.SetActive (true);
 			AudioClip audio = Resources.Load (Variables.DEFEAT_SOUND_PATH) as AudioClip;
-			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
+			AudioSource.PlayClipAtPoint (audio, Vector2.zero, SettingsController.GetSoundVolume());
 		}
         Debug.Log("Wygrana");
 		StartCoroutine (Won ());
