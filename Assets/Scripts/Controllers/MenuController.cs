@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour{
 	private static bool isFirstTimeLoad = true;
 
 	void Start(){
-		LoadSettings ();		
+		LoadSettings ();
 		SettingsController.SetMusicVolumeInScene ();
 	}
 

@@ -21,7 +21,7 @@ public class SettingsController : MonoBehaviour {
 		vibrationToggle.GetComponent<Toggle> ().isOn = isVibration;
 		soundsSlider.GetComponent<Slider> ().value = volumeOfSounds;
 		musicSlider.GetComponent<Slider> ().value = volumeOfMusic;
-		GameObject.Find ("Music").GetComponent<AudioSource> ().volume = volumeOfMusic;
+	//	GameObject.Find ("Music").GetComponent<AudioSource> ().volume = volumeOfMusic;
 	}
 
 	public void SetSoundVolume(){
