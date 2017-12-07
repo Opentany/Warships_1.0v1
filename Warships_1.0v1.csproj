@@ -211,6 +211,12 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Programy/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>Assets/Plugins/Photon3Unity3D.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/sebas/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
     </Reference>
@@ -219,15 +225,98 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Warships_1.0v1.Plugins.csproj">
+      <Project>{0C27F363-3B86-FC56-09E5-BA1BF935A7B3}</Project>
+      <Name>Warships_1.0v1.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\EventController.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Extensions.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\FriendInfo.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\GizmoType.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\LoadbalancingPeer.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonClasses.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonLagSimulationGui.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonPlayer.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonStatsGui.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonStreamQueue.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PhotonView.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\PingCloudRegions.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Room.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\RoomInfo.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\RPC.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\ServerSettings.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\SocketUdp.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\SocketWebTcp.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonAnimatorView.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonRigidbody2DView.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonRigidbodyView.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformView.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewPositionControl.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewPositionModel.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewRotationControl.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewRotationModel.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewScaleControl.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\Plugins\PhotonNetwork\Views\PhotonTransformViewScaleModel.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\ConnectAndJoinRandom.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\CullArea.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\InputToEvent.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\InRoomChat.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\ManualPhotonViewAllocator.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\MoveByKeys.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\NetworkCullingHandler.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\OnClickDestroy.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\OnClickInstantiate.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\OnClickLoadSomething.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\OnJoinedInstantiate.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\OnStartDelete.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PhotonPlayer\PlayerRoomIndexing.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PickupItem.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PickupItemSimple.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PickupItemSyncer.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PointedAtGameObjectInfo.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PunPlayerScores.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PunTeams.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\PunTurnManager.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\QuitOnEscapeOrBack.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\ShowStatusWhenConnecting.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\SmoothSyncMovement.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\SupportLogger.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\UI\ButtonInsideScrollList.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\UI\TextButtonTransition.cs" />
+    <Compile Include="Assets\Imported\Photon Unity Networking\UtilityScripts\UI\TextToggleIsOnTransition.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatChannel.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatClient.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatDisconnectCause.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatEventCode.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatOperationCode.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatParameterCode.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatPeer.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatState.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\ChatUserStatus.cs" />
+    <Compile Include="Assets\Imported\PhotonChatApi\IChatClientListener.cs" />
+    <Compile Include="Assets\Scripts\AndroidToast.cs" />
     <Compile Include="Assets\Scripts\BotLevelInfo.cs" />
     <Compile Include="Assets\Scripts\Controllers\DragDrop.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameplayController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LobbyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Scripts\Controllers\MultiplayerController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MusicController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PreparationController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SettingsController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SinglePlayerController.cs" />
     <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseBoard.cs" />
     <Compile Include="Assets\Scripts\Model\BaseModelObjects\BaseField.cs" />
+    <Compile Include="Assets\Scripts\Model\BaseModelObjects\Position.cs" />
+    <Compile Include="Assets\Scripts\Model\BaseModelObjects\SecureBorder.cs" />
     <Compile Include="Assets\Scripts\Model\BaseModelObjects\Warship.cs" />
     <Compile Include="Assets\Scripts\Model\BaseModelObjects\WarshipCreator.cs" />
     <Compile Include="Assets\Scripts\Model\BaseModelObjects\WarshipOrientation.cs" />
@@ -237,14 +326,18 @@
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementException.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementField.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\PlacementManager.cs" />
-    <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\SecureBorder.cs" />
+    <Compile Include="Assets\Scripts\Model\ModelLogic\PlacementLogic\WarshipPlacer.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\DmgDone.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\IllegalShotException.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\ShootingBoard.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\ShootingField.cs" />
     <Compile Include="Assets\Scripts\Model\ModelLogic\ShotingLogic\ShotRaport.cs" />
-    <Compile Include="Assets\Scripts\Players\BotCreator.cs" />
-    <Compile Include="Assets\Scripts\Players\BotPlayer.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotCreator.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotLevel.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotModelObjects\BotLogicException.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotModelObjects\ComplexShootingBoard.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotModelObjects\ShipRevealer.cs" />
+    <Compile Include="Assets\Scripts\Players\BotPlayer\BotPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\HumanPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\Player.cs" />
     <Compile Include="Assets\Scripts\Variables.cs" />
@@ -252,6 +345,13 @@
     <Compile Include="Assets\Scripts\View\ViewBoard.cs" />
     <Compile Include="Assets\Scripts\View\ViewField.cs" />
     <Compile Include="Assets\Scripts\View\ViewFieldComponent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Imported\Photon Unity Networking\changelog.txt" />
+    <None Include="Assets\Imported\Photon Unity Networking\link.xml" />
+    <None Include="Assets\Imported\Photon Unity Networking\readme.txt" />
+    <None Include="Assets\Plugins\Photon3Unity3D.xml" />
+    <None Include="Assets\Plugins\release_history.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
