@@ -26,7 +26,9 @@ public class ViewAnimationComponent : MonoBehaviour {
 		{
 			SetEffect (Variables.animationTriggerHit);
 			SetEffect (Variables.animationTriggerFire);
-			Handheld.Vibrate ();
+			if (SettingsController.IsVibrationEnabled ()) {
+				Handheld.Vibrate ();			
+			}
 			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
 		}
@@ -39,7 +41,9 @@ public class ViewAnimationComponent : MonoBehaviour {
 		else if (shotResult.Equals(DmgDone.SINKED)){
 			SetEffect (Variables.animationTriggerHit);
 			SetEffect(Variables.animationTriggerBack);
-			Handheld.Vibrate ();
+			if (SettingsController.IsVibrationEnabled ()) {
+				Handheld.Vibrate ();			
+			}
 			AudioClip audio = Resources.Load (Variables.BOOM_SOUND_PATH) as AudioClip;
 			AudioSource.PlayClipAtPoint (audio, Vector2.zero);
 		}
