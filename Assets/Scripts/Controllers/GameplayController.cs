@@ -28,6 +28,7 @@ public class GameplayController: MonoBehaviour{
 
     // Use this for initialization
     void Start() {
+		SettingsController.SetMusicVolumeInScene ();
         Debug.Log("Prepare Game");
 		androidToast = new AndroidToast ();
         foreach (Player player in players)

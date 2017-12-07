@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SinglePlayerController : MonoBehaviour {
 
+	void Start(){
+		SettingsController.SetMusicVolumeInScene ();
+	}
+
 	public void LoadEasyLevel(){
 		BotLevelInfo.botLevel = BotLevel.EASY;
 		LoadPreparationScene ();

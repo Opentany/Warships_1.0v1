@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour{
 
+	void Start(){
+		SettingsController.SetMusicVolumeInScene ();
+	}
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

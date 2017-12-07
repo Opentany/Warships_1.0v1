@@ -11,6 +11,7 @@ public class MultiplayerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+		SettingsController.SetMusicVolumeInScene ();
 		Connect();
         roomInfos = new RoomInfo[5];
 	}

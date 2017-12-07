@@ -19,6 +19,7 @@ public class PreparationController : MonoBehaviour {
     private WarshipsContainer humanPlayerShips;
 
     void Start() {
+		SettingsController.SetMusicVolumeInScene ();
 		PrepareBoards ();
 		CreateWarships ();
 		CreatePlayersAndStartArrange();
