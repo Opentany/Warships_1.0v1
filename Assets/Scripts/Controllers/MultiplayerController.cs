@@ -61,6 +61,10 @@ public class MultiplayerController : MonoBehaviour
     }
     public void JoinRoom()
     {
+        if (chosenRoom=="Brak")
+        {
+            chosenRoom = null;
+        }
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.MaxPlayers = 2;
