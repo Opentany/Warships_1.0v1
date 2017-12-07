@@ -420,7 +420,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364135770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 112, y: 179.5, z: 0}
+  m_LocalPosition: {x: 112, y: 179, z: 0}
   m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
   m_Children:
   - {fileID: 124916001}
@@ -546,22 +546,6 @@ MonoBehaviour:
   loseText: {fileID: 412288835}
   player1WarshipsLeft: {fileID: 122625399}
   player2WarshipsLeft: {fileID: 1085166718}
-  warship4HorizontalPrefab: {fileID: 1221629565021194, guid: 7b149009e3ba10f40913735f53fb7c23,
-    type: 2}
-  warship3HorizontalPrefab: {fileID: 1303855574466638, guid: 5c7e4b995eb64b8458ea94f3958009e9,
-    type: 2}
-  warship2HorizontalPrefab: {fileID: 1537890768630418, guid: 087b47c79c5a3594aad51dbc0f353a14,
-    type: 2}
-  warship1HorizontalPrefab: {fileID: 1873526470440244, guid: 26fc9dd614f41ef47a3367c06196ff78,
-    type: 2}
-  warship4VerticalPrefab: {fileID: 1728468037836274, guid: 12fd7ab745ea86341b15cd36e2d32bfc,
-    type: 2}
-  warship3VerticalPrefab: {fileID: 1303855574466638, guid: 5c7e4b995eb64b8458ea94f3958009e9,
-    type: 2}
-  warship2VerticalPrefab: {fileID: 1257434926126438, guid: dc83dd209ce68e3469ac8659e7c55aa9,
-    type: 2}
-  warship1VerticalPrefab: {fileID: 1914435277629442, guid: c8b32d4dc4462f248a1a431a9fbdaa40,
-    type: 2}
   activeHuman: 0
 --- !u!4 &445727802
 Transform:
@@ -575,115 +559,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &756715206
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 756715208}
-  - component: {fileID: 756715207}
-  m_Layer: 0
-  m_Name: Music
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &756715207
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 756715206}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 01f88bddf75996d49ad7427dd81005ac, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!4 &756715208
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 756715206}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21464902, y: -0.22207631, z: 0.0044824197}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &948015779
 GameObject:

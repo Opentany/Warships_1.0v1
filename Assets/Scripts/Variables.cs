@@ -62,4 +62,14 @@ public class Variables {
 
 	//SETTING FILE PATH
 	public static string SETTINGS_PATH = Application.persistentDataPath + "/settings.dat";
+
+	//MUSIC NAME
+	public static string MENU_MUSIC = "MenuMusic";
+	public static string PREPARATION_MUSIC = "PreparationMusic";
+	public static string GAMEPLAY_MUSIC = "GameplayMusic";
+
+	//MUSIC PATH
+	public static string MENU_MUSIC_PATH = "Music/MenuScene";
+	public static string PREPARATION_MUSIC_PATH = "Music/Preparation";
+	public static string GAMEPLAY_MUSIC_PATH = "Music/Gameplay";
 }

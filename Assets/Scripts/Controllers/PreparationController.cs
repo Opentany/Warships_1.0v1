@@ -20,6 +20,7 @@ public class PreparationController : MonoBehaviour {
 
     void Start() {
 		SettingsController.SetMusicVolumeInScene ();
+		MusicController.SetActualMusic (Variables.PREPARATION_MUSIC);
 		PrepareBoards ();
 		CreateWarships ();
 		CreatePlayersAndStartArrange();
