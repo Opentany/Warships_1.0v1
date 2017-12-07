@@ -18,8 +18,6 @@ public class SettingsController : MonoBehaviour {
 		soundsSlider = GameObject.Find ("Sound_Slider");
 		musicSlider = GameObject.Find ("Music_Slider");
 		vibrationToggle = GameObject.Find ("Vibration");
-		Debug.Log (volumeOfMusic);
-		Debug.Log (volumeOfSounds);
 		vibrationToggle.GetComponent<Toggle> ().isOn = isVibration;
 		soundsSlider.GetComponent<Slider> ().value = volumeOfSounds;
 		musicSlider.GetComponent<Slider> ().value = volumeOfMusic;
@@ -30,6 +28,10 @@ public class SettingsController : MonoBehaviour {
 		volumeOfSounds = soundsSlider.GetComponent<Slider> ().value;
 	}
 
+	public static void SetSoundVolume(float soundVolume){
+		volumeOfSounds = soundVolume;
+	}
+
 	public static float GetSoundVolume(){
 		return volumeOfSounds;
 	}
@@ -38,9 +40,21 @@ public class SettingsController : MonoBehaviour {
 		volumeOfMusic = musicSlider.GetComponent<Slider> ().value;
 		SetMusicVolumeInScene ();
 	}
+
+	public static void SetMusicVolume(float musicVolume){
+		volumeOfMusic = musicVolume;
+	}
+
+	public static float GetMusicVolume(){
+		return volumeOfMusic;
+	}
 		
 	public void SetVibration(){		
 		isVibration = !isVibration;
+	}
+
+	public static void SetVibration(bool vibration){
+		isVibration = vibration;
 	}
 
 	public static bool IsVibrationEnabled(){
@@ -54,5 +68,5 @@ public class SettingsController : MonoBehaviour {
 	public void LoadScene(string sceneName) {
 		SceneManager.LoadScene(sceneName);
 	}
-
+		
 }

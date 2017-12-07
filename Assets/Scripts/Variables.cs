@@ -60,4 +60,6 @@ public class Variables {
 	public static string NO_ALL_SHIPS_ON_BORAD = "You have not put all the ships on the board yet";
 	public static string INCORRECT_SHOT = "This shot is incorrect";
 
+	//SETTING FILE PATH
+	public static string SETTINGS_PATH = Application.persistentDataPath + "/settings.dat";
 }
