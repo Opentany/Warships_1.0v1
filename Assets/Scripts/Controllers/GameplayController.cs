@@ -31,6 +31,7 @@ public class GameplayController: MonoBehaviour{
     // Use this for initialization
     void Start() {
 		SettingsController.SetMusicVolumeInScene ();
+		MusicController.SetActualMusic (Variables.GAMEPLAY_MUSIC);
         Debug.Log("Prepare Game");
 		isEndOfGame = false;
 		androidToast = new AndroidToast ();

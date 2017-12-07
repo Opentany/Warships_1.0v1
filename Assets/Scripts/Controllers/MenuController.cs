@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour{
 	void Start(){
 		LoadSettings ();
 		SettingsController.SetMusicVolumeInScene ();
+		MusicController.SetActualMusic (Variables.MENU_MUSIC);
 	}
 
 	private void LoadSettings(){

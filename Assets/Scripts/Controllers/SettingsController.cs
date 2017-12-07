@@ -15,12 +15,14 @@ public class SettingsController : MonoBehaviour {
 	private static GameObject vibrationToggle;
 
 	void Start () {
+		MusicController.SetActualMusic (Variables.MENU_MUSIC);
 		soundsSlider = GameObject.Find ("Sound_Slider");
 		musicSlider = GameObject.Find ("Music_Slider");
 		vibrationToggle = GameObject.Find ("Vibration");
 		vibrationToggle.GetComponent<Toggle> ().isOn = isVibration;
 		soundsSlider.GetComponent<Slider> ().value = volumeOfSounds;
 		musicSlider.GetComponent<Slider> ().value = volumeOfMusic;
+
 	//	GameObject.Find ("Music").GetComponent<AudioSource> ().volume = volumeOfMusic;
 	}
 
