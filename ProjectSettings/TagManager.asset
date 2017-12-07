@@ -16,6 +16,7 @@ TagManager:
   - verticalButton
   - Player_Name
   - ListOfRooms
+  - Lobby
   layers:
   - Default
   - TransparentFX
