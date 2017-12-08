@@ -14,7 +14,7 @@ public class ShipRevealer
     {
         this.board = board.GetBoard();
         this.shotRaport = shotRaport;
-        CheckWarshipOrientation();
+        orientation = CheckWarshipOrientation();
         GetStartinPoint();
         GetSize();
     }
