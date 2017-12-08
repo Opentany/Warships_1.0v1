@@ -86,7 +86,7 @@ public class MultiplayerController : MonoBehaviour
        
         var text = GameObject.FindGameObjectWithTag("Player_Name");
         text.GetComponent<Text>().text = PhotonNetwork.playerName;
-        PhotonNetwork.LoadLevel("Preparation_Multi");
+        PhotonNetwork.LoadLevel("Preparation");
     }
 	
 }

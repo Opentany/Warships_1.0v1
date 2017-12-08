@@ -26,6 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Preparation_Multi.unity
     guid: bea455465599e5d4ba1f479daae61b99
-  - enabled: 1
-    path: Assets/Scenes/Gameplay_Multi.unity
-    guid: 3abe3f1dda8228f43a5be51f56bc556e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000

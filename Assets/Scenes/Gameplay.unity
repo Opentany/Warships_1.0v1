@@ -346,8 +346,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364135770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 148, y: 237, z: 0}
-  m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
+  m_LocalPosition: {x: 130.5, y: 209, z: 0}
+  m_LocalScale: {x: 0.32625, y: 0.32625, z: 0.32625}
   m_Children:
   - {fileID: 122625400}
   - {fileID: 1085166719}
@@ -392,11 +392,13 @@ MonoBehaviour:
     type: 2}
   animationHolder: {fileID: 1302129000066982, guid: 1a994a2338a50824c80514d5ae7bafaf,
     type: 2}
-  victoryPicture: {fileID: 989482931}
-  deafeatPicture: {fileID: 964178899}
+  winText: {fileID: 0}
+  loseText: {fileID: 0}
   player1WarshipsLeft: {fileID: 122625399}
   player2WarshipsLeft: {fileID: 1085166718}
-  activeHuman: 0
+  victoryPicture: {fileID: 989482931}
+  deafeatPicture: {fileID: 964178899}
+  activeDeviceHuman: 0
 --- !u!4 &445727802
 Transform:
   m_ObjectHideFlags: 0

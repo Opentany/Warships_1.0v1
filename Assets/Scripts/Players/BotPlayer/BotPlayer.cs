@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class BotPlayer : Player
+public class BotPlayer : DevicePlayer
 {
 
     protected ComplexShootingBoard opponentBoard;
@@ -49,6 +49,7 @@ public class BotPlayer : Player
             Warship ship = ships[i];
             UnityEngine.Debug.Log(ship.toStringShort());
         }
+        this.preparationController.otherPlayerReady = true;
     }
 
     private static void getRandomWarship(Warship ship)
@@ -61,18 +62,18 @@ public class BotPlayer : Player
         ship.SetWarshipOrientation(wo);
     }
 
-    public override void SetPlayerBoard(WarshipsContainer warshipsContainer)
+    public override void SetPlayerBoard()
     {
         playerBoard = new ShootingBoard();
-        this.shipsContainer = warshipsContainer;
         foreach (Warship ship in shipsContainer.GetWarships()){
             playerBoard.SetWarship(ship);
         }
+        UnityEngine.Debug.Log("Prep");
+        playerBoard.IsEverythingOk();
     }
 
     public override void SetPlayerShotResult(ShotRaport shotRaport)
     {
-        base.SetPlayerShotResult(shotRaport);
         opponentBoard.ApplyShot(shotRaport);
     }
 
@@ -102,7 +103,7 @@ public class BotPlayer : Player
             }
             while (opponentBoard.GetBoard()[x][y].hasBeenShot);
         }
-        controller.ShotOpponent(x, y);
+        gameplayController.ShotOpponent(x, y);
     }
 
 }
