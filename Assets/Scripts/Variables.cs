@@ -59,6 +59,7 @@ public class Variables {
 	public static string NO_MORE_SHIPS_OF_SIZE = "There are no more ships size ";
 	public static string NO_ALL_SHIPS_ON_BORAD = "You have not put all the ships on the board yet";
 	public static string INCORRECT_SHOT = "This shot is incorrect";
+    public static string NOT_READY = "Second player is not ready yet";
 
 	//SETTING FILE PATH
 	public static string SETTINGS_PATH = Application.persistentDataPath + "/settings.dat";
@@ -72,4 +73,18 @@ public class Variables {
 	public static string MENU_MUSIC_PATH = "Music/MenuScene";
 	public static string PREPARATION_MUSIC_PATH = "Music/Preparation";
 	public static string GAMEPLAY_MUSIC_PATH = "Music/Gameplay";
+
+    //PHOTON EVENT CODES
+    public const byte PREPARATION_READY = 101;
+    public const byte SET_PLAYER_BOARD = 102;
+    public const byte YOUR_TURN = 103;
+    public const byte SHOT_RESULT_MISS = 104;
+    public const byte SHOT_RESULT_HIT = 105;
+    public const byte SHOT_RESULT_SINKED = 106;
+    public const byte SHOT_RESULT_ILLEGAL = 107;
+    public const byte SLAVE_START = 108;
+    public const byte MASTER_START = 109;
+    public const byte INITIALIZED = 110;
+    public const byte YOU_WON = 111;
+
 }

@@ -86,6 +86,10 @@ public class MultiplayerController : MonoBehaviour
        
         var text = GameObject.FindGameObjectWithTag("Player_Name");
         text.GetComponent<Text>().text = PhotonNetwork.playerName;
+        UnityEngine.Debug.Log("trying to start1");
+        PreparationController.humanDevicePlayer = new HumanPlayer();
+        PreparationController.otherPlayer = gameObject.AddComponent<RemotePlayer>();
+        UnityEngine.Debug.Log("trying to start2");
         PhotonNetwork.LoadLevel("Preparation");
     }
 	

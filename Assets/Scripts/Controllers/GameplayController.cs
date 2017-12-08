@@ -16,8 +16,9 @@ public class GameplayController: MonoBehaviour{
 	public GameObject player2WarshipsLeft;
 	public GameObject victoryPicture;
 	public GameObject deafeatPicture;
+    public Position lastHumanShot;
 
-	private AndroidToast androidToast;
+	public AndroidToast androidToast;
 
     public static List<Player> players;
 
@@ -30,14 +31,18 @@ public class GameplayController: MonoBehaviour{
     public static bool ready = false;
 
 	private static bool isEndOfGame = false;
+    private int badShotCounter = 0;
 
     // Use this for initialization
     void Start() {
-		SettingsController.SetMusicVolumeInScene ();
+        bool ifMaster = PhotonNetwork.isMasterClient;
+        SettingsController.SetMusicVolumeInScene ();
 		MusicController.SetActualMusic (Variables.GAMEPLAY_MUSIC);
         Debug.Log("Prepare Game");
 		isEndOfGame = false;
 		androidToast = new AndroidToast ();
+        string master_text = ifMaster? "You are master player" : "You are slave player";
+        androidToast.CreateToastWithMessage(master_text);
         ViewBoard viewBoard = new ViewBoard();
         ViewBoard.SetWaterPrefab(waterPrefab);
         ViewBoard.SetAnimationHolder(animationHolder);
@@ -45,21 +50,45 @@ public class GameplayController: MonoBehaviour{
         viewBoard.GenerateMiniBoardOnScreen();
         player1WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
         player2WarshipsLeftCounter = Variables.fieldsOccupiedByWarships;
-        foreach (DevicePlayer player in players)
+        foreach (Player player in players)
         {
             player.SetGameController(this);
-            player.playerBoard.IsEverythingOk();
         }
         Debug.Log("Controllers Set");
         HumanPlayer.SetViewBoard(viewBoard);
-        ((HumanPlayer) players[0]).SetShipsOnBoard();     
-        System.Random rnd = new System.Random();
-        activePlayer = (PlayerType) rnd.Next(2);
-        activeDeviceHuman = (activePlayer.Equals(PlayerType.DEVICE_HUMAN));
-        Debug.Log("Start Game");
-        ready = true;
-        players[(int)activePlayer].YourTurn();
+        ((HumanPlayer) players[0]).SetShipsOnBoard();
+
+        if(ifMaster || players[1] is DevicePlayer)
+        {
+            System.Random rnd = new System.Random();
+            activePlayer = (PlayerType)rnd.Next(2);
+            activeDeviceHuman = (activePlayer.Equals(PlayerType.DEVICE_HUMAN));
+            if (players[1] is RemotePlayer)
+            {
+                if (activeDeviceHuman)
+                    ((RemotePlayer)players[1]).MasterStart();
+                else
+                    ((RemotePlayer)players[1]).SlaveStart();
+                Debug.Log("Start Game");
+            }
+            else
+            {
+                InitializeGame();
+            }
+        }
     }
+
+    public void InitializeSlave(bool slaveStart)
+    {
+        activePlayer = slaveStart ? PlayerType.DEVICE_HUMAN : PlayerType.OTHER_PLAYER;
+        activeDeviceHuman = (activePlayer.Equals(PlayerType.DEVICE_HUMAN));
+        ((RemotePlayer)players[1]).Initialized();
+    }
+
+    public void InitializeGame()
+    {
+        players[(int)activePlayer].YourTurn();
+    }  
 
     public static void setPlayers(HumanPlayer deviceHuman, Player otherPlayer)
     {
@@ -81,45 +110,62 @@ public class GameplayController: MonoBehaviour{
     {
         Debug.Log(activeDeviceHuman);
         Debug.Log(activePlayer);
-        if(activeDeviceHuman)
+        if (activeDeviceHuman)
+        {
+            lastHumanShot = new Position(x, y);
             ShotOpponent(x, y);
+        }
     }
 
     public void ShotOpponent(int x, int y)
-    {
-        int badShotCounter = 0; 
+    {  
         PlayerType opponent = NextPlayer(activePlayer);
         try
         {
-            ShotRaport raport = players[(int)opponent].TakeOpponentShot(new Position(x,y));
-            players[(int)activePlayer].SetPlayerShotResult(raport);
-            bool activeWon = UpdatePlayerCounter(players[(int)opponent], raport.GetShotResult());
-            if (activeWon){
-                PlayerWon(players[(int)activePlayer]);
-                return;
-            }
-            if (raport.GetShotResult().Equals(DmgDone.MISS))
-            {
-                activePlayer = NextPlayer(activePlayer);
-                opponent = NextPlayer(opponent);
-                activeDeviceHuman = !activeDeviceHuman;
-            }
-            players[(int)activePlayer].YourTurn();
-
+            players[(int)opponent].TakeOpponentShot(new Position(x, y));
         }
-        catch(IllegalShotException badShot)
+        catch (IllegalShotException badShot)
         {
-			androidToast.CreateToastWithMessage (Variables.INCORRECT_SHOT);
-            Debug.Log(badShot);
-            badShotCounter++;
-            if (badShotCounter == 3)
-            {
-                activePlayer = NextPlayer(activePlayer);
-                opponent = NextPlayer(opponent);
-                activeDeviceHuman = !activeDeviceHuman;
-            }
-            players[(int)activePlayer].YourTurn();
+            IllegalShot(badShot);
         }
+    }
+
+    public void IllegalShot(IllegalShotException badShot)
+    {
+        PlayerType opponent = NextPlayer(activePlayer);
+        if (activePlayer.Equals(PlayerType.DEVICE_HUMAN))
+            androidToast.CreateToastWithMessage(Variables.INCORRECT_SHOT);
+        if (activePlayer.Equals(PlayerType.OTHER_PLAYER) && players[1] is RemotePlayer)
+            ((RemotePlayer)players[1]).IllegalShot();
+        Debug.Log(badShot);
+        badShotCounter++;
+        if (badShotCounter == 3)
+        {
+            activePlayer = NextPlayer(activePlayer);
+            opponent = NextPlayer(opponent);
+            activeDeviceHuman = !activeDeviceHuman;
+        }
+        players[(int)activePlayer].YourTurn();
+    }
+
+    public void SendShotRaport(ShotRaport raport)
+    {
+        PlayerType opponent = NextPlayer(activePlayer);
+        players[(int)activePlayer].SetPlayerShotResult(raport);
+        bool activeWon = UpdatePlayerCounter(players[(int)opponent], raport.GetShotResult());
+        if (activeWon)
+        {
+            PlayerWon(players[(int)activePlayer]);
+            return;
+        }
+        if (raport.GetShotResult().Equals(DmgDone.MISS))
+        {
+            activePlayer = NextPlayer(activePlayer);
+            opponent = NextPlayer(opponent);
+            activeDeviceHuman = !activeDeviceHuman;
+        }
+        badShotCounter = 0;
+        players[(int)activePlayer].YourTurn();
     }
 
     public bool UpdatePlayerCounter(Player player, DmgDone shotResult){

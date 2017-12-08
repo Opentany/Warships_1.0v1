@@ -17,9 +17,9 @@ public class LobbyController : MonoBehaviour
     {
         Debug.Log("wybrano");
         Dropdown name = FindObjectOfType<Dropdown>();
-        
+
         MultiplayerController.ChooseRoom(name.options[name.value].text);
-        
+
     }
 
     public void RoomSelectFromText()
@@ -36,12 +36,12 @@ public class LobbyController : MonoBehaviour
         GameObject text = GameObject.FindWithTag("ListOfRooms");
         text.GetComponent<Text>().text = "";
         dropdown.ClearOptions();
-        dropdown.AddOptions(new List<string>{"Brak"});
+        dropdown.AddOptions(new List<string> { "Brak" });
         List<string> roomnames = new List<string>();
         foreach (var roomInfo in roomInfos)
         {
             roomnames.Add(roomInfo.Name);
-            text.GetComponent<Text>().text +="+ "+ roomInfo.Name + "\n";
+            text.GetComponent<Text>().text += "+ " + roomInfo.Name + "\n";
         }
         dropdown.AddOptions(roomnames);
     }

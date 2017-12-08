@@ -31,11 +31,11 @@ public abstract class DevicePlayer : Player {
         this.preparationController = preparationController;
     }
 
-    public virtual ShotRaport TakeOpponentShot(Position target)
+    public virtual void TakeOpponentShot(Position target)
     {
         ShotRaport shotRaport = new ShotRaport(target.x, target.y, playerBoard);
         playerBoard.ApplyShot(shotRaport);
-        return shotRaport;
+        this.gameplayController.SendShotRaport(shotRaport);
     }
 
     public abstract void ArrangeBoard();

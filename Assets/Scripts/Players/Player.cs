@@ -3,7 +3,7 @@
 
     void SetPlayerShotResult(ShotRaport shotRaport);
 
-    ShotRaport TakeOpponentShot(Position target);
+    void TakeOpponentShot(Position target);
 
     void SetGameController(GameplayController gameplayController);
 

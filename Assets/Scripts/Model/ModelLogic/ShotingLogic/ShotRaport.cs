@@ -24,9 +24,21 @@
             return null;
     }
 
+    public void SetWarship(Warship warship)
+    {
+        this.warship = warship;
+    }
+
     public DmgDone GetShotResult()
     {
         return shotResult;
+    }
+
+    public ShotRaport(Position pos, DmgDone dmgDone)
+    {
+        this.x = pos.x;
+        this.y = pos.y;
+        this.shotResult = dmgDone;
     }
 
     public ShotRaport(int x, int y, ShootingBoard board)

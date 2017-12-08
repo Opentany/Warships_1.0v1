@@ -13,11 +13,15 @@ public class PreparationController : MonoBehaviour {
     public GameObject horizontalButton;
     public GameObject verticalButton;
     public bool otherPlayerReady;
+    public bool ifMaster;
+    public bool meReady;
 
     void Start() {
+        ifMaster = PhotonNetwork.isMasterClient;
         SettingsController.SetMusicVolumeInScene();
         MusicController.SetActualMusic(Variables.PREPARATION_MUSIC);
         otherPlayerReady = false;
+        meReady = false;
         PreparePlayers();
         PrepareBoards();
         CreateWarships();
@@ -44,6 +48,11 @@ public class PreparationController : MonoBehaviour {
 	}
 
     public void UndoneLastWarship(){
+        if (meReady)
+        {
+            warshipPlacer.androidToast.CreateToastWithMessage("You cannot change warships after getting ready");
+            return;
+        }
 		if (warshipPlacer.GetNumberOfWarshipOnBoard() != 0){
 			warshipPlacer.RemoveWarshipFromBoard ();
         }
@@ -72,17 +81,37 @@ public class PreparationController : MonoBehaviour {
     }
 
     public void StartGame(string sceneName) {
-        Debug.Log("I wanna start");
-		if (warshipPlacer.isReady() && otherPlayerReady) {
-			GameplayController.setPlayers (humanDevicePlayer, otherPlayer);
-			Debug.Log ("Set");
-			humanDevicePlayer.SetPlayerBoard ();
+        if (warshipPlacer.isReady() && !meReady)
+        {
+            meReady = true;
             otherPlayer.SetPlayerBoard();
+            if (otherPlayerReady)
+            {
+                GameplayController.setPlayers(humanDevicePlayer, otherPlayer);
+                Debug.Log("Set");
+                humanDevicePlayer.SetPlayerBoard();
+                Debug.Log("Set");
+                LoadScene(sceneName);
+            }
+            else
+                warshipPlacer.androidToast.CreateToastWithMessage(Variables.NOT_READY);
+        }
+        else
+        {
+            warshipPlacer.androidToast.CreateToastWithMessage(Variables.NO_ALL_SHIPS_ON_BORAD);
+        }
+    }
+
+    public void EnemyReady()
+    {
+        if (meReady)
+        {
+            GameplayController.setPlayers(humanDevicePlayer, otherPlayer);
             Debug.Log("Set");
-            LoadScene (sceneName);    
-		} else {
-			warshipPlacer.androidToast.CreateToastWithMessage (Variables.NO_ALL_SHIPS_ON_BORAD);
-		}     
+            humanDevicePlayer.SetPlayerBoard();
+            Debug.Log("Set");
+            LoadScene("Gameplay");
+        }
     }
 		
     public void LoadScene(string sceneName) {

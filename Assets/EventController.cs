@@ -26,6 +26,7 @@ public class EventController : MonoBehaviour {
 	{
 		PhotonNetwork.OnEventCall += this.OnEvent;
 	}
+
 	void OnDisable()
 	{
 		PhotonNetwork.OnEventCall -= this.OnEvent;

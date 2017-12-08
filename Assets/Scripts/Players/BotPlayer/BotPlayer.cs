@@ -20,7 +20,6 @@ public class BotPlayer : DevicePlayer
     public override void ArrangeBoard()
     {
         PlacementBoard board = new PlacementBoard();
-        System.Random rnd = new System.Random();
         WarshipCreator creator = new WarshipCreator();
         List<Warship> ships = creator.GetWarshipList();
         bool lastShipOk = false;

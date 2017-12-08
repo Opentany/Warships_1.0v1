@@ -1,6 +1,7 @@
 ﻿public class HumanPlayer : DevicePlayer
 {
     public static PlacementBoard placementBoard;
+    public static ShootingBoard enemyBoard;
     public static ViewBoard viewBoard;
     private WarshipPlacer warshipPlacer;
 
@@ -8,6 +9,7 @@
     {
         isYourTurn = false;
         placementBoard = new PlacementBoard();
+        enemyBoard = new ShootingBoard();
     }
 
     public void SetMultiGameController(GameplayController gameplayController)
@@ -31,16 +33,23 @@
 
     public override void SetPlayerShotResult(ShotRaport shotRaport)
     {
+        enemyBoard.ApplyShot(shotRaport);
+        if (shotRaport.GetShotResult().Equals(DmgDone.SINKED))
+        {
+            ShipRevealer revealer = new ShipRevealer(enemyBoard, shotRaport);
+            Warship ship = revealer.GetWarship();
+            shotRaport.SetWarship(ship);
+        }
         viewBoard.ApplyMyShot(shotRaport);
     }
 
 
-    public override ShotRaport TakeOpponentShot(Position target)
+    public override void TakeOpponentShot(Position target)
     {
         ShotRaport shotRaport = new ShotRaport(target.x, target.y, playerBoard);
         playerBoard.ApplyShot(shotRaport);
         viewBoard.ApplyOpponentShot(shotRaport);
-        return shotRaport;
+        this.gameplayController.SendShotRaport(shotRaport);
     }
 
     public void SetShipsOnBoard()
